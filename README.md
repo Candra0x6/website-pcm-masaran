@@ -15,10 +15,49 @@
 
 | No | Nama Mahasiswa | NIM | Peran Utama | Rincian Pekerjaan & Fitur yang Dikerjakan |
 |---|---|---|---|---|
-| 1 | **Kurniawan Candra Mahardika** | **L200240210** | *Lead Fullstack & DevOps* | Inisialisasi arsitektur uv & Django 6.x, konfigurasi environment, WhiteNoise, Dockerfile & Compose, management command `seed_pcm`, deployment setup, dan GitHub Actions CI. |
-| 2 | *(Nama Anggota 2)* | *(NIM Anggota 2)* | *Frontend & UI Designer* | Desain sistem antarmuka responsif mengadopsi estetika Waabi, template inheritance `base.html`, halaman beranda, profil, dan pimpinan. |
-| 3 | *(Nama Anggota 3)* | *(NIM Anggota 3)* | *Feature Developer (Warta & Agenda)* | Model Berita & Agenda, custom queryset/manager `published()`, fitur slug otomatis unik, pagination (6 per halaman), pencarian berita, filter agenda mendatang/lampau. |
-| 4 | *(Nama Anggota 4)* | *(NIM Anggota 4)* | *Backend Developer & QA* | Model Ranting & Amal Usaha, `ModelForm` formulir kontak publik & validasi, messages framework, panel admin custom, dan pengujian unit (`manage.py test`). |
+| 1 | **Kurniawan Candra Mahardika** | **L200240210** | *Lead Fullstack, Core Backend & DevOps* | Inisialisasi arsitektur uv & Django 6.x, arsitektur database & core models (`ProfilOrganisasi`, `Pimpinan`, `Dokumen`, `TautanTerkait`), context processor navigasi global, singleton pattern organisasi, query optimizer (`select_related`/`prefetch_related`), WhiteNoise & security headers, Dockerfile & Compose, management command `seed_pcm`, orkestrasi motion design Waabi (Lenis + GSAP), deployment setup, dan GitHub Actions CI. |
+| 2 | **afiiisky** | **L200240222** | *Frontend & UI Designer* | Desain sistem antarmuka responsif mengadopsi estetika Waabi, template inheritance `base.html`, dropdown hover flyout navigasi 4 menu, halaman beranda, profil, dan pimpinan. |
+| 3 | **Latifah12-ui** | **L200240170** | *Feature Developer (Warta & Agenda)* | Model Berita & Agenda, custom queryset/manager `published()`, fitur slug otomatis unik, pagination (6 per halaman), pencarian berita, filter agenda mendatang/lampau. |
+| 4 | *(Menyusul)* | *(Menyusul)* | *Backend Developer & QA* | Model Ranting & Amal Usaha, `ModelForm` formulir kontak publik & validasi, messages framework, panel admin custom, dan pengujian unit (`manage.py test`). |
+
+### 🔄 Alur Kerja & Workflow Kolaborasi Anggota
+
+Untuk menjamin kualitas kode berskala enterprise dan distribusi kontribusi yang terukur, alur kerja dibagi ke dalam 5 fase kolaborasi:
+
+#### 1. Workflow Anggota 1 (Lead Fullstack, Core Backend & DevOps):
+- **Arsitektur & Core Backend:**
+  - Inisialisasi stack modern dengan `uv` (Fast Python Package Manager) dan Django 6.x.
+  - Perancangan arsitektur database relasional untuk 9 model, termasuk model singleton `ProfilOrganisasi` (pola single-row constraint).
+  - Implementasi model inti backend: `ProfilOrganisasi`, `Pimpinan`, `Dokumen`, dan `TautanTerkait`.
+  - Pembangunan Global Context Processor (`pcm.context_processors.pcm_globals`) agar data organisasi, nomor kontak, serta tautan eksternal terdistribusi ke seluruh template tanpa duplicate database queries.
+  - Optimasi query backend (`select_related` & `prefetch_related`) untuk mencegah masalah N+1 queries pada view Beranda dan Amal Usaha.
+- **Pipeline Data & Seeder:**
+  - Pembuatan custom Django management command `seed_pcm` (`manage.py seed_pcm --download-images`).
+  - Mekanisme pipeline unduh aset foto riil (Gedung Dakwah Masaran, struktur majelis, logo resmi) ke direktori `media/` dengan penanganan graceful fallback saat offline.
+- **Motion & Visual Engineering:**
+  - Orkestrasi sistem interaksi interaktif bergaya Waabi: Lenis Momentum Scroll, GSAP ScrollTrigger, Pinned Diorama Showcase 4 Pilar, serta dropdown navigasi 4 menu beranimasi smooth.
+  - Integrasi Street View 360° & Google Maps Street interaktif dengan geolokasi presisi Gedung Dakwah PCM Masaran.
+- **Containerization & CI/CD DevOps:**
+  - Penyusunan `Dockerfile` multi-stage berbasis `python:3.12-slim` dengan keamanan user non-root.
+  - Orkestrasi `compose.yaml` untuk pengujian kontainer lokal.
+  - Setup konfigurasi WhiteNoise serving static files dan pipeline GitHub Actions CI otomatis.
+
+#### 2. Workflow Anggota 2 — afiiisky (Frontend & UI Designer):
+- Desain antarmuka publik berbasis Tailwind CSS mengadopsi estetika minimalis modern Waabi.
+- Implementasi template inheritance `base.html` lengkap dengan header dinamis, footer resmi dengan lisensi CC BY-SA 4.0, dan mobile navigation drawer.
+- Penyusunan halaman publik Beranda (`beranda.html`), Profil & Sejarah (`profil.html`), dan Pimpinan (`pimpinan.html`).
+
+#### 3. Workflow Anggota 3 — Latifah12-ui (Feature Developer - Warta & Agenda):
+- Pembangunan model data `Berita` (dengan auto-slug unik) dan `Agenda` (dengan tanggal mulai/selesai).
+- Implementasi Custom Manager & QuerySet `BeritaManager.published()` dan `AgendaManager.mendatang()`.
+- Pembuatan view warta (`berita_list_view`, `berita_detail_view`) dengan pagination 6 artikel per halaman dan pencarian keyword.
+- Pembuatan view agenda (`agenda_list_view`) dengan segmentasi agenda mendatang vs riwayat agenda lampau.
+
+#### 4. Workflow Anggota 4 (Backend Developer & QA — Menyusul):
+- Pembangunan model data `Ranting` (13 PRM definitif) dan `AmalUsaha` (kategori pendidikan, kesehatan, sosial, ekonomi).
+- Implementasi `ModelForm` formulir kontak publik (`KontakForm`) dengan validasi input, sanitasi pesan, dan Django Messages framework.
+- Kustomisasi panel Django Admin (`admin.py`) dengan filter list, search fields, dan fieldsets yang terstruktur.
+- Penyusunan pengujian unit otomatis (`pcm/tests.py`) untuk memverifikasi 100% endpoint publik mengembalikan HTTP 200 dan form submission berjalan valid.
 
 ---
 
