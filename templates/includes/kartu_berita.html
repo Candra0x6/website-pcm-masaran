@@ -1,5 +1,5 @@
 {% load static %}
-<article class="group bg-white rounded-3xl border border-neutral-200/80 overflow-hidden shadow-sm hover:shadow-xl hover:border-neutral-300 transition-all duration-300 flex flex-col h-full">
+<article class="card-tilt group bg-white rounded-3xl border border-neutral-200/80 overflow-hidden shadow-sm hover:shadow-2xl hover:border-neutral-300 transition-all duration-300 flex flex-col h-full transform-gpu">
     <div class="relative aspect-[16/10] overflow-hidden bg-neutral-100">
         {% if item.gambar_sampul %}
             <img src="{{ item.gambar_sampul.url }}" alt="{{ item.judul }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">

@@ -33,12 +33,20 @@ def beranda_view(request):
     berita_terbaru = Berita.objects.published().order_by('-tanggal_terbit')[:3]
     agenda_mendatang = Agenda.objects.filter(waktu_mulai__gte=now).order_by('waktu_mulai')[:3]
 
+    # Ambil representasi 4 pilar Amal Usaha untuk showcase beranda
+    aum_pendidikan = AmalUsaha.objects.filter(bidang='pendidikan', gambar__isnull=False).first()
+    aum_kesehatan = AmalUsaha.objects.filter(bidang='kesehatan', gambar__isnull=False).first()
+    aum_sosial = AmalUsaha.objects.filter(bidang='sosial', gambar__isnull=False).first()
+    aum_ekonomi = AmalUsaha.objects.filter(bidang='ekonomi', gambar__isnull=False).first()
+    amal_usaha_unggulan = [a for a in [aum_pendidikan, aum_kesehatan, aum_sosial, aum_ekonomi] if a]
+
     context = {
         'total_ranting': total_ranting,
         'total_amal_usaha': total_amal_usaha,
         'total_ktam': total_ktam,
         'berita_terbaru': berita_terbaru,
         'agenda_mendatang': agenda_mendatang,
+        'amal_usaha_unggulan': amal_usaha_unggulan,
     }
     return render(request, 'pcm/beranda.html', context)
 

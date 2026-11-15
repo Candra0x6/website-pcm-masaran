@@ -6,65 +6,72 @@
 {% block content %}
 <div class="relative overflow-hidden hero-pattern">
     
-    <!-- HERO SECTION: CINEMATIC FULL-WIDTH BANNER WITH REAL PCM MASARAN IMAGE -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-16">
-        <div class="relative w-full rounded-[2.5rem] overflow-hidden bg-neutral-950 border border-neutral-300/60 shadow-2xl min-h-[540px] lg:min-h-[620px] flex flex-col justify-between p-8 sm:p-12 lg:p-16 text-white group">
+    <!-- HERO SECTION: CINEMATIC FULL-WIDTH BANNER WITH PARALLAX & SPRING ANIMATIONS -->
+    <section class="hero-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-16">
+        <div class="relative w-full rounded-[2.5rem] overflow-hidden bg-neutral-950 border border-neutral-300/60 shadow-2xl min-h-[560px] lg:min-h-[640px] flex flex-col justify-between p-8 sm:p-12 lg:p-16 text-white group">
             
-            <!-- BACKGROUND HERO IMAGE -->
-            <div class="absolute inset-0 z-0">
+            <!-- BACKGROUND HERO IMAGE WITH GSAP PARALLAX SCRUB -->
+            <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
                 {% if profil_organisasi.gambar_utama %}
-                    <img src="{{ profil_organisasi.gambar_utama.url }}" alt="{{ profil_organisasi.nama }}" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-1000 ease-out">
+                    <img src="{{ profil_organisasi.gambar_utama.url }}" alt="{{ profil_organisasi.nama }}" class="hero-bg-img w-full h-[120%] -top-[10%] relative object-cover object-center will-change-transform">
                 {% else %}
                     <div class="w-full h-full bg-gradient-to-br from-brand-900 to-neutral-950"></div>
                 {% endif %}
-                <!-- Double-layer dark gradient overlay for optimal legibility -->
-                <div class="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/70 to-neutral-950/40"></div>
-                <div class="absolute inset-0 bg-neutral-950/30 backdrop-blur-[1px]"></div>
+                <!-- Triple-layer dark gradient overlay for crystal clear contrast & text legibility -->
+                <div class="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/75 to-neutral-950/40"></div>
+                <div class="absolute inset-0 bg-neutral-950/20 backdrop-blur-[0.5px]"></div>
             </div>
 
-            <!-- HERO TOP TAGS -->
+            <!-- HERO TOP TAGS (ANIMATED ENTRANCE) -->
             <div class="relative z-10 flex flex-wrap items-center justify-between gap-4">
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-xs font-semibold uppercase tracking-wider text-white shadow-sm">
-                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <div class="hero-badge-item inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-xs font-semibold uppercase tracking-wider text-white shadow-sm">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping opacity-75"></span>
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 -ml-3.5"></span>
                     <span>Pimpinan Cabang Muhammadiyah Masaran</span>
                 </div>
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/40 backdrop-blur-md text-xs font-medium text-neutral-200 border border-white/15">
+                <div class="hero-badge-item inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/40 backdrop-blur-md text-xs font-medium text-neutral-200 border border-white/15">
                     <span>📍 Gedung Dakwah, Masaran, Sragen</span>
                 </div>
             </div>
 
             <!-- HERO MAIN HEADLINE & CTAs -->
             <div class="relative z-10 max-w-3xl space-y-6 pt-12 sm:pt-20">
-                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08] drop-shadow-sm">
+                <h1 class="hero-headline text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08] drop-shadow-sm">
                     Mencerahkan Semesta,<br>
                     <span class="text-emerald-400">Memajukan Masaran.</span>
                 </h1>
-                <p class="text-base sm:text-lg text-neutral-200 font-normal leading-relaxed max-w-2xl drop-shadow">
+                <p class="hero-subtext text-base sm:text-lg text-neutral-200 font-normal leading-relaxed max-w-2xl drop-shadow">
                     {{ profil_organisasi.tentang|default:"Pimpinan Cabang Muhammadiyah (PCM) Masaran bergerak mengemban amanah dakwah pencerahan Islam berkemajuan, membina 13 ranting desa serta amal usaha pendidikan, kesehatan, sosial, dan ekonomi di Kabupaten Sragen." }}
                 </p>
                 <div class="flex flex-wrap items-center gap-4 pt-2">
-                    <a href="{% url 'pcm:profil' %}" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-brand-800 hover:bg-brand-700 text-white font-bold text-sm tracking-wide transition-all shadow-lg hover:shadow-brand-900/50 hover:-translate-y-0.5">
+                    <a href="{% url 'pcm:profil' %}" class="hero-cta-btn btn-magnetic inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-brand-800 hover:bg-brand-700 text-white font-bold text-sm tracking-wide transition-all shadow-lg hover:shadow-brand-900/50 hover:-translate-y-0.5 active:scale-95">
                         <span>Tentang PCM Masaran</span>
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                     </a>
-                    <a href="{% url 'pcm:amal_usaha' %}" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-white/15 hover:bg-white/25 backdrop-blur-md text-white border border-white/25 font-semibold text-sm tracking-wide transition-all">
-                        <span>Lihat Amal Usaha</span>
+                    <a href="{% url 'pcm:amal_usaha' %}" class="hero-cta-btn btn-magnetic inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-white/15 hover:bg-white/25 backdrop-blur-md text-white border border-white/25 font-semibold text-sm tracking-wide transition-all active:scale-95">
+                        <span>Jelajah Amal Usaha</span>
                     </a>
                 </div>
             </div>
 
-            <!-- HERO STATS COUNTER CARDS (A2 REQUIREMENT: STATISTIK DI HERO) -->
+            <!-- HERO STATS COUNTER CARDS (ROLLING NUMBER ANIMATION) -->
             <div class="relative z-10 pt-10 mt-10 border-t border-white/15 grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div class="bg-black/40 backdrop-blur-md rounded-2xl p-5 border border-white/15 hover:border-white/30 transition">
-                    <p class="text-3xl sm:text-4xl font-extrabold text-emerald-400 tracking-tight">{{ total_ranting|default:"13" }}</p>
+                <div class="hero-stat-card card-tilt bg-black/40 backdrop-blur-md rounded-2xl p-5 border border-white/15 hover:border-white/30 transition">
+                    <p class="text-3xl sm:text-4xl font-extrabold text-emerald-400 tracking-tight flex items-baseline">
+                        <span class="counter-val" data-target="{{ total_ranting|default:'13' }}">0</span>
+                    </p>
                     <p class="text-xs font-semibold text-neutral-300 uppercase tracking-wider mt-1">Pimpinan Ranting Desa</p>
                 </div>
-                <div class="bg-black/40 backdrop-blur-md rounded-2xl p-5 border border-white/15 hover:border-white/30 transition">
-                    <p class="text-3xl sm:text-4xl font-extrabold text-emerald-400 tracking-tight">{{ total_amal_usaha|default:"8" }}</p>
+                <div class="hero-stat-card card-tilt bg-black/40 backdrop-blur-md rounded-2xl p-5 border border-white/15 hover:border-white/30 transition">
+                    <p class="text-3xl sm:text-4xl font-extrabold text-emerald-400 tracking-tight flex items-baseline">
+                        <span class="counter-val" data-target="{{ total_amal_usaha|default:'8' }}">0</span>
+                    </p>
                     <p class="text-xs font-semibold text-neutral-300 uppercase tracking-wider mt-1">Amal Usaha Mandiri (AUM)</p>
                 </div>
-                <div class="bg-black/40 backdrop-blur-md rounded-2xl p-5 border border-white/15 hover:border-white/30 transition">
-                    <p class="text-3xl sm:text-4xl font-extrabold text-emerald-400 tracking-tight">{{ total_ktam|default:"1.250" }}+</p>
+                <div class="hero-stat-card card-tilt bg-black/40 backdrop-blur-md rounded-2xl p-5 border border-white/15 hover:border-white/30 transition">
+                    <p class="text-3xl sm:text-4xl font-extrabold text-emerald-400 tracking-tight flex items-baseline">
+                        <span class="counter-val" data-target="{{ total_ktam|default:'1.250' }}">0</span><span>+</span>
+                    </p>
                     <p class="text-xs font-semibold text-neutral-300 uppercase tracking-wider mt-1">Anggota Ber-KTAM Aktif</p>
                 </div>
             </div>
@@ -74,22 +81,222 @@
 
 </div>
 
-<!-- SECTION 2: BERITA TERBARU (3 BERITA TERBIT) -->
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-neutral-200/70">
-    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
+<!-- SECTION 2: PINNED SCROLL SHOWCASE (EMPAT PILAR MASARAN - WAABI & AWWWARDS STYLE) -->
+<section class="diorama-scroll-wrapper max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 border-t border-neutral-200/80">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        
+        <!-- LEFT COLUMN: PINNED STICKY HEADLINE & INTERACTIVE STEP TRACKER -->
+        <div class="lg:col-span-5 lg:sticky lg:top-28 space-y-8">
+            <div class="space-y-4">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-50 border border-brand-200 text-brand-900 text-xs font-bold uppercase tracking-wider">
+                    <span class="w-2 h-2 rounded-full bg-brand-700"></span>
+                    <span>Pilar Gerakan Berkemajuan</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-950 tracking-tight leading-[1.15]">
+                    Empat Pilar Dakwah Nyata di Masaran.
+                </h2>
+                <p class="text-base text-neutral-600 leading-relaxed">
+                    Muhammadiyah Masaran tidak hanya bergerak di mimbar dakwah, namun mewujud dalam kerja-kerja nyata pelayanan sosial, pendidikan berkualitas, fasilitas kesehatan, dan kemandirian ekonomi umat.
+                </p>
+            </div>
+
+            <!-- INTERACTIVE STEP TRACKER -->
+            <div class="space-y-3 pt-2">
+                <!-- Step 1: Pendidikan -->
+                <div class="diorama-step-item p-4 rounded-2xl border border-brand-800 bg-brand-800 text-white transition-all duration-300 shadow-sm">
+                    <div class="flex items-center justify-between text-xs font-bold uppercase tracking-wider">
+                        <span>Pilar 01 · Pendidikan</span>
+                        <span class="text-emerald-300 font-extrabold">Unggul</span>
+                    </div>
+                    <p class="text-xs mt-1 text-white/90 font-medium">10+ Satuan PAUD, SD/MI, SMP, MTs, SMA & SMK</p>
+                    <div class="w-full bg-white/20 h-1 rounded-full mt-2.5 overflow-hidden">
+                        <div class="step-bar bg-emerald-400 h-full w-full transition-all duration-500"></div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Kesehatan -->
+                <div class="diorama-step-item p-4 rounded-2xl border border-neutral-200 bg-neutral-100 text-neutral-600 transition-all duration-300">
+                    <div class="flex items-center justify-between text-xs font-bold uppercase tracking-wider">
+                        <span>Pilar 02 · Kesehatan</span>
+                        <span class="font-extrabold">PKU 24 Jam</span>
+                    </div>
+                    <p class="text-xs mt-1 text-neutral-500 font-medium">Klinik Pratama PKU & Ambulans Siaga Gratis</p>
+                    <div class="w-full bg-neutral-200 h-1 rounded-full mt-2.5 overflow-hidden">
+                        <div class="step-bar bg-brand-800 h-full w-0 transition-all duration-500"></div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Filantropi -->
+                <div class="diorama-step-item p-4 rounded-2xl border border-neutral-200 bg-neutral-100 text-neutral-600 transition-all duration-300">
+                    <div class="flex items-center justify-between text-xs font-bold uppercase tracking-wider">
+                        <span>Pilar 03 · Filantropi</span>
+                        <span class="font-extrabold">LAZISMU</span>
+                    </div>
+                    <p class="text-xs mt-1 text-neutral-500 font-medium">Pemberdayaan Dhuafa, Beasiswa Mentari & Bencana</p>
+                    <div class="w-full bg-neutral-200 h-1 rounded-full mt-2.5 overflow-hidden">
+                        <div class="step-bar bg-brand-800 h-full w-0 transition-all duration-500"></div>
+                    </div>
+                </div>
+
+                <!-- Step 4: Ekonomi -->
+                <div class="diorama-step-item p-4 rounded-2xl border border-neutral-200 bg-neutral-100 text-neutral-600 transition-all duration-300">
+                    <div class="flex items-center justify-between text-xs font-bold uppercase tracking-wider">
+                        <span>Pilar 04 · Ekonomi</span>
+                        <span class="font-extrabold">BMT & Ritel</span>
+                    </div>
+                    <p class="text-xs mt-1 text-neutral-500 font-medium">Toko Surya & Lembaga Keuangan Mikro Syariah</p>
+                    <div class="w-full bg-neutral-200 h-1 rounded-full mt-2.5 overflow-hidden">
+                        <div class="step-bar bg-brand-800 h-full w-0 transition-all duration-500"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-2">
+                <a href="{% url 'pcm:amal_usaha' %}" class="btn-magnetic inline-flex items-center gap-2 text-sm font-bold text-brand-800 hover:text-brand-900 group">
+                    <span>Lihat Rincian Seluruh Amal Usaha</span>
+                    <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- RIGHT COLUMN: STACKED PINNED SHOWCASE CARDS -->
+        <div class="lg:col-span-7 space-y-12">
+            
+            <!-- Card 1: Pendidikan -->
+            <div class="diorama-card card-tilt relative rounded-3xl overflow-hidden bg-neutral-900 text-white shadow-2xl border border-neutral-800 min-h-[440px] flex flex-col justify-end p-8 sm:p-10 group">
+                <div class="absolute inset-0 z-0">
+                    <img src="{% static 'images/muhammadiyah.svg' %}" alt="Pendidikan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-20 filter invert">
+                    <!-- Real photo layer if available -->
+                    {% for aum in amal_usaha_unggulan %}
+                        {% if aum.bidang == 'pendidikan' and aum.gambar %}
+                            <img src="{{ aum.gambar.url }}" alt="{{ aum.nama }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        {% endif %}
+                    {% endfor %}
+                    <div class="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/70 to-neutral-950/20"></div>
+                </div>
+                <div class="relative z-10 space-y-3">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-800/90 backdrop-blur-md text-emerald-300 text-xs font-bold uppercase tracking-wider border border-brand-600">
+                        <span>Pilar I · Pendidikan Holistik</span>
+                    </div>
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                        Mencetak Generasi Qur'ani, Berakhlak, dan Terampil
+                    </h3>
+                    <p class="text-sm text-neutral-300 leading-relaxed line-clamp-3">
+                        Dari pendidikan anak usia dini (TK ABA) hingga jenjang menengah kejuruan (SMK Muhammadiyah 10 Masaran dan SMA Muhammadiyah 3 Masaran), membekali generasi muda dengan aqidah shahihah dan keahlian vokasi masa depan.
+                    </p>
+                    <div class="pt-2">
+                        <a href="{% url 'pcm:amal_usaha' %}#pendidikan" class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-emerald-400 hover:text-emerald-300 transition">
+                            <span>Jelajahi Unit Pendidikan &rarr;</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Kesehatan -->
+            <div class="diorama-card card-tilt relative rounded-3xl overflow-hidden bg-neutral-900 text-white shadow-2xl border border-neutral-800 min-h-[440px] flex flex-col justify-end p-8 sm:p-10 group">
+                <div class="absolute inset-0 z-0">
+                    {% for aum in amal_usaha_unggulan %}
+                        {% if aum.bidang == 'kesehatan' and aum.gambar %}
+                            <img src="{{ aum.gambar.url }}" alt="{{ aum.nama }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        {% endif %}
+                    {% endfor %}
+                    <div class="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/70 to-neutral-950/20"></div>
+                </div>
+                <div class="relative z-10 space-y-3">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-900/90 backdrop-blur-md text-emerald-300 text-xs font-bold uppercase tracking-wider border border-emerald-600">
+                        <span>Pilar II · Kesehatan Umat</span>
+                    </div>
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                        Klinik Pratama PKU Muhammadiyah Masaran
+                    </h3>
+                    <p class="text-sm text-neutral-300 leading-relaxed line-clamp-3">
+                        Layanan kesehatan primer terpadu dengan poliklinik umum, pemeriksaan ibu dan anak, apotek, serta armada ambulans gratis yang siaga 24 jam melayani pasien darurat di pelosok desa Masaran.
+                    </p>
+                    <div class="pt-2">
+                        <a href="{% url 'pcm:amal_usaha' %}#kesehatan" class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-emerald-400 hover:text-emerald-300 transition">
+                            <span>Info Layanan Kesehatan &rarr;</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3: Filantropi -->
+            <div class="diorama-card card-tilt relative rounded-3xl overflow-hidden bg-neutral-900 text-white shadow-2xl border border-neutral-800 min-h-[440px] flex flex-col justify-end p-8 sm:p-10 group">
+                <div class="absolute inset-0 z-0">
+                    {% for aum in amal_usaha_unggulan %}
+                        {% if aum.bidang == 'sosial' and aum.gambar %}
+                            <img src="{{ aum.gambar.url }}" alt="{{ aum.nama }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        {% endif %}
+                    {% endfor %}
+                    <div class="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/70 to-neutral-950/20"></div>
+                </div>
+                <div class="relative z-10 space-y-3">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-900/90 backdrop-blur-md text-amber-300 text-xs font-bold uppercase tracking-wider border border-amber-600">
+                        <span>Pilar III · Filantropi & Keadilan</span>
+                    </div>
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                        Kantor Layanan LAZISMU Masaran
+                    </h3>
+                    <p class="text-sm text-neutral-300 leading-relaxed line-clamp-3">
+                        Mengelola amanah Zakat, Infaq, dan Shadaqah warga secara transparan dan akuntabel. Menyalurkan bantuan beasiswa santri dhuafa, paket sembako berkah lansia, hingga respon tanggap bencana MDMC.
+                    </p>
+                    <div class="pt-2">
+                        <a href="{% url 'pcm:amal_usaha' %}#sosial" class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-amber-400 hover:text-amber-300 transition">
+                            <span>Program ZIS & Donasi &rarr;</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4: Ekonomi -->
+            <div class="diorama-card card-tilt relative rounded-3xl overflow-hidden bg-neutral-900 text-white shadow-2xl border border-neutral-800 min-h-[440px] flex flex-col justify-end p-8 sm:p-10 group">
+                <div class="absolute inset-0 z-0">
+                    {% for aum in amal_usaha_unggulan %}
+                        {% if aum.bidang == 'ekonomi' and aum.gambar %}
+                            <img src="{{ aum.gambar.url }}" alt="{{ aum.nama }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        {% endif %}
+                    {% endfor %}
+                    <div class="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/70 to-neutral-950/20"></div>
+                </div>
+                <div class="relative z-10 space-y-3">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-900/90 backdrop-blur-md text-blue-300 text-xs font-bold uppercase tracking-wider border border-blue-600">
+                        <span>Pilar IV · Kemandirian Jamaah</span>
+                    </div>
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                        Toko Surya & BMT Masaran
+                    </h3>
+                    <p class="text-sm text-neutral-300 leading-relaxed line-clamp-3">
+                        Pemberdayaan ekonomi mikro melalui permodalan syariah tanpa riba, tabungan qurban, serta jejaring ritel Toko Surya untuk kemandirian finansial persyarikatan dan keluarga jamaah.
+                    </p>
+                    <div class="pt-2">
+                        <a href="{% url 'pcm:amal_usaha' %}#ekonomi" class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-blue-400 hover:text-blue-300 transition">
+                            <span>Kemitraan Usaha Syariah &rarr;</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- SECTION 3: BERITA TERBARU (3 BERITA TERBIT - ANIMATED STAGGER GRID) -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 border-t border-neutral-200/80">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
         <div>
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-200/70 text-neutral-800 text-xs font-semibold uppercase tracking-wider mb-2">
                 Warta Persyarikatan
             </div>
-            <h2 class="text-3xl font-extrabold text-neutral-950 tracking-tight">Berita & Informasi Terbaru</h2>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight">Berita & Informasi Terbaru</h2>
         </div>
-        <a href="{% url 'pcm:berita_list' %}" class="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-800 hover:text-brand-900 transition">
+        <a href="{% url 'pcm:berita_list' %}" class="btn-magnetic inline-flex items-center gap-1.5 text-sm font-semibold text-brand-800 hover:text-brand-900 transition group">
             <span>Lihat Semua Berita</span>
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
         </a>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="animate-stagger-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {% for item in berita_terbaru %}
             {% include 'includes/kartu_berita.html' with item=item %}
         {% empty %}
@@ -100,22 +307,22 @@
     </div>
 </section>
 
-<!-- SECTION 3: AGENDA MENDATANG (3 AGENDA TERDEKAT) -->
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-neutral-200/70">
-    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
+<!-- SECTION 4: AGENDA MENDATANG (3 AGENDA TERDEKAT - ANIMATED STAGGER GRID) -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 border-t border-neutral-200/80">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
         <div>
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 border border-brand-200 text-brand-900 text-xs font-semibold uppercase tracking-wider mb-2">
                 Agenda Kegiatan
             </div>
-            <h2 class="text-3xl font-extrabold text-neutral-950 tracking-tight">Agenda & Pengajian Mendatang</h2>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight">Agenda & Pengajian Mendatang</h2>
         </div>
-        <a href="{% url 'pcm:agenda' %}" class="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-800 hover:text-brand-900 transition">
+        <a href="{% url 'pcm:agenda' %}" class="btn-magnetic inline-flex items-center gap-1.5 text-sm font-semibold text-brand-800 hover:text-brand-900 transition group">
             <span>Lihat Jadwal Lengkap</span>
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
         </a>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="animate-stagger-grid grid grid-cols-1 md:grid-cols-3 gap-6">
         {% for item in agenda_mendatang %}
             {% include 'includes/kartu_agenda.html' with item=item %}
         {% empty %}
@@ -126,27 +333,27 @@
     </div>
 </section>
 
-<!-- SECTION 4: CALL TO ACTION BANNER -->
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <div class="rounded-3xl bg-neutral-950 text-white p-8 sm:p-12 relative overflow-hidden shadow-xl border border-neutral-800">
-        <div class="relative z-10 max-w-2xl space-y-4">
-            <span class="inline-block px-3 py-1 rounded-full bg-brand-800 text-white text-xs font-semibold uppercase tracking-wider">
+<!-- SECTION 5: CALL TO ACTION BANNER WITH AMBIENT WATERMARK -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="card-tilt rounded-3xl bg-neutral-950 text-white p-8 sm:p-14 relative overflow-hidden shadow-2xl border border-neutral-800">
+        <div class="relative z-10 max-w-2xl space-y-5">
+            <span class="inline-block px-3.5 py-1.5 rounded-full bg-brand-800 text-white text-xs font-bold uppercase tracking-wider shadow-sm">
                 Partisipasi Umat
             </span>
-            <h3 class="text-2xl sm:text-3xl font-bold tracking-tight">
+            <h3 class="text-3xl sm:text-4xl font-extrabold tracking-tight">
                 Salurkan Aspirasi & Bersinergi Bersama PCM Masaran
             </h3>
-            <p class="text-sm sm:text-base text-neutral-400 leading-relaxed">
-                Kami membuka ruang komunikasi seluas-luasnya untuk warga persyarikatan dan masyarakat umum. Kirimkan pesan, masukan, atau permohonan kerjasama langsung ke kantor sekretariat.
+            <p class="text-sm sm:text-base text-neutral-300 leading-relaxed">
+                Kami membuka ruang komunikasi seluas-luasnya untuk warga persyarikatan dan masyarakat umum. Kirimkan pesan, masukan, pertanyaan, atau permohonan kerjasama langsung ke kantor sekretariat.
             </p>
             <div class="pt-2">
-                <a href="{% url 'pcm:kontak' %}" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-brand-800 hover:bg-brand-900 text-white text-sm font-semibold tracking-wide transition">
+                <a href="{% url 'pcm:kontak' %}" class="btn-magnetic inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-brand-800 hover:bg-brand-700 text-white text-sm font-bold tracking-wide transition shadow-lg active:scale-95">
                     <span>Kirim Pesan Sekarang</span>
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                 </a>
             </div>
         </div>
-        <div class="absolute -right-12 -bottom-12 opacity-10 pointer-events-none">
+        <div class="ambient-float absolute -right-12 -bottom-12 opacity-10 pointer-events-none">
             <img src="{% static 'images/muhammadiyah.svg' %}" alt="Muhammadiyah Watermark" class="w-96 h-96 filter invert brightness-0">
         </div>
     </div>
