@@ -1,0 +1,44 @@
+services:
+  db:
+    image: postgres:17-alpine
+    restart: always
+    environment:
+      POSTGRES_DB: pcm_masaran_db
+      POSTGRES_USER: pcm_user
+      POSTGRES_PASSWORD: pcm_secret_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pcm_user -d pcm_masaran_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "5432:5432"
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    env_file:
+      - .env
+    environment:
+      PORT: 8000
+      DATABASE_URL: postgres://pcm_user:pcm_secret_password@db:5432/pcm_masaran_db
+      DEBUG: "False"
+      ALLOWED_HOSTS: "localhost,127.0.0.1,web"
+      CSRF_TRUSTED_ORIGINS: "http://localhost:8000,http://127.0.0.1:8000"
+    ports:
+      - "8000:8000"
+    volumes:
+      - media_data:/app/media
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
+    name: pcm_masaran_postgres_data
+  media_data:
+    name: pcm_masaran_media_data
