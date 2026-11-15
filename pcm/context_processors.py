@@ -2,13 +2,6 @@ from .models import ProfilOrganisasi, TautanTerkait
 
 
 def pcm_global_context(request):
-    """
-    Context processor global untuk menyediakan:
-    1. profil_organisasi (Profil PCM Masaran)
-    2. tautan_terkait (Tautan Persyarikatan di footer)
-    3. medsos_links (Akun resmi media sosial PCM Masaran)
-    ke semua template tanpa perlu query manual di setiap view.
-    """
     profil = ProfilOrganisasi.objects.first()
     tautan = TautanTerkait.objects.all().order_by('urutan', 'nama')
     

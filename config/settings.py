@@ -1,9 +1,3 @@
-"""
-Django settings for config project.
-Website Pimpinan Cabang Muhammadiyah (PCM) Masaran, Sragen.
-Built with Django 6.x and uv.
-"""
-
 import os
 from pathlib import Path
 from dotenv import load_dotenv

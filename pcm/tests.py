@@ -26,9 +26,9 @@ class PCMWebsiteTests(TestCase):
             nama_singkat="PCM Masaran",
             tagline="Mencerahkan Semesta, Memajukan Masaran",
             tentang="Tentang PCM Masaran di Sragen.",
-            sejarah="Sejarah berdiri sejak 1960.",
-            visi="Visi masyarakat Islam sebenar-benarnya.",
-            misi="Misi 1\nMisi 2\nMisi 3",
+            sejarah="Sejarah berdiri sejak 17 November 1935 M.",
+            visi="Terwujudnya masyarakat Islam yang sebenar-benarnya.",
+            misi="Menegakkan Tauhid yang murni.\nMenyebarluaskan Ajaran Islam.\nMewujudkan Islam dalam kehidupan.",
             alamat_sekretariat="Gedung Dakwah Muhammadiyah Masaran",
             telepon="(0271) 8821032",
             email="pcm.masaran@gmail.com",
@@ -93,7 +93,6 @@ class PCMWebsiteTests(TestCase):
         )
 
     def test_semua_halaman_publik_200(self):
-        """Uji 1: Semua halaman publik dapat diakses dengan HTTP Status 200."""
         urls = [
             reverse('pcm:beranda'),
             reverse('pcm:profil'),
@@ -113,7 +112,6 @@ class PCMWebsiteTests(TestCase):
             )
 
     def test_berita_terbit_200_and_draf_404(self):
-        """Uji 2: Berita terbit mengembalikan 200, berita draf atau bertanggal di masa depan WAJIB 404."""
         url_terbit = reverse('pcm:berita_detail', kwargs={'slug': self.berita_terbit.slug})
         resp_terbit = self.client.get(url_terbit)
         self.assertEqual(resp_terbit.status_code, 200)
@@ -127,7 +125,6 @@ class PCMWebsiteTests(TestCase):
         self.assertEqual(resp_future.status_code, 404)
 
     def test_formulir_kontak_menyimpan_pesan(self):
-        """Uji 3: Formulir kontak publik menyimpan pesan ke database dan menampilkan pesan sukses."""
         data = {
             'nama': 'Ahmad Dahlan',
             'email': 'ahmad@example.com',
@@ -144,7 +141,6 @@ class PCMWebsiteTests(TestCase):
         self.assertEqual(pesan.subjek, 'Kerjasama Pengajian Ranting')
 
     def test_profil_organisasi_singleton(self):
-        """Uji 4: Profil Organisasi hanya boleh ada 1 baris di database (singleton check)."""
         duplikat = ProfilOrganisasi(
             nama="Profil Duplikat PCM",
             nama_singkat="Duplikat",
@@ -162,7 +158,6 @@ class PCMWebsiteTests(TestCase):
             duplikat.clean()
 
     def test_berita_auto_slug_uniqueness(self):
-        """Uji 5: Pembuatan berita dengan judul identik otomatis menghasilkan slug unik tanpa tabrakan."""
         b1 = Berita.objects.create(
             judul="Pengajian Akbar Milad Masaran",
             ringkasan="Ringkasan 1",
@@ -179,7 +174,6 @@ class PCMWebsiteTests(TestCase):
         self.assertTrue(b2.slug.startswith("pengajian-akbar-milad-masaran-"))
 
     def test_berita_custom_manager_published(self):
-        """Uji 6: Custom manager Berita.objects.published() hanya memfilter berita terbit & tidak masa depan."""
         published_qs = Berita.objects.published()
         self.assertIn(self.berita_terbit, published_qs)
         self.assertNotIn(self.berita_draf, published_qs)

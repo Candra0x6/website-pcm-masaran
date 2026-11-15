@@ -6,10 +6,6 @@ from django.urls import reverse
 
 
 class ProfilOrganisasi(models.Model):
-    """
-    Model Profil Organisasi PCM Masaran.
-    Hanya boleh ada SATU baris data di database.
-    """
     nama = models.CharField(max_length=200, default="Pimpinan Cabang Muhammadiyah Masaran")
     nama_singkat = models.CharField(max_length=50, default="PCM Masaran")
     tagline = models.CharField(
@@ -45,16 +41,12 @@ class ProfilOrganisasi(models.Model):
             raise ValidationError("Hanya boleh ada satu baris profil organisasi di sistem.")
 
     def get_misi_list(self):
-        """Mengembalikan daftar butir misi yang dipisah per baris."""
         if not self.misi:
             return []
         return [line.strip() for line in self.misi.splitlines() if line.strip()]
 
 
 class Pimpinan(models.Model):
-    """
-    Susunan pimpinan PCM Masaran periode aktif.
-    """
     nama = models.CharField(max_length=150)
     jabatan = models.CharField(max_length=150)
     periode = models.CharField(max_length=50, default="2022–2027")
@@ -74,9 +66,6 @@ class Pimpinan(models.Model):
 
 
 class Ranting(models.Model):
-    """
-    Pimpinan Ranting Muhammadiyah (PRM) di wilayah Kecamatan Masaran.
-    """
     nama_ranting = models.CharField(max_length=150)
     ketua = models.CharField(max_length=150)
     alamat = models.TextField()
@@ -96,9 +85,6 @@ class Ranting(models.Model):
 
 
 class AmalUsaha(models.Model):
-    """
-    Amal Usaha Muhammadiyah (AUM) di bawah binaan PCM Masaran.
-    """
     BIDANG_CHOICES = [
         ('pendidikan', 'Pendidikan'),
         ('kesehatan', 'Kesehatan'),
@@ -123,7 +109,6 @@ class AmalUsaha(models.Model):
 
 class BeritaQuerySet(models.QuerySet):
     def published(self):
-        """Queryset untuk berita yang terbit dan tanggalnya tidak di masa depan."""
         return self.filter(status_terbit='terbit', tanggal_terbit__lte=timezone.now())
 
 
@@ -136,9 +121,6 @@ class BeritaManager(models.Manager):
 
 
 class Berita(models.Model):
-    """
-    Berita dan artikel kegiatan PCM Masaran.
-    """
     STATUS_CHOICES = [
         ('draf', 'Draf'),
         ('terbit', 'Terbit'),
@@ -183,9 +165,6 @@ class Berita(models.Model):
 
 
 class Agenda(models.Model):
-    """
-    Agenda kegiatan resmi PCM Masaran.
-    """
     nama_kegiatan = models.CharField(max_length=250)
     waktu_mulai = models.DateTimeField()
     tempat = models.CharField(max_length=250)
@@ -205,9 +184,6 @@ class Agenda(models.Model):
 
 
 class Dokumen(models.Model):
-    """
-    Dokumen dan berkas unduhan publik resmi (SK, Surat Edaran, Panduan, dsb).
-    """
     judul = models.CharField(max_length=250)
     keterangan = models.TextField(blank=True)
     berkas = models.FileField(upload_to='dokumen/')
@@ -223,10 +199,6 @@ class Dokumen(models.Model):
 
 
 class PesanMasuk(models.Model):
-    """
-    Pesan dari formulir kontak masyarakat.
-    Hanya bisa dibaca oleh admin (read-only).
-    """
     nama = models.CharField(max_length=150)
     email = models.EmailField()
     subjek = models.CharField(max_length=200)
@@ -244,9 +216,6 @@ class PesanMasuk(models.Model):
 
 
 class TautanTerkait(models.Model):
-    """
-    Tautan Persyarikatan (PDM, PWM, PP Muhammadiyah, Lazismu, dll).
-    """
     nama = models.CharField(max_length=150)
     url = models.URLField()
     urutan = models.PositiveIntegerField(default=0)

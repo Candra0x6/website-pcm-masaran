@@ -60,22 +60,17 @@ class Command(BaseCommand):
         if not ProfilOrganisasi.objects.exists():
             hero_rel = copy_asset('hero/hero_masaran.jpg', 'profil/hero_masaran.jpg')
             misi_text = (
-                "Menegakkan tauhid yang murni berlandaskan Al-Qur'an dan As-Sunnah ash-Shahihah di seluruh cabang dan ranting.\n"
-                "Memperluas dan meningkatkan mutu dakwah Islamiyah di bidang tabligh, pendidikan, kesehatan, dan sosial kemasyarakatan.\n"
-                "Membina generasi muda melalui gerakan kepanduan Hizbul Wathan, Tapak Suci, dan Ikatan Pelajar Muhammadiyah.\n"
-                "Mengoptimalkan tata kelola dan profesionalisme pengelolaan Amal Usaha Muhammadiyah (AUM) di Kecamatan Masaran.\n"
-                "Menggerakkan kepedulian sosial, filantropi, dan pemberdayaan ekonomi umat melalui jaringan Lazismu Masaran."
+                "Menegakkan Tauhid yang murni berdasarkan Al-Quran dan As-Sunnah.\n"
+                "Menyebarluaskan dan memajukan Ajaran Islam yang bersumber pada Al-Quran dan As-Sunnah yang shahihah/maqbulah.\n"
+                "Mewujudkan Islam dalam kehidupan pribadi, keluarga, dan masyarakat."
             )
             sejarah_text = (
-                "Pimpinan Cabang Muhammadiyah (PCM) Masaran telah dirintis sejak dekade 1960-an oleh para tokoh agama dan sesepuh pejuang Islam di Masaran, Sragen. "
-                "Bermula dari kelompok pengajian jamaah dan madrasah diniyah ranting di Pilang, Kliwonan, dan Masaran, persyarikatan tumbuh pesat menjadi cabang definitif "
-                "di bawah koordinasi Pimpinan Daerah Muhammadiyah (PDM) Kabupaten Sragen.\n\n"
-                "Tonggak penting pergerakan ditandai dengan dibangunnya Gedung Dakwah Muhammadiyah Masaran di jalur strategis Solo-Sragen KM 13, yang kini menjadi episentrum "
-                "koordinasi 13 Pimpinan Ranting Muhammadiyah (PRM), lembaga pendidikan unggulan, pusat pembinaan kader, serta pelayanan sosial bagi umat."
+                "Pimpinan Cabang Muhammadiyah (PCM) Masaran secara resmi berdiri pada tanggal 20 Sya'ban 1354 Hijriyah yang bertepatan dengan 17 November 1935 Masehi, sebagaimana disahkan melalui Surat Keputusan Pimpinan Wilayah Muhammadiyah Jawa Tengah Nomor 066/KEP/II.0/B/2026 tentang Pengesahan Pendirian Cabang Muhammadiyah Masaran Kabupaten Sragen.\n\n"
+                "Bermula dari pergerakan dakwah Islam berkemajuan di wilayah Masaran masa pra-kemerdekaan, para perintis persyarikatan mendirikan pusat kajian dan pengajian di desa-desa sekitar Masaran. Selama lebih dari sembilan dekade perjalanan khidmah, PCM Masaran terus bertransformasi menjadi kekuatan pencerah peradaban umat melalui penguatan 13 Pimpinan Ranting Muhammadiyah (PRM) definitif, belasan Amal Usaha Muhammadiyah (AUM) di bidang pendidikan dasar hingga menengah kejuruan, pelayanan kesehatan, gerakan filantropi Lazismu, serta sentra ekonomi produktif.\n\n"
+                "Kini dengan berpusat di Gedung Dakwah Muhammadiyah Masaran di jalur strategis Solo–Sragen KM 13, persyarikatan menggerakkan dakwah amar ma'ruf nahi munkar berlandaskan Al-Qur'an dan As-Sunnah ash-Shahihah."
             )
             tentang_text = (
-                "Pimpinan Cabang Muhammadiyah (PCM) Masaran adalah organisasi kemasyarakatan Islam berkemajuan yang membina wilayah Kecamatan Masaran, Kabupaten Sragen, Jawa Tengah. "
-                "Dengan 13 ranting desa aktif dan puluhan amal usaha, PCM Masaran berkomitmen menebar kebaikan, memajukan pendidikan, dan memperkuat ukhuwah Islamiyah."
+                "Pimpinan Cabang Muhammadiyah (PCM) Masaran adalah organisasi kemasyarakatan Islam berkemajuan yang membina wilayah Kecamatan Masaran, Kabupaten Sragen, Jawa Tengah. Berdiri sejak 17 November 1935 (20 Sya'ban 1354 H), PCM Masaran mengoordinasikan 13 Pimpinan Ranting Muhammadiyah (PRM) desa, puluhan lembaga pendidikan mulai dari TK 'Aisyiyah, MIM, MTs, SMP, SMA, hingga SMK, serta unit kesehatan dan sentra ekonomi keumatan."
             )
             ProfilOrganisasi.objects.create(
                 nama="Pimpinan Cabang Muhammadiyah Masaran",
@@ -83,7 +78,7 @@ class Command(BaseCommand):
                 tagline="Mencerahkan Semesta, Memajukan Masaran Berkemajuan",
                 tentang=tentang_text,
                 sejarah=sejarah_text,
-                visi="Terwujudnya masyarakat Islam yang sebenar-benarnya di Masaran yang cerdas, berdaya saing, mandiri, dan berakhlak mulia.",
+                visi="Terwujudnya masyarakat Islam yang sebenar-benarnya.",
                 misi=misi_text,
                 alamat_sekretariat="Gedung Dakwah Muhammadiyah Masaran, Jl. Raya Solo - Sragen KM 13, Masaran, Sragen, Jawa Tengah 57282",
                 telepon="(0271) 8821032",
@@ -96,11 +91,20 @@ class Command(BaseCommand):
         if not Pimpinan.objects.exists():
             pimpinan_data = [
                 ("H. Siyamto Umardani, S.Ag.", "Ketua Cabang", "2022–2027", 1, "pimpinan/ketua_siyamto.jpg", "pimpinan/ketua_siyamto.jpg"),
-                ("Muhammad Effendi, S.Psi.", "Sekretaris Cabang", "2022–2027", 2, "pimpinan/sekretaris_efendi.jpg", "pimpinan/sekretaris_efendi.jpg"),
-                ("H. Riris Purnawan, SE", "Bendahara Cabang", "2022–2027", 3, "pimpinan/bendahara_riris.jpg", "pimpinan/bendahara_riris.jpg"),
-                ("Drs. H. Sucipto", "Wakil Ketua Bidang Pembinaan Ranting", "2022–2027", 4, "pimpinan/wakil_sucipto.jpg", "pimpinan/wakil_sucipto.jpg"),
-                ("Ustadz H. Sukadi", "Ketua Majelis Tabligh & Dakwah Khusus", "2022–2027", 5, "pimpinan/tabligh_sukadi.jpg", "pimpinan/tabligh_sukadi.jpg"),
-                ("Ustadz Muslih, S.Pd.", "Ketua Majelis Dikdasmen & PNF", "2022–2027", 6, "pimpinan/dikdasmen_muslih.jpg", "pimpinan/dikdasmen_muslih.jpg"),
+                ("Giyamto, S.Pd.", "Wakil Ketua I (MPM & Lazismu)", "2022–2027", 2, "pimpinan/wakil_sucipto.jpg", "pimpinan/wakil_giyamto.jpg"),
+                ("H. Sumarno, S.Th.I.", "Wakil Ketua II (LPHU & LPPK)", "2022–2027", 3, "pimpinan/tabligh_sukadi.jpg", "pimpinan/wakil_sumarno.jpg"),
+                ("Parlan Sinung Darsono", "Wakil Ketua III (MPK-SDI & LSBO)", "2022–2027", 4, "pimpinan/wakil_sucipto.jpg", "pimpinan/wakil_parlan.jpg"),
+                ("H. Suyatno, S.Sos, M.Si.", "Wakil Ketua IV (Wakaf & MLH)", "2022–2027", 5, "pimpinan/bendahara_riris.jpg", "pimpinan/wakil_suyatno.jpg"),
+                ("Muhammad Marjuki, S.Pd.", "Wakil Ketua V (Tarjih, Tabligh & LPCR)", "2022–2027", 6, "pimpinan/tabligh_sukadi.jpg", "pimpinan/wakil_marjuki.jpg"),
+                ("Dr. H. Basuki Agus Suparno, M.Si.", "Wakil Ketua VI (MPI & Hukum-HAM)", "2022–2027", 7, "pimpinan/dikdasmen_muslih.jpg", "pimpinan/wakil_basuki.jpg"),
+                ("Dr. Purwadi, M.Pd.", "Wakil Ketua VII (Dikdasmen & Pesantren)", "2022–2027", 8, "pimpinan/dikdasmen_muslih.jpg", "pimpinan/wakil_purwadi.jpg"),
+                ("Dr. H. Suharno, ST. MT.", "Wakil Ketua VIII (Ekonomi & LHKP)", "2022–2027", 9, "pimpinan/bendahara_riris.jpg", "pimpinan/wakil_suharno.jpg"),
+                ("Muhammad Effendi, S.Psi.", "Sekretaris Cabang", "2022–2027", 10, "pimpinan/sekretaris_efendi.jpg", "pimpinan/sekretaris_efendi.jpg"),
+                ("Drs. H. Taslim Daryanto, M.Pd.", "Wakil Sekretaris (MPKU & Sosial)", "2022–2027", 11, "pimpinan/sekretaris_efendi.jpg", "pimpinan/wsek_taslim.jpg"),
+                ("Dwi Daryanto, S.Pd.I.", "Bendahara Cabang", "2022–2027", 12, "pimpinan/bendahara_riris.jpg", "pimpinan/bendahara_dwi.jpg"),
+                ("Muslih, S.Pd.", "Wakil Bendahara (Resiliensi Bencana)", "2022–2027", 13, "pimpinan/dikdasmen_muslih.jpg", "pimpinan/wbend_muslih.jpg"),
+                ("Drs. H. Sutarno, MM", "Penasehat PCM Masaran", "2022–2027", 14, "pimpinan/ketua_siyamto.jpg", "pimpinan/penasehat_sutarno.jpg"),
+                ("Ir. H. Suroto", "Penasehat PCM Masaran", "2022–2027", 15, "pimpinan/ketua_siyamto.jpg", "pimpinan/penasehat_suroto.jpg"),
             ]
             for nama, jabatan, periode, urutan, src_rel, dst_rel in pimpinan_data:
                 foto_rel = copy_asset(src_rel, dst_rel)
@@ -115,19 +119,19 @@ class Command(BaseCommand):
 
         if not Ranting.objects.exists():
             ranting_data = [
-                ("Masaran", "H. Suratno, S.Pd.", "Kompleks Masjid Baiturrahman, Desa Masaran", "(0271) 8821035"),
-                ("Pilang", "Drs. Joko Purnomo", "Dukuh Pilang RT 04, Desa Pilang, Masaran", ""),
-                ("Kliwonan", "H. Budi Santoso", "Jl. Batik Kliwonan RT 08, Desa Kliwonan", "(0271) 8821102"),
-                ("Sidodadi", "Ustadz Suparman", "Kompleks MIM Sidodadi, Desa Sidodadi", ""),
-                ("Jirapan", "Drs. H. Wardoyo", "Kompleks Ponpes/Masjid Al-Manar, Jirapan", ""),
-                ("Dawungan", "Sunardi, S.Pd.I", "Dukuh Dawungan RT 02, Desa Dawungan", ""),
+                ("Dawungan", "Sunardi, S.Pd.I", "Dukuh Dawungan RT 02, Desa Dawungan, Masaran", ""),
                 ("Gebang", "H. Sukamto", "Dukuh Gebang RT 05, Desa Gebang, Masaran", ""),
                 ("Jati", "Supriyanto, S.Pd.", "Dukuh Jati RT 01, Desa Jati, Masaran", ""),
-                ("Karangmalang", "H. Mulyono", "Dukuh Karangmalang RT 03, Desa Karangmalang", ""),
-                ("Krebet", "Agus Widodo", "Kompleks Masjid Mujahidin, Desa Krebet", ""),
-                ("Krikilan", "Drs. H. Bambang", "Dukuh Krikilan RT 06, Desa Krikilan", ""),
-                ("Pringanom", "Ustadz Rohmadi", "Dukuh Pringanom RT 02, Desa Pringanom", ""),
-                ("Sepat", "H. Ahmad Fauzi", "Kompleks Mushola Al-Huda, Desa Sepat", ""),
+                ("Jirapan", "Drs. H. Wardoyo", "Kompleks Ponpes/Masjid Al-Manar, Desa Jirapan, Masaran", ""),
+                ("Karangmalang", "H. Mulyono", "Dukuh Karangmalang RT 03, Desa Karangmalang, Masaran", ""),
+                ("Kliwonan", "H. Budi Santoso", "Jl. Batik Kliwonan RT 08, Desa Kliwonan, Masaran", "(0271) 8821102"),
+                ("Krebet", "Agus Widodo", "Kompleks Masjid Mujahidin, Desa Krebet, Masaran", ""),
+                ("Krikilan", "Drs. H. Bambang", "Dukuh Krikilan RT 06, Desa Krikilan, Masaran", ""),
+                ("Masaran", "H. Suratno, S.Pd.", "Kompleks Masjid Baiturrahman, Desa Masaran", "(0271) 8821035"),
+                ("Pilang", "Drs. Joko Purnomo", "Dukuh Pilang RT 04, Desa Pilang, Masaran", ""),
+                ("Pringanom", "Ustadz Rohmadi", "Dukuh Pringanom RT 02, Desa Pringanom, Masaran", ""),
+                ("Sepat", "H. Ahmad Fauzi", "Kompleks Mushola Al-Huda, Desa Sepat, Masaran", ""),
+                ("Sidodadi", "Ustadz Suparman", "Kompleks MIM Sidodadi, Desa Sidodadi, Masaran", ""),
             ]
             for nama, ketua, alamat, telp in ranting_data:
                 Ranting.objects.create(
@@ -140,13 +144,19 @@ class Command(BaseCommand):
 
         if not AmalUsaha.objects.exists():
             aum_data = [
-                ("SMK Muhammadiyah 10 Masaran", "pendidikan", "Sekolah Menengah Kejuruan Pusat Keunggulan dengan jurusan Teknik Kendaraan Ringan dan Teknik Komputer Jaringan.", "Jl. Raya Masaran - Pungkruk KM 2, Masaran, Sragen", "amal_usaha/aum_pendidikan_smk.jpg", "amal_usaha/aum_pendidikan_smk.jpg"),
-                ("SMA Muhammadiyah 3 Masaran", "pendidikan", "Sekolah Menengah Atas berbasis nilai Islam holistik, program riset, dan penguasaan bahasa asing.", "Kompleks Pendidikan Muhammadiyah, Masaran, Sragen", "amal_usaha/aum_pendidikan_smk.jpg", "amal_usaha/aum_pendidikan_sma.jpg"),
-                ("SMP Muhammadiyah 2 Masaran", "pendidikan", "Sekolah Menengah Pertama unggulan dengan kurikulum terpadu nasional dan kepesantrenan.", "Jl. Raya Solo - Sragen KM 12, Masaran, Sragen", "amal_usaha/aum_pendidikan_smk.jpg", "amal_usaha/aum_pendidikan_smp.jpg"),
-                ("MTs Muhammadiyah 3 Masaran (Kliwonan)", "pendidikan", "Madrasah Tsanawiyah dengan penguatan tahfidz Al-Qur'an dan sains teknologi.", "Dukuh Kliwonan RT 08, Desa Kliwonan, Masaran", "amal_usaha/aum_pendidikan_smk.jpg", "amal_usaha/aum_pendidikan_mts.jpg"),
+                ("SMK Muhammadiyah 10 Masaran", "pendidikan", "Sekolah Menengah Kejuruan Pusat Keunggulan dengan program keahlian Teknik Kendaraan Ringan dan Teknik Komputer Jaringan.", "Jl. Raya Masaran - Pungkruk KM 2, Masaran, Sragen", "amal_usaha/aum_pendidikan_smk.jpg", "amal_usaha/aum_pendidikan_smk.jpg"),
+                ("SMA Muhammadiyah 3 Masaran", "pendidikan", "Sekolah Menengah Atas berbasis nilai Islam holistik, riset sains, dan pembinaan kader bangsa.", "Kompleks Pendidikan Muhammadiyah, Masaran, Sragen", "amal_usaha/aum_pendidikan_smk.jpg", "amal_usaha/aum_pendidikan_sma.jpg"),
+                ("SMP Muhammadiyah 2 Masaran", "pendidikan", "Sekolah Menengah Pertama unggulan berprestasi akademik dan kepesantrenan (lokasi Musycab ke-48).", "Jl. Raya Solo - Sragen KM 12, Masaran, Sragen", "amal_usaha/aum_pendidikan_smk.jpg", "amal_usaha/aum_pendidikan_smp.jpg"),
+                ("MTs Muhammadiyah 3 Masaran", "pendidikan", "Madrasah Tsanawiyah terpadu berwawasan global dengan kurikulum Kemenag dan tahfidz Al-Qur'an.", "Dukuh Kliwonan RT 08, Desa Kliwonan, Masaran", "amal_usaha/aum_pendidikan_smk.jpg", "amal_usaha/aum_pendidikan_mts.jpg"),
+                ("SD Muhammadiyah Terpadu Masaran", "pendidikan", "Sekolah Dasar Islam terpadu dengan pembelajaran aktif, tahfidz juz amma, dan pembiasaan adab Islami.", "Kompleks Gedung Dakwah PCM Masaran, Sragen", "amal_usaha/aum_pendidikan_smk.jpg", "amal_usaha/aum_pendidikan_sd.jpg"),
+                ("MIM Sidodadi Masaran", "pendidikan", "Madrasah Ibtidaiyah Muhammadiyah Sidodadi membina generasi Qur'ani di wilayah ranting Sidodadi.", "Kompleks Perguruan Muhammadiyah Sidodadi, Masaran, Sragen", "amal_usaha/aum_pendidikan_smk.jpg", "amal_usaha/aum_pendidikan_mim_sidodadi.jpg"),
+                ("MIM Kliwonan Masaran", "pendidikan", "Madrasah Ibtidaiyah Muhammadiyah Kliwonan dengan program keagamaan, sains madrasah, dan bahasa Arab.", "Jl. Batik Kliwonan RT 08, Desa Kliwonan, Masaran, Sragen", "amal_usaha/aum_pendidikan_smk.jpg", "amal_usaha/aum_pendidikan_mim_kliwonan.jpg"),
+                ("MIM Pilang Masaran", "pendidikan", "Madrasah Ibtidaiyah Muhammadiyah Pilang berfokus pada pendidikan akhlakul karimah dan literasi dasar.", "Dukuh Pilang RT 04, Desa Pilang, Masaran, Sragen", "amal_usaha/aum_pendidikan_smk.jpg", "amal_usaha/aum_pendidikan_mim_pilang.jpg"),
+                ("Jaringan 11 TK 'Aisyiyah Bustanul Athfal Masaran", "pendidikan", "Jaringan 11 unit PAUD dan TK 'Aisyiyah Bustanul Athfal (TK ABA) binaan PCA Masaran tersebar di 11 ranting desa se-Kecamatan Masaran.", "Tersebar di 11 Ranting Desa se-Kecamatan Masaran", "amal_usaha/aum_pendidikan_smk.jpg", "amal_usaha/aum_tk_aba.jpg"),
+                ("Sentra Pengolahan Pertanian Gabah Muhammadiyah (SPPGM) Tangen", "ekonomi", "Unit usaha produktif agrobisnis persyarikatan pengolahan gabah dan ketahanan pangan mandiri PCM Masaran di Tangen.", "Kawasan Sentra Pangan PCM Masaran, Tangen, Sragen", "amal_usaha/aum_ekonomi.jpg", "amal_usaha/aum_sppgm.jpg"),
                 ("Klinik Pratama PKU Muhammadiyah Masaran", "kesehatan", "Pusat pelayanan kesehatan rawat jalan 24 jam, persalinan, khitanan, dan poliklinik umum masyarakat.", "Jl. Raya Solo - Sragen KM 13.5, Masaran, Sragen", "amal_usaha/aum_pku_kesehatan.jpg", "amal_usaha/aum_pku_kesehatan.jpg"),
                 ("Kantor Layanan Lazismu Masaran", "sosial", "Lembaga amil zakat, infak, dan sedekah terpercaya untuk program pemberdayaan mustahiq dan beasiswa sang surya.", "Gedung Dakwah PCM Masaran Lt. 1, Jl. Raya Solo - Sragen KM 13", "amal_usaha/aum_lazismu.jpg", "amal_usaha/aum_lazismu.jpg"),
-                ("Toko Surya & BMT Masaran", "ekonomi", "Unit usaha ritel kebutuhan warga dan lembaga keuangan mikro syariah penggerak ekonomi usaha kecil.", "Kompleks Pertokoan PCM Masaran, Jl. Raya Solo - Sragen KM 13", "amal_usaha/aum_lazismu.jpg", "amal_usaha/aum_ekonomi.jpg"),
+                ("Toko Surya & BMT Muhammadiyah Masaran", "ekonomi", "Unit usaha ritel kebutuhan warga dan lembaga keuangan mikro syariah penggerak ekonomi usaha kecil umat.", "Kompleks Pertokoan PCM Masaran, Jl. Raya Solo - Sragen KM 13", "amal_usaha/aum_ekonomi.jpg", "amal_usaha/aum_bmt.jpg"),
                 ("Padepokan Tapak Suci Pimda 058 Cabang Masaran", "sosial", "Pusat pelatihan bela diri pencak silat prestasi dan kaderisasi generasi muda persyarikatan.", "Gedung Olahraga PCM Masaran", "amal_usaha/aum_tapak_suci.jpg", "amal_usaha/aum_tapak_suci.jpg"),
             ]
             for nama, bidang, deskripsi, alamat, src_rel, dst_rel in aum_data:
@@ -278,7 +288,9 @@ class Command(BaseCommand):
 
         if not Dokumen.objects.exists():
             doc_data = [
-                ("SK PDM Sragen No. 032/KEP/III.0/D/2023 - Penetapan Kepengurusan", "Surat Keputusan PDM Sragen tentang pengesahan susunan pengurus PCM Masaran periode 2022–2027.", "dokumen/sk_pdm_masaran_2022_2027.pdf", "dokumen/sk_pdm_masaran_2022_2027.pdf"),
+                ("SK PWM Jawa Tengah No. 066/KEP/II.0/B/2026 - Piagam Pengesahan Pendirian PCM Masaran 1935", "Piagam resmi pengesahan pendirian Pimpinan Cabang Muhammadiyah Masaran tertanggal 17 November 1935 M (20 Sya'ban 1354 H) oleh Pimpinan Wilayah Muhammadiyah Jawa Tengah.", "dokumen/sk_pengesahan_pendirian_pcm_masaran_1935.pdf", "dokumen/sk_pengesahan_pendirian_pcm_masaran_1935.pdf"),
+                ("SK PDM Sragen No. 032/KEP/III.0/D/2023 - Penetapan Hasil Musycab ke-48", "Surat Keputusan PDM Sragen tentang penetapan 13 Anggota Pleno / Formatur PCM Masaran Periode Muktamar ke-48 (2022–2027).", "dokumen/sk_032_pdm_sragen_pengurus_pcm_masaran_2022_2027.pdf", "dokumen/sk_032_pdm_sragen_pengurus_pcm_masaran_2022_2027.pdf"),
+                ("Struktur Pengurus Paripurna PCM Masaran Periode 2022–2027", "Bagan struktur organisasi lengkap meliputi Penasehat, 13 Pimpinan Pleno Koordinator, serta 18 Majelis dan Lembaga Pembantu Pimpinan.", "dokumen/struktur_pengurus_pcm_masaran_2022_2027_paripurna.pdf", "dokumen/struktur_pengurus_pcm_masaran_2022_2027_paripurna.pdf"),
                 ("Pedoman Penyelenggaraan Ranting Muhammadiyah (LPCR)", "Panduan baku tata kelola keorganisasian, administrasi surat-menyurat, dan pembinaan jamaah tingkat ranting.", "dokumen/panduan_organisasi_ranting.pdf", "dokumen/panduan_organisasi_ranting.pdf"),
             ]
             for judul, ket, src_rel, dst_rel in doc_data:

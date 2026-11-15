@@ -15,14 +15,173 @@ from .models import (
 from .forms import KontakForm
 
 
+MAJELIS_LEMBAGA_LIST = [
+    {
+        "nama": "Majelis Pembina Kesehatan Umum dan Pelayanan Sosial (MPKU)",
+        "singkatan": "MPKU",
+        "ketua": "H. Sukiswanto, S.Pd",
+        "sekretaris": "Sukarman Kembangan",
+        "koordinator": "Drs. H. Taslim Daryanto, M.Pd (Wakil Sekretaris)",
+        "kategori": "Majelis",
+        "deskripsi": "Mengkoordinasikan pelayanan kesehatan umum PKU Muhammadiyah dan bakti sosial kemasyarakatan se-Kecamatan Masaran."
+    },
+    {
+        "nama": "Majelis Pembinaan Kader – Sumber Daya Insani (MPK-SDI)",
+        "singkatan": "MPK-SDI",
+        "ketua": "Iksanuddin, S.Ag",
+        "sekretaris": "Sajiman, S.Ag",
+        "koordinator": "Parlan Sinung Darsono (Wakil Ketua III)",
+        "kategori": "Majelis",
+        "deskripsi": "Pembibitan kader, Baitul Arqam, dan penguatan ideologi persyarikatan bagi seluruh pimpinan dan guru AUM."
+    },
+    {
+        "nama": "Majelis Pendayagunaan Wakaf",
+        "singkatan": "Wakaf",
+        "ketua": "Drs. H. Sabar Sholihin",
+        "sekretaris": "Endang Ismei",
+        "koordinator": "H. Suyatno, S.Sos, M.Si (Wakil Ketua IV)",
+        "kategori": "Majelis",
+        "deskripsi": "Inventarisasi, sertifikasi tanah wakaf persyarikatan, serta optimalisasi aset untuk kemaslahatan umat."
+    },
+    {
+        "nama": "Majelis Ekonomi dan Kewirausahaan (MEK)",
+        "singkatan": "MEK",
+        "ketua": "Ari Rudianto, SE",
+        "sekretaris": "Supriyono",
+        "koordinator": "Dr. H. Suharno, ST, MT (Wakil Ketua VIII)",
+        "kategori": "Majelis",
+        "deskripsi": "Pengembangan unit usaha produktif, kemitraan pertanian SPPGM Tangen, BMT, dan pembinaan UMKM jamaah."
+    },
+    {
+        "nama": "Majelis Pustaka dan Informasi (MPI)",
+        "singkatan": "MPI",
+        "ketua": "Jumadi, S.Pd",
+        "sekretaris": "Ery Munandar, S.Sos",
+        "koordinator": "Dr. H. Basuki Agus Suparno, M.Si (Wakil Ketua VI)",
+        "kategori": "Majelis",
+        "deskripsi": "Pengelolaan portal web resmi, dakwah siber digital, arsip historis, dan keterbukaan informasi persyarikatan."
+    },
+    {
+        "nama": "Majelis Pendidikan Dasar dan Menengah (Dikdasmen)",
+        "singkatan": "Dikdasmen",
+        "ketua": "H. Mulyanto, S.Pd, M.Pd",
+        "sekretaris": "Arif Sumoro, S.Pd",
+        "koordinator": "Dr. Purwadi, M.Pd (Wakil Ketua VII)",
+        "kategori": "Majelis",
+        "deskripsi": "Membina dan mengelola jaringan sekolah (SMK 10, SMA 3, SMP 2, MTs 3, SD Terpadu, MIM) menuju sekolah unggul."
+    },
+    {
+        "nama": "Majelis Pemberdayaan Masyarakat (MPM)",
+        "singkatan": "MPM",
+        "ketua": "Eko Priyanto, S.Pd",
+        "sekretaris": "Supadi, S.E, S.Pd, M.Pd",
+        "koordinator": "Giyamto, S.Pd (Wakil Ketua I)",
+        "kategori": "Majelis",
+        "deskripsi": "Pendampingan petani gabah, kelompok ternak, nelayan air tawar, dan pemberdayaan ekonomi kaum dhuafa."
+    },
+    {
+        "nama": "Majelis Tabligh, Tarjih, dan Tajdid (MTTT)",
+        "singkatan": "Tabligh-Tarjih",
+        "ketua": "Sukarno, S.Ag",
+        "sekretaris": "H. Nur Salim, S.Ag",
+        "koordinator": "Muhammad Marjuki, S.Pd (Wakil Ketua V)",
+        "kategori": "Majelis",
+        "deskripsi": "Pengkajian fatwa hisab dan tarjih, pembinaan korp muballigh, serta penyelenggaraan Pengajian Ahad Pagi Akbar."
+    },
+    {
+        "nama": "Majelis Lingkungan Hidup (MLH)",
+        "singkatan": "MLH",
+        "ketua": "H. Juwadi, M.Si",
+        "sekretaris": "Sungadi, SH",
+        "koordinator": "H. Suyatno, S.Sos, M.Si (Wakil Ketua IV)",
+        "kategori": "Majelis",
+        "deskripsi": "Edukasi kelestarian alam, mitigasi krisis iklim, pengelolaan sampah masjid, dan penghijauan ranting."
+    },
+    {
+        "nama": "Majelis Hukum HAM dan Bantuan Hukum",
+        "singkatan": "Hukum & HAM",
+        "ketua": "Joko Sulistyo, S.Pd",
+        "sekretaris": "Suparno, SH",
+        "koordinator": "Dr. H. Basuki Agus Suparno, M.Si (Wakil Ketua VI)",
+        "kategori": "Majelis",
+        "deskripsi": "Advokasi legal persyarikatan, pendampingan hukum warga dhuafa, dan penyuluhan kesadaran hukum."
+    },
+    {
+        "nama": "Lembaga Resiliensi Bencana (LRB / MDMC)",
+        "singkatan": "MDMC",
+        "ketua": "M. Amin Rois",
+        "sekretaris": "Nova Zakariya",
+        "koordinator": "Muslih, S.Pd (Wakil Bendahara)",
+        "kategori": "Lembaga",
+        "deskripsi": "Tanggap darurat bencana alam, relawan kebencanaan MDMC, pelatihan mitigasi, dan kesiapsiagaan ranting."
+    },
+    {
+        "nama": "Lembaga Pembinaan Haji dan Umroh (LPHU)",
+        "singkatan": "LPHU",
+        "ketua": "Drs. H. Teguh",
+        "sekretaris": "H. Ramelan, S.Pd, M.Pd",
+        "koordinator": "H. Sumarno, S.Th.I (Wakil Ketua II)",
+        "kategori": "Lembaga",
+        "deskripsi": "Bimbingan manasik haji dan umroh mandiri, silaturahmi alumni jamaah, dan pembinaan kemabruran."
+    },
+    {
+        "nama": "Lembaga Pembinaan dan Pengawasan Keuangan (LPPK)",
+        "singkatan": "LPPK",
+        "ketua": "Gatot Widiarto, SE",
+        "sekretaris": "Arif BJ, S.P",
+        "koordinator": "H. Sumarno, S.Th.I (Wakil Ketua II)",
+        "kategori": "Lembaga",
+        "deskripsi": "Audit internal berkala, standardisasi tata kelola akuntansi keuangan cabang, ranting, dan seluruh AUM."
+    },
+    {
+        "nama": "Lembaga Pengembangan Pesantren Muhammadiyah (LP2M)",
+        "singkatan": "LP2M",
+        "ketua": "Syamsiar Ahmadi, S.Ag",
+        "sekretaris": "Iksan Darajat, S.Pd",
+        "koordinator": "Dr. Purwadi, M.Pd (Wakil Ketua VII)",
+        "kategori": "Lembaga",
+        "deskripsi": "Pengembangan kurikulum kepesantrenan, asrama tahfidz, dan kaderisasi ulama tarjih muda."
+    },
+    {
+        "nama": "Lembaga Pengembangan Cabang Ranting dan Pembinaan Masjid (LPCR-PM)",
+        "singkatan": "LPCR-PM",
+        "ketua": "Eko Budiyono, S.Pd",
+        "sekretaris": "Kaswadi, S.Pd",
+        "koordinator": "Muhammad Marjuki, S.Pd (Wakil Ketua V)",
+        "kategori": "Lembaga",
+        "deskripsi": "Penguatan organisasi 13 PRM se-Kecamatan Masaran, pemakmuran masjid, mushalla, dan jamaah ranting."
+    },
+    {
+        "nama": "Lembaga Hikmah dan Kebijakan Publik (LHKP)",
+        "singkatan": "LHKP",
+        "ketua": "Eka Widiastono, S.Pd",
+        "sekretaris": "Hanan Rustamaji, S.Sn",
+        "koordinator": "Dr. H. Suharno, ST, MT (Wakil Ketua VIII)",
+        "kategori": "Lembaga",
+        "deskripsi": "Kajian kebijakan strategis publik daerah, sinergi Forkopimcam Masaran, dan wawasan kebangsaan."
+    },
+    {
+        "nama": "Lembaga Amil Zakat Infak dan Shodaqoh (Lazismu Masaran)",
+        "singkatan": "Lazismu",
+        "ketua": "Agus SW, S.Pd",
+        "sekretaris": "Irwan Susanto",
+        "koordinator": "Giyamto, S.Pd (Wakil Ketua I)",
+        "kategori": "Lembaga",
+        "deskripsi": "Penghimpunan dan pendistribusian ZISKA untuk beasiswa santri, penanganan kemiskinan, dan layanan ambulans."
+    },
+    {
+        "nama": "Lembaga Seni Budaya & Olahraga, Pembinaan AMM & Ortom (LSBO-AMM)",
+        "singkatan": "LSBO-AMM",
+        "ketua": "Habiburohman, S.Pd, M.Pd",
+        "sekretaris": "M. Rizqon Bayu Aji, S.Pd",
+        "koordinator": "Parlan Sinung Darsono (Wakil Ketua III)",
+        "kategori": "Lembaga",
+        "deskripsi": "Pembinaan ortom (Pemuda Muhammadiyah, Nasyiah, IPM, Tapak Suci, Hizbul Wathan) dan seni budaya Islam."
+    }
+]
+
+
 def beranda_view(request):
-    """
-    Halaman Beranda:
-    - Hero dengan gambar utama dan identitas PCM Masaran
-    - Kartu statistik (jumlah ranting, jumlah amal usaha, anggota ber-KTAM)
-    - 3 berita terbaru yang sudah terbit
-    - 3 agenda mendatang terdekat
-    """
     now = timezone.now()
     profil = ProfilOrganisasi.objects.first()
     
@@ -55,13 +214,6 @@ def beranda_view(request):
 
 
 def profil_view(request):
-    """
-    Halaman Profil:
-    - Tentang PCM Masaran
-    - Sejarah berdirinya
-    - Visi dan Misi (misi tampil sebagai daftar bernomor)
-    - Alamat & Kontak resmi
-    """
     profil = ProfilOrganisasi.objects.first()
     misi_list = profil.get_misi_list() if profil else []
 
@@ -73,37 +225,31 @@ def profil_view(request):
 
 
 def pimpinan_view(request):
-    """
-    Halaman Pimpinan:
-    - Kartu pimpinan dengan foto, jabatan, dan periode
-    - Diurutkan berdasarkan field 'urutan'
-    """
     pimpinan_list = Pimpinan.objects.all().order_by('urutan', 'id')
+    penasehat_list = [p for p in pimpinan_list if 'penasehat' in p.jabatan.lower()]
+    pleno_list = [p for p in pimpinan_list if 'penasehat' not in p.jabatan.lower()]
+
     context = {
         'pimpinan_list': pimpinan_list,
+        'penasehat_list': penasehat_list,
+        'pleno_list': pleno_list,
+        'majelis_lembaga_list': MAJELIS_LEMBAGA_LIST,
+        'total_majelis_lembaga': len(MAJELIS_LEMBAGA_LIST),
     }
     return render(request, 'pcm/pimpinan.html', context)
 
 
 def ranting_view(request):
-    """
-    Halaman Ranting:
-    - Tabel daftar 13 Pimpinan Ranting Muhammadiyah (PRM) di Kecamatan Masaran
-    - Info ketua, alamat, kontak
-    """
     ranting_list = Ranting.objects.all().order_by('nama_ranting')
     context = {
         'ranting_list': ranting_list,
+        'total_ranting': ranting_list.count(),
     }
     return render(request, 'pcm/ranting.html', context)
 
 
 def amal_usaha_view(request):
-    """
-    Halaman Amal Usaha (AUM):
-    - Dikelompokkan per bidang: Pendidikan, Kesehatan, Sosial, Ekonomi
-    """
-    amal_usaha_list = AmalUsaha.objects.all()
+    amal_usaha_list = AmalUsaha.objects.all().order_by('nama')
     
     aum_pendidikan = amal_usaha_list.filter(bidang='pendidikan')
     aum_kesehatan = amal_usaha_list.filter(bidang='kesehatan')
@@ -111,6 +257,7 @@ def amal_usaha_view(request):
     aum_ekonomi = amal_usaha_list.filter(bidang='ekonomi')
 
     context = {
+        'amal_usaha_list': amal_usaha_list,
         'aum_pendidikan': aum_pendidikan,
         'aum_kesehatan': aum_kesehatan,
         'aum_sosial': aum_sosial,
@@ -121,12 +268,6 @@ def amal_usaha_view(request):
 
 
 def berita_list_view(request):
-    """
-    Halaman Daftar Berita:
-    - Berita terbit terfilter (tanpa draf / masa depan)
-    - Paginator 6 berita per halaman
-    - Fitur pencarian berita (?q=...) untuk bonus nilai
-    """
     query = request.GET.get('q', '').strip()
     berita_qs = Berita.objects.published()
 
@@ -149,12 +290,6 @@ def berita_list_view(request):
 
 
 def berita_detail_view(request, slug):
-    """
-    Halaman Detail Berita:
-    - Berita draf atau bertanggal di masa depan WAJIB 404!
-    - Menggunakan get_object_or_404 pada Berita.objects.published()
-    - Rekomendasi berita lainnya
-    """
     berita = get_object_or_404(Berita.objects.published(), slug=slug)
     berita_terkait = Berita.objects.published().exclude(pk=berita.pk).order_by('-tanggal_terbit')[:3]
 
@@ -166,10 +301,6 @@ def berita_detail_view(request, slug):
 
 
 def agenda_view(request):
-    """
-    Halaman Agenda:
-    - Agenda akan datang dan sudah terlaksana dipisah secara rapi
-    """
     now = timezone.now()
     agenda_akan_datang = Agenda.objects.filter(waktu_mulai__gte=now).order_by('waktu_mulai')
     agenda_terlaksana = Agenda.objects.filter(waktu_mulai__lt=now).order_by('-waktu_mulai')
@@ -182,10 +313,6 @@ def agenda_view(request):
 
 
 def unduhan_view(request):
-    """
-    Halaman Unduhan:
-    - Berkas dokumen publik dengan tombol unduh
-    """
     dokumen_list = Dokumen.objects.all().order_by('-tanggal_unggah')
     context = {
         'dokumen_list': dokumen_list,
@@ -194,12 +321,6 @@ def unduhan_view(request):
 
 
 def kontak_view(request):
-    """
-    Halaman Kontak & Aspirasi:
-    - Informasi sekretariat dan media sosial resmi
-    - Formulir kontak (ModelForm PesanMasuk)
-    - Menyimpan pesan ke database dan menampilkan pesan sukses via messages framework
-    """
     if request.method == 'POST':
         form = KontakForm(request.POST)
         if form.is_valid():

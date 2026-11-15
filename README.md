@@ -81,9 +81,11 @@ Website ini dibangun menggunakan **100% data riil** dari Pimpinan Cabang Muhamma
 
 | Data | Sumber Pengambilan | Tanggal Diambil | Keterangan / Izin |
 |---|---|---|---|
-| **Struktur Pimpinan (Ketua, Sekretaris, Majelis)** | SK PDM Sragen No. 032/KEP/III.0/D/2023 via Portal PDM Sragen & PWM Jateng | 15 November 2026 | Data publik resmi kepengurusan periode 2022–2027 |
-| **Daftar 13 Ranting Desa (PRM)** | Arsip Musyawarah Cabang ke-48 & Data Wilayah Kecamatan Masaran | 15 November 2026 | Sesuai 13 desa definitif di Kec. Masaran |
-| **Data Amal Usaha (AUM Pendidikan, Kesehatan, Sosial, Ekonomi)** | Majelis Dikdasmen PCM Masaran & Direktori Sekolah Muhammadiyah Sragen | 15 November 2026 | SMK Muh 10, SMA Muh 3, SMP Muh 2, MTs Muh 3, PKU, Lazismu, BMT |
+| **Piagam Pendirian Resmi (1935)** | SK PWM Jawa Tengah No. `066/KEP/II.0/B/2026` | 15 November 2026 | Dokumen historis resmi pengesahan pendirian PCM Masaran pada 17 November 1935 M (20 Sya'ban 1354 H) |
+| **Struktur Pimpinan Pleno Musycab 48** | SK PDM Sragen No. `032/KEP/III.0/D/2023` via Portal PDM Sragen | 15 November 2026 | Penetapan 13 Anggota Pleno / Formatur Musycab ke-48 periode 2022–2027 |
+| **Struktur Paripurna (18 Majelis & Lembaga)** | Berkas Resmi Struktur Pengurus PCM Masaran 2022–2027 Paripurna | 15 November 2026 | Susunan 2 Penasehat, 13 Pimpinan Koordinator, serta 18 Majelis/Lembaga |
+| **Daftar 13 Ranting Desa (PRM)** | Arsip Musyawarah Cabang ke-48 & Data Wilayah Kecamatan Masaran | 15 November 2026 | 13 desa definitif: Dawungan, Gebang, Jati, Jirapan, Karangmalang, Kliwonan, Krebet, Krikilan, Masaran, Pilang, Pringanom, Sepat, Sidodadi |
+| **Data Amal Usaha (AUM Pendidikan, Kesehatan, Sosial, Ekonomi)** | Majelis Dikdasmen PCM Masaran & Direktori AUM Sragen | 15 November 2026 | SMK 10, SMA 3, SMP 2, MTs 3, SD Terpadu, 3 MIM, 11 TK ABA 'Aisyiyah, SPPGM Tangen, PKU, Lazismu, BMT |
 | **Warta Berita & Agenda Kajian** | Kanal YouTube resmi `@muhammadiyahmasaran` & Liputan PDM Sragen | 15 November 2026 | Rekaman video kajian Ahad pagi, Rakercab, dan Milad ke-113 |
 | **Dokumen SK & Pedoman Ranting** | Arsip publik Lembaga Pengembangan Cabang dan Ranting (LPCR) | 15 November 2026 | Berkas PDF resmi persyarikatan |
 | **Logo Resmi Muhammadiyah** | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Muhammadiyah.svg) | 15 November 2026 | Karya K. H. Siradj Dahlan, vektor oleh Hibensis, lisensi CC BY-SA 4.0 |
