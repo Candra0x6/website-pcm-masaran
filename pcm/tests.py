@@ -21,7 +21,6 @@ class PCMWebsiteTests(TestCase):
         self.client = Client()
         self.now = timezone.now()
 
-        # 1. Profil Organisasi
         self.profil = ProfilOrganisasi.objects.create(
             nama="Pimpinan Cabang Muhammadiyah Masaran",
             nama_singkat="PCM Masaran",
@@ -36,7 +35,6 @@ class PCMWebsiteTests(TestCase):
             jumlah_anggota_ktam=1250,
         )
 
-        # 2. Pimpinan
         self.pimpinan = Pimpinan.objects.create(
             nama="H. Siyamto Umardani, S.Ag.",
             jabatan="Ketua Cabang",
@@ -44,7 +42,6 @@ class PCMWebsiteTests(TestCase):
             urutan=1
         )
 
-        # 3. Ranting
         self.ranting = Ranting.objects.create(
             nama_ranting="Masaran",
             ketua="H. Suratno",
@@ -52,7 +49,6 @@ class PCMWebsiteTests(TestCase):
             telepon="(0271) 8821035"
         )
 
-        # 4. Amal Usaha
         self.amal_usaha = AmalUsaha.objects.create(
             nama="SMK Muhammadiyah 10 Masaran",
             bidang="pendidikan",
@@ -60,7 +56,6 @@ class PCMWebsiteTests(TestCase):
             alamat="Jl. Raya Masaran"
         )
 
-        # 5. Berita Terbit
         self.berita_terbit = Berita.objects.create(
             judul="Kajian Ahad Pagi Akbar Masaran",
             ringkasan="Ringkasan kajian akbar.",
@@ -69,7 +64,6 @@ class PCMWebsiteTests(TestCase):
             status_terbit="terbit"
         )
 
-        # 6. Berita Draf
         self.berita_draf = Berita.objects.create(
             judul="Rencana Kegiatan Rahasia Internal",
             ringkasan="Ringkasan draf rahasia.",
@@ -78,7 +72,6 @@ class PCMWebsiteTests(TestCase):
             status_terbit="draf"
         )
 
-        # 7. Berita Masa Depan
         self.berita_future = Berita.objects.create(
             judul="Berita di Masa Depan 2030",
             ringkasan="Ringkasan masa depan.",
@@ -87,14 +80,12 @@ class PCMWebsiteTests(TestCase):
             status_terbit="terbit"
         )
 
-        # 8. Agenda
         self.agenda_mendatang = Agenda.objects.create(
             nama_kegiatan="Pengajian Ahad Pagi Pekan Depan",
             waktu_mulai=self.now + timedelta(days=3),
             tempat="Gedung Dakwah Masaran"
         )
 
-        # 9. Tautan
         self.tautan = TautanTerkait.objects.create(
             nama="PDM Sragen",
             url="https://muhammadiyahsragen.or.id",
@@ -123,17 +114,14 @@ class PCMWebsiteTests(TestCase):
 
     def test_berita_terbit_200_and_draf_404(self):
         """Uji 2: Berita terbit mengembalikan 200, berita draf atau bertanggal di masa depan WAJIB 404."""
-        # Berita terbit -> 200
         url_terbit = reverse('pcm:berita_detail', kwargs={'slug': self.berita_terbit.slug})
         resp_terbit = self.client.get(url_terbit)
         self.assertEqual(resp_terbit.status_code, 200)
 
-        # Berita draf -> 404
         url_draf = reverse('pcm:berita_detail', kwargs={'slug': self.berita_draf.slug})
         resp_draf = self.client.get(url_draf)
         self.assertEqual(resp_draf.status_code, 404)
 
-        # Berita masa depan -> 404
         url_future = reverse('pcm:berita_detail', kwargs={'slug': self.berita_future.slug})
         resp_future = self.client.get(url_future)
         self.assertEqual(resp_future.status_code, 404)
@@ -150,7 +138,6 @@ class PCMWebsiteTests(TestCase):
         response = self.client.post(url_kontak, data=data, follow=True)
         self.assertEqual(response.status_code, 200)
 
-        # Pastikan data tersimpan di tabel PesanMasuk
         pesan = PesanMasuk.objects.filter(email='ahmad@example.com').first()
         self.assertIsNotNone(pesan)
         self.assertEqual(pesan.nama, 'Ahmad Dahlan')

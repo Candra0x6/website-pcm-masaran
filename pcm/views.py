@@ -33,7 +33,6 @@ def beranda_view(request):
     berita_terbaru = Berita.objects.published().order_by('-tanggal_terbit')[:3]
     agenda_mendatang = Agenda.objects.filter(waktu_mulai__gte=now).order_by('waktu_mulai')[:3]
 
-    # Ambil representasi 4 pilar Amal Usaha untuk showcase beranda
     aum_pendidikan = AmalUsaha.objects.filter(bidang='pendidikan', gambar__isnull=False).first()
     aum_kesehatan = AmalUsaha.objects.filter(bidang='kesehatan', gambar__isnull=False).first()
     aum_sosial = AmalUsaha.objects.filter(bidang='sosial', gambar__isnull=False).first()
@@ -106,7 +105,6 @@ def amal_usaha_view(request):
     """
     amal_usaha_list = AmalUsaha.objects.all()
     
-    # Kelompokkan per bidang
     aum_pendidikan = amal_usaha_list.filter(bidang='pendidikan')
     aum_kesehatan = amal_usaha_list.filter(bidang='kesehatan')
     aum_sosial = amal_usaha_list.filter(bidang='sosial')

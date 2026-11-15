@@ -6,7 +6,6 @@
 {% block content %}
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
     
-    <!-- HEADER -->
     <div class="max-w-3xl space-y-4">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 border border-brand-200 text-brand-900 text-xs font-semibold uppercase tracking-wider">
             Layanan Publik & Administrasi
@@ -20,7 +19,6 @@
         </p>
     </div>
 
-    <!-- DOKUMEN LIST (A2 REQUIREMENT: DAFTAR DOKUMEN DENGAN TOMBOL UNDUH) -->
     <div class="bg-white rounded-3xl border border-neutral-200/80 shadow-sm overflow-hidden divide-y divide-neutral-100">
         {% for doc in dokumen_list %}
             <div class="p-6 sm:p-8 hover:bg-neutral-50/70 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-6">

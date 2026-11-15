@@ -12,7 +12,6 @@ from .models import (
     TautanTerkait
 )
 
-# Custom Admin Site Headers
 admin.site.site_header = "Admin Website PCM Masaran"
 admin.site.site_title = "Portal Admin PCM Masaran"
 admin.site.index_title = "Manajemen Konten & Organisasi PCM Masaran"
@@ -43,13 +42,11 @@ class ProfilOrganisasiAdmin(admin.ModelAdmin):
     preview_hero.short_description = "Hero"
 
     def has_add_permission(self, request):
-        # Tidak boleh ditambah jika sudah ada 1 baris data
         if ProfilOrganisasi.objects.exists():
             return False
         return super().has_add_permission(request)
 
     def has_delete_permission(self, request, obj=None):
-        # Profil organisasi tidak boleh dihapus
         return False
 
 
@@ -136,11 +133,9 @@ class PesanMasukAdmin(admin.ModelAdmin):
     ordering = ('-waktu_kirim',)
 
     def has_add_permission(self, request):
-        # Pesan masuk tidak bisa ditambah dari admin (hanya dari formulir publik)
         return False
 
     def has_change_permission(self, request, obj=None):
-        # Admin hanya bisa mengubah status sudah_dibaca, bukan isi pesan
         return True
 
     def get_readonly_fields(self, request, obj=None):
