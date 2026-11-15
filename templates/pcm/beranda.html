@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Beranda — {{ profil_organisasi.nama_singkat|default:"PCM Masaran" }} Kabupaten Sragen{% endblock %}
+
+{% block content %}
+<div class="relative overflow-hidden hero-pattern">
+    <!-- HERO SECTION WITH WAABI EDITORIAL MINIMALISM -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-20">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <div class="lg:col-span-7 space-y-8">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-50 border border-brand-200 text-brand-900 text-xs font-semibold uppercase tracking-wider">
+                    <span class="w-2 h-2 rounded-full bg-brand-600 animate-pulse"></span>
+                    <span>Portal Resmi Cabang Muhammadiyah</span>
+                </div>
+
+                <div class="space-y-4">
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-950 tracking-tight leading-[1.1]">
+                        Mencerahkan Semesta, <br>
+                        <span class="text-brand-800">Memajukan Masaran.</span>
+                    </h1>
+                    <p class="text-base sm:text-lg text-neutral-600 max-w-xl leading-relaxed font-normal">
+                        {{ profil_organisasi.tentang|default:"Pimpinan Cabang Muhammadiyah (PCM) Masaran bergerak mengemban amanah dakwah pencerahan Islam berkemajuan, membina 13 ranting desa serta amal usaha pendidikan, kesehatan, sosial, dan ekonomi di Kabupaten Sragen." }}
+                    </p>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-4 pt-2">
+                    <a href="{% url 'pcm:profil' %}" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-neutral-900 hover:bg-neutral-800 text-white text-sm font-semibold tracking-wide transition shadow-sm hover:shadow-md">
+                        <span>Tentang PCM Masaran</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    </a>
+                    <a href="{% url 'pcm:amal_usaha' %}" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white hover:bg-neutral-100 text-neutral-800 border border-neutral-300 text-sm font-semibold tracking-wide transition shadow-sm">
+                        <span>Lihat Amal Usaha</span>
+                    </a>
+                </div>
+
+                <!-- STATS COUNTER CARDS (A2 REQUIREMENT) -->
+                <div class="grid grid-cols-3 gap-4 pt-8 border-t border-neutral-200">
+                    <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-4 border border-neutral-200/80 shadow-sm">
+                        <p class="text-3xl sm:text-4xl font-extrabold text-brand-800 tracking-tight">{{ total_ranting|default:"13" }}</p>
+                        <p class="text-xs font-semibold text-neutral-500 uppercase tracking-wider mt-1">Ranting Desa</p>
+                    </div>
+                    <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-4 border border-neutral-200/80 shadow-sm">
+                        <p class="text-3xl sm:text-4xl font-extrabold text-brand-800 tracking-tight">{{ total_amal_usaha|default:"8" }}</p>
+                        <p class="text-xs font-semibold text-neutral-500 uppercase tracking-wider mt-1">Amal Usaha</p>
+                    </div>
+                    <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-4 border border-neutral-200/80 shadow-sm">
+                        <p class="text-3xl sm:text-4xl font-extrabold text-brand-800 tracking-tight">{{ total_ktam|default:"1.250" }}+</p>
+                        <p class="text-xs font-semibold text-neutral-500 uppercase tracking-wider mt-1">Anggota KTAM</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HERO IMAGE / VISUAL DIORAMA -->
+            <div class="lg:col-span-5">
+                <div class="relative group">
+                    <div class="absolute -inset-2 bg-gradient-to-r from-brand-700/20 to-neutral-800/10 rounded-[2.5rem] blur-xl opacity-75 group-hover:opacity-100 transition duration-1000"></div>
+                    <div class="relative rounded-[2rem] overflow-hidden bg-neutral-900 shadow-2xl border border-neutral-200 aspect-[4/3] lg:aspect-[4/5]">
+                        {% if profil_organisasi.gambar_utama %}
+                            <img src="{{ profil_organisasi.gambar_utama.url }}" alt="{{ profil_organisasi.nama }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        {% else %}
+                            <div class="w-full h-full flex flex-col items-center justify-center p-8 text-center text-white bg-gradient-to-br from-brand-900 to-neutral-950">
+                                <img src="{% static 'images/muhammadiyah.svg' %}" alt="Logo" class="w-24 h-24 mb-4 filter invert brightness-0">
+                                <h3 class="text-xl font-bold">Gedung Dakwah Muhammadiyah Masaran</h3>
+                                <p class="text-xs text-neutral-400 mt-2">Pusat Gerakan Persyarikatan Kecamatan Masaran</p>
+                            </div>
+                        {% endif %}
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8 text-white">
+                            <span class="inline-block px-3 py-1 rounded-full bg-brand-800 text-[11px] font-semibold tracking-wider uppercase mb-2 w-max">
+                                Gedung Dakwah Utama
+                            </span>
+                            <h4 class="text-lg font-bold">Pusat Syiar & Administrasi PCM Masaran</h4>
+                            <p class="text-xs text-neutral-300 mt-1">Jl. Raya Solo - Sragen KM 13, Masaran, Sragen</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>
+
+<!-- SECTION 2: BERITA TERBARU (3 BERITA TERBIT) -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-neutral-200/70">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
+        <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-200/70 text-neutral-800 text-xs font-semibold uppercase tracking-wider mb-2">
+                Warta Persyarikatan
+            </div>
+            <h2 class="text-3xl font-extrabold text-neutral-950 tracking-tight">Berita & Informasi Terbaru</h2>
+        </div>
+        <a href="{% url 'pcm:berita_list' %}" class="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-800 hover:text-brand-900 transition">
+            <span>Lihat Semua Berita</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for item in berita_terbaru %}
+            {% include 'includes/kartu_berita.html' with item=item %}
+        {% empty %}
+            <div class="col-span-3 text-center py-12 bg-white rounded-3xl border border-neutral-200 text-neutral-500">
+                <p>Belum ada berita yang diterbitkan.</p>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- SECTION 3: AGENDA MENDATANG (3 AGENDA TERDEKAT) -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-neutral-200/70">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
+        <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 border border-brand-200 text-brand-900 text-xs font-semibold uppercase tracking-wider mb-2">
+                Agenda Kegiatan
+            </div>
+            <h2 class="text-3xl font-extrabold text-neutral-950 tracking-tight">Agenda & Pengajian Mendatang</h2>
+        </div>
+        <a href="{% url 'pcm:agenda' %}" class="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-800 hover:text-brand-900 transition">
+            <span>Lihat Jadwal Lengkap</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {% for item in agenda_mendatang %}
+            {% include 'includes/kartu_agenda.html' with item=item %}
+        {% empty %}
+            <div class="col-span-3 text-center py-12 bg-white rounded-3xl border border-neutral-200 text-neutral-500">
+                <p>Tidak ada agenda mendatang dalam waktu dekat.</p>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- SECTION 4: CALL TO ACTION BANNER -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="rounded-3xl bg-neutral-950 text-white p-8 sm:p-12 relative overflow-hidden shadow-xl border border-neutral-800">
+        <div class="relative z-10 max-w-2xl space-y-4">
+            <span class="inline-block px-3 py-1 rounded-full bg-brand-800 text-white text-xs font-semibold uppercase tracking-wider">
+                Partisipasi Umat
+            </span>
+            <h3 class="text-2xl sm:text-3xl font-bold tracking-tight">
+                Salurkan Aspirasi & Bersinergi Bersama PCM Masaran
+            </h3>
+            <p class="text-sm sm:text-base text-neutral-400 leading-relaxed">
+                Kami membuka ruang komunikasi seluas-luasnya untuk warga persyarikatan dan masyarakat umum. Kirimkan pesan, masukan, atau permohonan kerjasama langsung ke kantor sekretariat.
+            </p>
+            <div class="pt-2">
+                <a href="{% url 'pcm:kontak' %}" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-brand-800 hover:bg-brand-900 text-white text-sm font-semibold tracking-wide transition">
+                    <span>Kirim Pesan Sekarang</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
+            </div>
+        </div>
+        <div class="absolute -right-12 -bottom-12 opacity-10 pointer-events-none">
+            <img src="{% static 'images/muhammadiyah.svg' %}" alt="Muhammadiyah Watermark" class="w-96 h-96 filter invert brightness-0">
+        </div>
+    </div>
+</section>
+{% endblock %}

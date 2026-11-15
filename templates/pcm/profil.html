@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Profil & Sejarah — {{ profil_organisasi.nama_singkat|default:"PCM Masaran" }}{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+    
+    <!-- HEADER INTRO -->
+    <div class="max-w-3xl space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 border border-brand-200 text-brand-900 text-xs font-semibold uppercase tracking-wider">
+            Profil Persyarikatan
+        </div>
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-neutral-950 tracking-tight leading-tight">
+            Mengenal Lebih Dekat <br>
+            <span class="text-brand-800">PCM Masaran Sragen</span>
+        </h1>
+        <p class="text-base sm:text-lg text-neutral-600 leading-relaxed">
+            Sejarah panjang perjuangan dakwah amar ma'ruf nahi munkar dalam mewujudkan masyarakat Islam yang sebenar-benarnya di wilayah Kecamatan Masaran.
+        </p>
+    </div>
+
+    <!-- TENTANG & SEJARAH (TWO COLUMNS / CARDS) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- TENTANG -->
+        <div class="lg:col-span-5 bg-white rounded-3xl p-8 sm:p-10 border border-neutral-200/80 shadow-sm space-y-6">
+            <div class="w-12 h-12 rounded-2xl bg-brand-800 text-white flex items-center justify-center p-2.5 shadow-md">
+                <img src="{% static 'images/muhammadiyah.svg' %}" alt="Logo" class="w-full h-full object-contain filter invert brightness-0">
+            </div>
+            <h2 class="text-2xl font-bold text-neutral-950 tracking-tight">Tentang Organisasi</h2>
+            <div class="text-neutral-700 leading-relaxed space-y-4 text-sm sm:text-base">
+                {{ profil.tentang|linebreaks }}
+            </div>
+            
+            <div class="pt-6 border-t border-neutral-100 space-y-3 text-xs text-neutral-600">
+                <p><strong class="text-neutral-900">Naungan:</strong> Pimpinan Daerah Muhammadiyah (PDM) Sragen</p>
+                <p><strong class="text-neutral-900">Wilayah Kerja:</strong> 13 Desa / Kelurahan di Kecamatan Masaran</p>
+                <p><strong class="text-neutral-900">Alamat Kantor:</strong> {{ profil.alamat_sekretariat }}</p>
+            </div>
+        </div>
+
+        <!-- SEJARAH -->
+        <div class="lg:col-span-7 bg-white rounded-3xl p-8 sm:p-10 border border-neutral-200/80 shadow-sm space-y-6">
+            <div class="inline-flex items-center px-3 py-1 rounded-full bg-neutral-100 text-neutral-700 text-xs font-semibold uppercase tracking-wider">
+                Catatan Historis
+            </div>
+            <h2 class="text-2xl font-bold text-neutral-950 tracking-tight">Sejarah Perkembangan</h2>
+            <div class="text-neutral-700 leading-relaxed space-y-4 text-sm sm:text-base">
+                {{ profil.sejarah|linebreaks }}
+            </div>
+        </div>
+
+    </div>
+
+    <!-- VISI & MISI SECTION (MISI AS NUMBERED LIST) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- VISI -->
+        <div class="lg:col-span-5 bg-brand-900 text-white rounded-3xl p-8 sm:p-10 shadow-lg relative overflow-hidden flex flex-col justify-between">
+            <div class="relative z-10 space-y-6">
+                <span class="inline-block px-3 py-1 rounded-full bg-brand-800 text-brand-100 text-xs font-semibold uppercase tracking-wider">
+                    Visi Persyarikatan
+                </span>
+                <h3 class="text-2xl sm:text-3xl font-bold tracking-tight leading-snug">
+                    Visi PCM Masaran
+                </h3>
+                <p class="text-base text-brand-100 leading-relaxed font-light">
+                    {{ profil.visi }}
+                </p>
+            </div>
+            <div class="pt-8 relative z-10 text-xs text-brand-200/70 border-t border-brand-800">
+                Berlandaskan Al-Qur'an dan As-Sunnah ash-Shahihah.
+            </div>
+            <div class="absolute -right-10 -bottom-10 opacity-10 pointer-events-none">
+                <img src="{% static 'images/muhammadiyah.svg' %}" alt="Watermark" class="w-72 h-72 filter invert brightness-0">
+            </div>
+        </div>
+
+        <!-- MISI (NUMBERED LIST REQUIRED IN A2) -->
+        <div class="lg:col-span-7 bg-white rounded-3xl p-8 sm:p-10 border border-neutral-200/80 shadow-sm space-y-6">
+            <span class="inline-block px-3 py-1 rounded-full bg-brand-50 text-brand-800 text-xs font-semibold uppercase tracking-wider border border-brand-200">
+                Misi Persyarikatan
+            </span>
+            <h3 class="text-2xl font-bold text-neutral-950 tracking-tight">
+                Misi PCM Masaran
+            </h3>
+            
+            <ol class="space-y-4">
+                {% for item in misi_list %}
+                    <li class="flex items-start gap-4">
+                        <span class="flex-shrink-0 w-8 h-8 rounded-full bg-neutral-900 text-white font-bold text-xs flex items-center justify-center mt-0.5">
+                            {{ forloop.counter }}
+                        </span>
+                        <p class="text-neutral-700 text-sm sm:text-base leading-relaxed pt-1">
+                            {{ item }}
+                        </p>
+                    </li>
+                {% empty %}
+                    <li class="text-neutral-500">Misi belum tersedia.</li>
+                {% endfor %}
+            </ol>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

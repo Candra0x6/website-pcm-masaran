@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ berita.judul }} — {{ profil_organisasi.nama_singkat|default:"PCM Masaran" }}{% endblock %}
+
+{% block content %}
+<article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
+    
+    <!-- BREADCRUMBS & META -->
+    <div class="space-y-4">
+        <nav class="flex items-center gap-2 text-xs text-neutral-500 font-medium">
+            <a href="{% url 'pcm:beranda' %}" class="hover:text-neutral-900 transition">Beranda</a>
+            <span>/</span>
+            <a href="{% url 'pcm:berita_list' %}" class="hover:text-neutral-900 transition">Berita</a>
+            <span>/</span>
+            <span class="text-neutral-900 truncate max-w-xs">{{ berita.judul }}</span>
+        </nav>
+
+        <div class="flex items-center gap-3">
+            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-brand-50 text-brand-800 border border-brand-200">
+                Warta Resmi
+            </span>
+            <span class="text-xs text-neutral-500">
+                Diterbitkan pada {{ berita.tanggal_terbit|date:"l, d F Y H:i" }} WIB
+            </span>
+        </div>
+
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-950 tracking-tight leading-tight">
+            {{ berita.judul }}
+        </h1>
+
+        <p class="text-base sm:text-lg text-neutral-600 font-medium leading-relaxed italic border-l-4 border-brand-800 pl-4 py-1">
+            {{ berita.ringkasan }}
+        </p>
+    </div>
+
+    <!-- MAIN ARTICLE IMAGE -->
+    {% if berita.gambar_sampul %}
+        <div class="rounded-3xl overflow-hidden shadow-lg border border-neutral-200 aspect-[16/9] bg-neutral-100">
+            <img src="{{ berita.gambar_sampul.url }}" alt="{{ berita.judul }}" class="w-full h-full object-cover">
+        </div>
+    {% endif %}
+
+    <!-- ARTICLE BODY -->
+    <div class="prose prose-neutral max-w-none text-neutral-800 leading-relaxed text-base sm:text-lg space-y-6 pt-4 border-t border-neutral-100">
+        {{ berita.isi|linebreaks }}
+    </div>
+
+    <!-- SHARE & BACK BUTTON -->
+    <div class="pt-8 pb-12 border-t border-b border-neutral-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <a href="{% url 'pcm:berita_list' %}" class="inline-flex items-center gap-2 text-sm font-semibold text-neutral-700 hover:text-neutral-950 transition">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+            <span>Kembali ke Daftar Berita</span>
+        </a>
+        <div class="text-xs text-neutral-500">
+            Sumber: Media & Dokumentasi Resmi PCM Masaran Sragen
+        </div>
+    </div>
+
+    <!-- RELATED NEWS / BERITA LAINNYA (A2 REQUIREMENT) -->
+    {% if berita_terkait %}
+        <section class="space-y-6 pt-6">
+            <h3 class="text-2xl font-bold text-neutral-950 tracking-tight">Berita & Informasi Lainnya</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {% for item in berita_terkait %}
+                    {% include 'includes/kartu_berita.html' with item=item %}
+                {% endfor %}
+            </div>
+        </section>
+    {% endif %}
+
+</article>
+{% endblock %}

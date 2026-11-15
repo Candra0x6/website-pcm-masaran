@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Warta & Berita — {{ profil_organisasi.nama_singkat|default:"PCM Masaran" }}{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
+    
+    <!-- HEADER & SEARCH BAR -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-neutral-200">
+        <div class="max-w-2xl space-y-3">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 border border-brand-200 text-brand-900 text-xs font-semibold uppercase tracking-wider">
+                Kabar Persyarikatan
+            </div>
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-neutral-950 tracking-tight leading-tight">
+                Warta & Berita <br>
+                <span class="text-brand-800">PCM Masaran Sragen</span>
+            </h1>
+            <p class="text-sm sm:text-base text-neutral-600">
+                Dokumentasi kegiatan dakwah, kajian, amal usaha, dan kabar persyarikatan terkini.
+            </p>
+        </div>
+
+        <!-- SEARCH FORM (BONUS FITUR PENCARIAN BERITA) -->
+        <div class="w-full md:w-80">
+            <form method="get" action="{% url 'pcm:berita_list' %}" class="relative">
+                <input 
+                    type="text" 
+                    name="q" 
+                    value="{{ query|default:'' }}" 
+                    placeholder="Cari berita atau kajian..." 
+                    class="w-full pl-11 pr-4 py-3 rounded-full bg-white border border-neutral-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-800 focus:border-transparent transition shadow-sm"
+                >
+                <svg class="w-4 h-4 text-neutral-400 absolute left-4 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                {% if query %}
+                    <a href="{% url 'pcm:berita_list' %}" class="absolute right-3.5 top-3.5 text-neutral-400 hover:text-neutral-700 text-xs font-bold">✕</a>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+
+    {% if query %}
+        <div class="p-4 rounded-2xl bg-neutral-100 border border-neutral-200 text-sm text-neutral-700 flex items-center justify-between">
+            <p>Menampilkan hasil pencarian untuk kata kunci: <strong class="text-neutral-950">"{{ query }}"</strong></p>
+            <a href="{% url 'pcm:berita_list' %}" class="text-brand-800 hover:underline font-semibold text-xs">Reset Pencarian</a>
+        </div>
+    {% endif %}
+
+    <!-- BERITA GRID (6 PER HALAMAN) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for item in page_obj %}
+            {% include 'includes/kartu_berita.html' with item=item %}
+        {% empty %}
+            <div class="col-span-3 text-center py-16 bg-white rounded-3xl border border-neutral-200 text-neutral-500 space-y-2">
+                <svg class="w-12 h-12 mx-auto text-neutral-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
+                <p class="font-medium text-base text-neutral-700">Tidak ada berita yang ditemukan.</p>
+                {% if query %}
+                    <p class="text-xs text-neutral-400">Coba gunakan kata kunci pencarian yang lain.</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- PAGINATION CONTROLS (A2 REQUIREMENT: NAVIGASI HALAMAN) -->
+    {% if page_obj.has_other_pages %}
+        <nav aria-label="Navigasi Halaman Berita" class="pt-8 flex items-center justify-center gap-2">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}{% if query %}&q={{ query }}{% endif %}" class="px-4 py-2 rounded-full border border-neutral-300 bg-white hover:bg-neutral-50 text-sm font-semibold text-neutral-700 transition shadow-sm">
+                    &larr; Sebelumnya
+                </a>
+            {% endif %}
+
+            <div class="flex items-center gap-1">
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <span class="w-10 h-10 rounded-full bg-neutral-900 text-white font-bold text-sm flex items-center justify-center shadow-sm">
+                            {{ num }}
+                        </span>
+                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                        <a href="?page={{ num }}{% if query %}&q={{ query }}{% endif %}" class="w-10 h-10 rounded-full border border-neutral-200 bg-white hover:bg-neutral-100 text-neutral-700 font-semibold text-sm flex items-center justify-center transition">
+                            {{ num }}
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}{% if query %}&q={{ query }}{% endif %}" class="px-4 py-2 rounded-full border border-neutral-300 bg-white hover:bg-neutral-50 text-sm font-semibold text-neutral-700 transition shadow-sm">
+                    Berikutnya &rarr;
+                </a>
+            {% endif %}
+        </nav>
+    {% endif %}
+
+</div>
+{% endblock %}

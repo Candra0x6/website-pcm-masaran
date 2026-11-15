@@ -1,0 +1,30 @@
+<div class="bg-white rounded-3xl p-6 border border-neutral-200/80 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between">
+    <div class="space-y-4">
+        <div class="flex items-center justify-between">
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold {% if item.is_upcoming %}bg-brand-50 text-brand-800 border border-brand-200{% else %}bg-neutral-100 text-neutral-600 border border-neutral-200{% endif %}">
+                {% if item.is_upcoming %}Akan Datang{% else %}Selesai{% endif %}
+            </span>
+            <span class="text-xs text-neutral-500 font-medium">
+                {{ item.waktu_mulai|date:"H:i" }} WIB
+            </span>
+        </div>
+        <h4 class="font-bold text-base text-neutral-900 leading-snug">
+            {{ item.nama_kegiatan }}
+        </h4>
+        {% if item.keterangan %}
+            <p class="text-xs text-neutral-600 line-clamp-2">
+                {{ item.keterangan }}
+            </p>
+        {% endif %}
+    </div>
+    <div class="pt-4 mt-4 border-t border-neutral-100 space-y-1.5 text-xs text-neutral-500">
+        <div class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-brand-700 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            <span class="font-medium text-neutral-700">{{ item.waktu_mulai|date:"l, d F Y" }}</span>
+        </div>
+        <div class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-brand-700 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            <span class="truncate">{{ item.tempat }}</span>
+        </div>
+    </div>
+</div>

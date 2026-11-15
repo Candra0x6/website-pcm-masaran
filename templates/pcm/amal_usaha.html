@@ -1,0 +1,192 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Amal Usaha Muhammadiyah — {{ profil_organisasi.nama_singkat|default:"PCM Masaran" }}{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+    
+    <!-- HEADER -->
+    <div class="max-w-3xl space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 border border-brand-200 text-brand-900 text-xs font-semibold uppercase tracking-wider">
+            Bakti Nyata Untuk Bangsa
+        </div>
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-neutral-950 tracking-tight leading-tight">
+            Amal Usaha <br>
+            <span class="text-brand-800">Muhammadiyah (AUM) Masaran</span>
+        </h1>
+        <p class="text-base sm:text-lg text-neutral-600 leading-relaxed">
+            Wujud praksis dakwah Islam berkemajuan yang dikelompokkan dalam bidang pendidikan, kesehatan, sosial, dan pemberdayaan ekonomi di Kecamatan Masaran.
+        </p>
+    </div>
+
+    <!-- 1. BIDANG PENDIDIKAN -->
+    <section class="space-y-6">
+        <div class="flex items-center gap-3 border-b border-neutral-200 pb-4">
+            <span class="w-3 h-3 rounded-full bg-blue-600"></span>
+            <h2 class="text-2xl font-bold text-neutral-950 tracking-tight">Bidang Pendidikan</h2>
+            <span class="text-xs px-2.5 py-1 rounded-full bg-blue-50 text-blue-700 font-semibold border border-blue-200">
+                {{ aum_pendidikan.count }} Lembaga
+            </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for item in aum_pendidikan %}
+                <div class="bg-white rounded-3xl border border-neutral-200/80 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="aspect-[16/10] bg-neutral-100 overflow-hidden relative">
+                            {% if item.gambar %}
+                                <img src="{{ item.gambar.url }}" alt="{{ item.nama }}" class="w-full h-full object-cover">
+                            {% else %}
+                                <div class="w-full h-full flex items-center justify-center bg-blue-50 text-blue-800">
+                                    <svg class="w-12 h-12 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                                </div>
+                            {% endif %}
+                            <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[11px] font-semibold text-blue-800 shadow-sm">
+                                Pendidikan
+                            </span>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <h3 class="font-bold text-lg text-neutral-950 leading-snug">{{ item.nama }}</h3>
+                            <p class="text-sm text-neutral-600 leading-relaxed">{{ item.deskripsi }}</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 text-xs text-neutral-500 border-t border-neutral-100 mt-4 flex items-start gap-2 pt-4">
+                        <svg class="w-4 h-4 text-neutral-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                        <span>{{ item.alamat }}</span>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="text-neutral-500 text-sm">Belum ada data AUM pendidikan.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- 2. BIDANG KESEHATAN -->
+    <section class="space-y-6">
+        <div class="flex items-center gap-3 border-b border-neutral-200 pb-4">
+            <span class="w-3 h-3 rounded-full bg-emerald-600"></span>
+            <h2 class="text-2xl font-bold text-neutral-950 tracking-tight">Bidang Kesehatan</h2>
+            <span class="text-xs px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 font-semibold border border-emerald-200">
+                {{ aum_kesehatan.count }} Fasilitas
+            </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for item in aum_kesehatan %}
+                <div class="bg-white rounded-3xl border border-neutral-200/80 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="aspect-[16/10] bg-neutral-100 overflow-hidden relative">
+                            {% if item.gambar %}
+                                <img src="{{ item.gambar.url }}" alt="{{ item.nama }}" class="w-full h-full object-cover">
+                            {% else %}
+                                <div class="w-full h-full flex items-center justify-center bg-emerald-50 text-emerald-800">
+                                    <svg class="w-12 h-12 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                                </div>
+                            {% endif %}
+                            <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[11px] font-semibold text-emerald-800 shadow-sm">
+                                Kesehatan
+                            </span>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <h3 class="font-bold text-lg text-neutral-950 leading-snug">{{ item.nama }}</h3>
+                            <p class="text-sm text-neutral-600 leading-relaxed">{{ item.deskripsi }}</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 text-xs text-neutral-500 border-t border-neutral-100 mt-4 flex items-start gap-2 pt-4">
+                        <svg class="w-4 h-4 text-neutral-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                        <span>{{ item.alamat }}</span>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="text-neutral-500 text-sm">Belum ada data AUM kesehatan.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- 3. BIDANG SOSIAL & LAZISMU -->
+    <section class="space-y-6">
+        <div class="flex items-center gap-3 border-b border-neutral-200 pb-4">
+            <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+            <h2 class="text-2xl font-bold text-neutral-950 tracking-tight">Bidang Sosial & Kemanusiaan</h2>
+            <span class="text-xs px-2.5 py-1 rounded-full bg-amber-50 text-amber-700 font-semibold border border-amber-200">
+                {{ aum_sosial.count }} Unit Layanan
+            </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for item in aum_sosial %}
+                <div class="bg-white rounded-3xl border border-neutral-200/80 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="aspect-[16/10] bg-neutral-100 overflow-hidden relative">
+                            {% if item.gambar %}
+                                <img src="{{ item.gambar.url }}" alt="{{ item.nama }}" class="w-full h-full object-cover">
+                            {% else %}
+                                <div class="w-full h-full flex items-center justify-center bg-amber-50 text-amber-800">
+                                    <svg class="w-12 h-12 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                                </div>
+                            {% endif %}
+                            <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[11px] font-semibold text-amber-800 shadow-sm">
+                                Sosial
+                            </span>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <h3 class="font-bold text-lg text-neutral-950 leading-snug">{{ item.nama }}</h3>
+                            <p class="text-sm text-neutral-600 leading-relaxed">{{ item.deskripsi }}</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 text-xs text-neutral-500 border-t border-neutral-100 mt-4 flex items-start gap-2 pt-4">
+                        <svg class="w-4 h-4 text-neutral-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                        <span>{{ item.alamat }}</span>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="text-neutral-500 text-sm">Belum ada data AUM sosial.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- 4. BIDANG EKONOMI -->
+    <section class="space-y-6">
+        <div class="flex items-center gap-3 border-b border-neutral-200 pb-4">
+            <span class="w-3 h-3 rounded-full bg-purple-600"></span>
+            <h2 class="text-2xl font-bold text-neutral-950 tracking-tight">Bidang Ekonomi & Kewirausahaan</h2>
+            <span class="text-xs px-2.5 py-1 rounded-full bg-purple-50 text-purple-700 font-semibold border border-purple-200">
+                {{ aum_ekonomi.count }} Unit Usaha
+            </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for item in aum_ekonomi %}
+                <div class="bg-white rounded-3xl border border-neutral-200/80 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="aspect-[16/10] bg-neutral-100 overflow-hidden relative">
+                            {% if item.gambar %}
+                                <img src="{{ item.gambar.url }}" alt="{{ item.nama }}" class="w-full h-full object-cover">
+                            {% else %}
+                                <div class="w-full h-full flex items-center justify-center bg-purple-50 text-purple-800">
+                                    <svg class="w-12 h-12 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                </div>
+                            {% endif %}
+                            <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[11px] font-semibold text-purple-800 shadow-sm">
+                                Ekonomi
+                            </span>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <h3 class="font-bold text-lg text-neutral-950 leading-snug">{{ item.nama }}</h3>
+                            <p class="text-sm text-neutral-600 leading-relaxed">{{ item.deskripsi }}</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 text-xs text-neutral-500 border-t border-neutral-100 mt-4 flex items-start gap-2 pt-4">
+                        <svg class="w-4 h-4 text-neutral-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                        <span>{{ item.alamat }}</span>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="text-neutral-500 text-sm">Belum ada data AUM ekonomi.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+</div>
+{% endblock %}
