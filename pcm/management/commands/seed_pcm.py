@@ -40,7 +40,6 @@ class Command(BaseCommand):
             Dokumen.objects.all().delete()
             TautanTerkait.objects.all().delete()
 
-        # Pastikan direktori media siap
         media_root = settings.MEDIA_ROOT
         os.makedirs(os.path.join(media_root, 'profil'), exist_ok=True)
         os.makedirs(os.path.join(media_root, 'pimpinan'), exist_ok=True)
@@ -58,7 +57,6 @@ class Command(BaseCommand):
                 return target_rel
             return ""
 
-        # 1. SEED PROFIL ORGANISASI (SINGLETON)
         if not ProfilOrganisasi.objects.exists():
             hero_rel = copy_asset('hero/hero_masaran.jpg', 'profil/hero_masaran.jpg')
             misi_text = (
@@ -95,7 +93,6 @@ class Command(BaseCommand):
             )
             self.stdout.write(self.style.SUCCESS("✓ Profil Organisasi berhasil dibuat"))
 
-        # 2. SEED PIMPINAN (PERIODE 2022-2027)
         if not Pimpinan.objects.exists():
             pimpinan_data = [
                 ("H. Siyamto Umardani, S.Ag.", "Ketua Cabang", "2022–2027", 1, "pimpinan/ketua_siyamto.jpg", "pimpinan/ketua_siyamto.jpg"),
@@ -116,7 +113,6 @@ class Command(BaseCommand):
                 )
             self.stdout.write(self.style.SUCCESS(f"✓ {len(pimpinan_data)} Pimpinan berhasil dibuat"))
 
-        # 3. SEED 13 RANTING (PRM DI KECAMATAN MASARAN)
         if not Ranting.objects.exists():
             ranting_data = [
                 ("Masaran", "H. Suratno, S.Pd.", "Kompleks Masjid Baiturrahman, Desa Masaran", "(0271) 8821035"),
@@ -142,7 +138,6 @@ class Command(BaseCommand):
                 )
             self.stdout.write(self.style.SUCCESS(f"✓ {len(ranting_data)} Pimpinan Ranting berhasil dibuat"))
 
-        # 4. SEED AMAL USAHA (AUM)
         if not AmalUsaha.objects.exists():
             aum_data = [
                 ("SMK Muhammadiyah 10 Masaran", "pendidikan", "Sekolah Menengah Kejuruan Pusat Keunggulan dengan jurusan Teknik Kendaraan Ringan dan Teknik Komputer Jaringan.", "Jl. Raya Masaran - Pungkruk KM 2, Masaran, Sragen", "amal_usaha/aum_pendidikan_smk.jpg", "amal_usaha/aum_pendidikan_smk.jpg"),
@@ -165,7 +160,6 @@ class Command(BaseCommand):
                 )
             self.stdout.write(self.style.SUCCESS(f"✓ {len(aum_data)} Amal Usaha berhasil dibuat"))
 
-        # 5. SEED BERITA (8 BERITA TERBIT + 1 BERITA DRAF)
         if not Berita.objects.exists():
             now = timezone.now()
             berita_data = [
@@ -241,7 +235,6 @@ class Command(BaseCommand):
                     now - timedelta(days=45),
                     "terbit"
                 ),
-                # 1 BERITA DRAF UNTUK MEMASTIKAN ATURAN 404 TERUJI
                 (
                     "[DRAF RAHASIA] Rencana Pembangunan Pusat Dakwah Baru 2027",
                     "Rancangan draf internal pimpinan yang belum dipublikasikan kepada khalayak umum.",
@@ -264,16 +257,13 @@ class Command(BaseCommand):
                 )
             self.stdout.write(self.style.SUCCESS(f"✓ {len(berita_data)} Berita berhasil dibuat (termasuk 1 draf)"))
 
-        # 6. SEED AGENDA (AKAN DATANG & SUDAH TERLAKSANA)
         if not Agenda.objects.exists():
             now = timezone.now()
             agenda_data = [
-                # Agenda Mendatang
                 ("Pengajian Ahad Pagi Akbar PCM Masaran", now + timedelta(days=3, hours=6), "Gedung Dakwah Muhammadiyah Masaran", "Pengajian rutin Ahad pagi bersama jajaran PDM Sragen dan seluruh warga persyarikatan se-Kecamatan Masaran."),
                 ("Kajian Majelis Dikdasmen & Pembinaan Guru AUM", now + timedelta(days=8, hours=8), "Aula SMK Muhammadiyah 10 Masaran", "Pembinaan ideologi Al-Islam dan Kemuhammadiyahan untuk seluruh pendidik dan tenaga kependidikan."),
                 ("Rapat Koordinasi LPCR PCM Masaran Bersama 13 PRM", now + timedelta(days=14, hours=19), "Ruang Rapat Pleno Gedung Dakwah Masaran", "Monitoring program kerja ranting dan evaluasi keaktifan jamaah masjid."),
                 ("Pemeriksaan Kesehatan Gratis & Donor Darah Lazismu", now + timedelta(days=21, hours=8), "Klinik Pratama PKU Muhammadiyah Masaran", "Bakti sosial pelayanan kesehatan bagi lansia dan dhuafa di wilayah Masaran."),
-                # Agenda Terlaksana
                 ("Kajian Iftitah Ramadhan 1445 H dan Sosialisasi Hisab", now - timedelta(days=20, hours=10), "Gedung Dakwah Muhammadiyah Masaran", "Sosialisasi penetapan awal Ramadhan sesuai Maklumat PP Muhammadiyah."),
                 ("Resepsi Milad Muhammadiyah Ke-113 Tingkat Cabang", now - timedelta(days=40, hours=7), "Lapangan Desa Masaran", "Pentas seni santri, bazar UMKM, dan tabligh akbar milad persyarikatan."),
             ]
@@ -286,7 +276,6 @@ class Command(BaseCommand):
                 )
             self.stdout.write(self.style.SUCCESS(f"✓ {len(agenda_data)} Agenda kegiatan berhasil dibuat"))
 
-        # 7. SEED DOKUMEN UNDUHAN
         if not Dokumen.objects.exists():
             doc_data = [
                 ("SK PDM Sragen No. 032/KEP/III.0/D/2023 - Penetapan Kepengurusan", "Surat Keputusan PDM Sragen tentang pengesahan susunan pengurus PCM Masaran periode 2022–2027.", "dokumen/sk_pdm_masaran_2022_2027.pdf", "dokumen/sk_pdm_masaran_2022_2027.pdf"),
@@ -301,7 +290,6 @@ class Command(BaseCommand):
                 )
             self.stdout.write(self.style.SUCCESS(f"✓ {len(doc_data)} Dokumen unduhan berhasil dibuat"))
 
-        # 8. SEED TAUTAN PERSYARIKATAN
         if not TautanTerkait.objects.exists():
             tautan_data = [
                 ("Pimpinan Daerah Muhammadiyah (PDM) Sragen", "https://muhammadiyahsragen.or.id", 1),
@@ -317,5 +305,17 @@ class Command(BaseCommand):
                     urutan=urutan
                 )
             self.stdout.write(self.style.SUCCESS(f"✓ {len(tautan_data)} Tautan Persyarikatan berhasil dibuat"))
+
+        from django.contrib.auth.models import User
+        if not User.objects.filter(username="admin").exists():
+            User.objects.create_superuser("admin", "admin@pcm-masaran.or.id", "adminpcm2026")
+            self.stdout.write(self.style.SUCCESS("✓ Superuser demo 'admin' (password: adminpcm2026) berhasil dibuat"))
+        else:
+            admin_user = User.objects.get(username="admin")
+            admin_user.set_password("adminpcm2026")
+            admin_user.is_superuser = True
+            admin_user.is_staff = True
+            admin_user.save()
+            self.stdout.write(self.style.SUCCESS("✓ Superuser demo 'admin' password dipastikan 'adminpcm2026'"))
 
         self.stdout.write(self.style.SUCCESS("\n🎉 Seluruh data riil PCM Masaran berhasil diisi ke database!"))
