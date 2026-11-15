@@ -47,6 +47,10 @@ def beranda_view(request):
         'berita_terbaru': berita_terbaru,
         'agenda_mendatang': agenda_mendatang,
         'amal_usaha_unggulan': amal_usaha_unggulan,
+        'aum_pendidikan': aum_pendidikan,
+        'aum_kesehatan': aum_kesehatan,
+        'aum_sosial': aum_sosial,
+        'aum_ekonomi': aum_ekonomi,
     }
     return render(request, 'pcm/beranda.html', context)
 

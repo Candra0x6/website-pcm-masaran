@@ -58,19 +58,19 @@
             <div class="relative z-10 pt-10 mt-10 border-t border-white/15 grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div class="hero-stat-card card-tilt bg-black/40 backdrop-blur-md rounded-2xl p-5 border border-white/15 hover:border-white/30 transition">
                     <p class="text-3xl sm:text-4xl font-extrabold text-emerald-400 tracking-tight flex items-baseline">
-                        <span class="counter-val" data-target="{{ total_ranting|default:'13' }}">0</span>
+                        <span class="counter-val" data-target="{{ total_ranting|default:'13' }}">{{ total_ranting|default:'13' }}</span>
                     </p>
                     <p class="text-xs font-semibold text-neutral-300 uppercase tracking-wider mt-1">Pimpinan Ranting Desa</p>
                 </div>
                 <div class="hero-stat-card card-tilt bg-black/40 backdrop-blur-md rounded-2xl p-5 border border-white/15 hover:border-white/30 transition">
                     <p class="text-3xl sm:text-4xl font-extrabold text-emerald-400 tracking-tight flex items-baseline">
-                        <span class="counter-val" data-target="{{ total_amal_usaha|default:'8' }}">0</span>
+                        <span class="counter-val" data-target="{{ total_amal_usaha|default:'8' }}">{{ total_amal_usaha|default:'8' }}</span>
                     </p>
                     <p class="text-xs font-semibold text-neutral-300 uppercase tracking-wider mt-1">Amal Usaha Mandiri (AUM)</p>
                 </div>
                 <div class="hero-stat-card card-tilt bg-black/40 backdrop-blur-md rounded-2xl p-5 border border-white/15 hover:border-white/30 transition">
                     <p class="text-3xl sm:text-4xl font-extrabold text-emerald-400 tracking-tight flex items-baseline">
-                        <span class="counter-val" data-target="{{ total_ktam|default:'1.250' }}">0</span><span>+</span>
+                        <span class="counter-val" data-target="{{ total_ktam|default:'1.250' }}">{{ total_ktam|default:'1.250' }}</span><span>+</span>
                     </p>
                     <p class="text-xs font-semibold text-neutral-300 uppercase tracking-wider mt-1">Anggota Ber-KTAM Aktif</p>
                 </div>
@@ -165,13 +165,11 @@
             <!-- Card 1: Pendidikan -->
             <div class="diorama-card card-tilt relative rounded-3xl overflow-hidden bg-neutral-900 text-white shadow-2xl border border-neutral-800 min-h-[440px] flex flex-col justify-end p-8 sm:p-10 group">
                 <div class="absolute inset-0 z-0">
-                    <img src="{% static 'images/muhammadiyah.svg' %}" alt="Pendidikan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-20 filter invert">
-                    <!-- Real photo layer if available -->
-                    {% for aum in amal_usaha_unggulan %}
-                        {% if aum.bidang == 'pendidikan' and aum.gambar %}
-                            <img src="{{ aum.gambar.url }}" alt="{{ aum.nama }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                        {% endif %}
-                    {% endfor %}
+                    {% if aum_pendidikan.gambar %}
+                        <img src="{{ aum_pendidikan.gambar.url }}" alt="{{ aum_pendidikan.nama }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    {% else %}
+                        <img src="{% static 'images/muhammadiyah.svg' %}" alt="Pendidikan" class="w-full h-full object-cover opacity-20 filter invert">
+                    {% endif %}
                     <div class="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/70 to-neutral-950/20"></div>
                 </div>
                 <div class="relative z-10 space-y-3">
@@ -195,11 +193,11 @@
             <!-- Card 2: Kesehatan -->
             <div class="diorama-card card-tilt relative rounded-3xl overflow-hidden bg-neutral-900 text-white shadow-2xl border border-neutral-800 min-h-[440px] flex flex-col justify-end p-8 sm:p-10 group">
                 <div class="absolute inset-0 z-0">
-                    {% for aum in amal_usaha_unggulan %}
-                        {% if aum.bidang == 'kesehatan' and aum.gambar %}
-                            <img src="{{ aum.gambar.url }}" alt="{{ aum.nama }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                        {% endif %}
-                    {% endfor %}
+                    {% if aum_kesehatan.gambar %}
+                        <img src="{{ aum_kesehatan.gambar.url }}" alt="{{ aum_kesehatan.nama }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    {% else %}
+                        <img src="{% static 'images/muhammadiyah.svg' %}" alt="Kesehatan" class="w-full h-full object-cover opacity-20 filter invert">
+                    {% endif %}
                     <div class="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/70 to-neutral-950/20"></div>
                 </div>
                 <div class="relative z-10 space-y-3">
@@ -223,11 +221,11 @@
             <!-- Card 3: Filantropi -->
             <div class="diorama-card card-tilt relative rounded-3xl overflow-hidden bg-neutral-900 text-white shadow-2xl border border-neutral-800 min-h-[440px] flex flex-col justify-end p-8 sm:p-10 group">
                 <div class="absolute inset-0 z-0">
-                    {% for aum in amal_usaha_unggulan %}
-                        {% if aum.bidang == 'sosial' and aum.gambar %}
-                            <img src="{{ aum.gambar.url }}" alt="{{ aum.nama }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                        {% endif %}
-                    {% endfor %}
+                    {% if aum_sosial.gambar %}
+                        <img src="{{ aum_sosial.gambar.url }}" alt="{{ aum_sosial.nama }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    {% else %}
+                        <img src="{% static 'images/muhammadiyah.svg' %}" alt="Sosial" class="w-full h-full object-cover opacity-20 filter invert">
+                    {% endif %}
                     <div class="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/70 to-neutral-950/20"></div>
                 </div>
                 <div class="relative z-10 space-y-3">
@@ -251,11 +249,11 @@
             <!-- Card 4: Ekonomi -->
             <div class="diorama-card card-tilt relative rounded-3xl overflow-hidden bg-neutral-900 text-white shadow-2xl border border-neutral-800 min-h-[440px] flex flex-col justify-end p-8 sm:p-10 group">
                 <div class="absolute inset-0 z-0">
-                    {% for aum in amal_usaha_unggulan %}
-                        {% if aum.bidang == 'ekonomi' and aum.gambar %}
-                            <img src="{{ aum.gambar.url }}" alt="{{ aum.nama }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                        {% endif %}
-                    {% endfor %}
+                    {% if aum_ekonomi.gambar %}
+                        <img src="{{ aum_ekonomi.gambar.url }}" alt="{{ aum_ekonomi.nama }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    {% else %}
+                        <img src="{% static 'images/muhammadiyah.svg' %}" alt="Ekonomi" class="w-full h-full object-cover opacity-20 filter invert">
+                    {% endif %}
                     <div class="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/70 to-neutral-950/20"></div>
                 </div>
                 <div class="relative z-10 space-y-3">

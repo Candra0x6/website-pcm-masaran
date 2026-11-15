@@ -1,7 +1,7 @@
 /**
  * PCM Masaran — Awwwards-Tier Motion Design System
  * Inspired by Waabi Design Architecture & Apple Motion Guidelines
- * Integrates Lenis Smooth Scroll, GSAP 3, ScrollTrigger, Parallax & Micro-interactions
+ * Robust, Safe, Zero-Flicker Progressive Enhancement
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!prefersReducedMotion && typeof Lenis !== 'undefined') {
         try {
             lenis = new Lenis({
-                duration: 1.2,
+                duration: 1.15,
                 easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
                 orientation: 'vertical',
                 gestureOrientation: 'vertical',
@@ -78,138 +78,103 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // If reduced motion is requested, stop here to avoid aggressive animations
-    if (prefersReducedMotion || typeof gsap === 'undefined') {
-        // Immediate display for counters
+    // 5. Rolling Number Counter Function (Safe: Never hides default text)
+    function initHeroCounters() {
         document.querySelectorAll('.counter-val').forEach(el => {
-            const target = el.getAttribute('data-target');
-            if (target) el.textContent = target;
+            const rawTarget = el.getAttribute('data-target') || el.textContent;
+            if (!rawTarget) return;
+
+            const isFormatted = rawTarget.includes('.');
+            const numericValue = parseInt(rawTarget.replace(/\D/g, ''), 10);
+            if (isNaN(numericValue) || numericValue === 0) return;
+
+            if (typeof gsap !== 'undefined' && !prefersReducedMotion) {
+                const counterObj = { val: 0 };
+                gsap.to(counterObj, {
+                    val: numericValue,
+                    duration: 1.8,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 95%",
+                        once: true
+                    },
+                    onUpdate: () => {
+                        const currentInt = Math.floor(counterObj.val);
+                        if (isFormatted && numericValue >= 1000) {
+                            el.textContent = currentInt.toLocaleString('id-ID');
+                        } else {
+                            el.textContent = currentInt.toString();
+                        }
+                    },
+                    onComplete: () => {
+                        el.textContent = rawTarget;
+                    }
+                });
+            } else {
+                el.textContent = rawTarget;
+            }
         });
+    }
+
+    // Call counters immediately (they already have default numbers visible)
+    initHeroCounters();
+
+    // If reduced motion is requested or GSAP missing, skip motion effects
+    if (prefersReducedMotion || typeof gsap === 'undefined') {
         return;
     }
 
-    // 5. Hero Entry Animation & Parallax Scrub
+    // 6. Hero Subtle Entrance (Safe: Starts visible, clears inline props)
     const heroSection = document.querySelector('.hero-section');
     const heroBgImg = document.querySelector('.hero-bg-img');
 
     if (heroSection) {
-        // Hero Content Entrance Timeline
-        const heroTl = gsap.timeline({ defaults: { ease: "power3.out" } });
+        // Fast entrance animation that clears all inline properties
+        gsap.fromTo('.hero-headline', 
+            { y: 25 }, 
+            { y: 0, duration: 0.8, ease: "power3.out", clearProps: "all" }
+        );
+        gsap.fromTo('.hero-subtext', 
+            { y: 15 }, 
+            { y: 0, duration: 0.8, delay: 0.1, ease: "power3.out", clearProps: "all" }
+        );
+        gsap.fromTo('.hero-cta-btn', 
+            { y: 15 }, 
+            { y: 0, duration: 0.6, delay: 0.2, stagger: 0.1, ease: "power2.out", clearProps: "all" }
+        );
+        gsap.fromTo('.hero-stat-card', 
+            { y: 20 }, 
+            { y: 0, duration: 0.6, delay: 0.3, stagger: 0.1, ease: "power2.out", clearProps: "all" }
+        );
 
-        heroTl.from('.hero-badge-item', {
-            y: -20,
-            opacity: 0,
-            duration: 0.7,
-            stagger: 0.1,
-            delay: 0.1
-        })
-        .from('.hero-headline', {
-            y: 40,
-            opacity: 0,
-            filter: 'blur(8px)',
-            duration: 0.9,
-        }, "-=0.4")
-        .from('.hero-subtext', {
-            y: 25,
-            opacity: 0,
-            duration: 0.8,
-        }, "-=0.6")
-        .from('.hero-cta-btn', {
-            y: 20,
-            opacity: 0,
-            scale: 0.95,
-            stagger: 0.12,
-            duration: 0.6,
-        }, "-=0.5")
-        .from('.hero-stat-card', {
-            y: 30,
-            opacity: 0,
-            stagger: 0.1,
-            duration: 0.7,
-            onComplete: initHeroCounters
-        }, "-=0.4");
-
-        // Hero Background Parallax on Scroll
-        if (heroBgImg) {
+        // Hero Background Parallax on Scroll (Subtle & GPU accelerated)
+        if (heroBgImg && typeof ScrollTrigger !== 'undefined') {
             gsap.to(heroBgImg, {
-                yPercent: 18,
-                scale: 1.12,
+                yPercent: 12,
                 ease: "none",
                 scrollTrigger: {
                     trigger: heroSection,
                     start: "top top",
                     end: "bottom top",
-                    scrub: 0.8
+                    scrub: 0.6
                 }
             });
         }
-    } else {
-        initHeroCounters();
-    }
-
-    // 6. Rolling Number Counter Function
-    function initHeroCounters() {
-        document.querySelectorAll('.counter-val').forEach(el => {
-            const rawTarget = el.getAttribute('data-target');
-            if (!rawTarget) return;
-
-            // Clean number and determine if has plus or formatting
-            const isFormatted = rawTarget.includes('.');
-            const numericValue = parseInt(rawTarget.replace(/\D/g, ''), 10);
-            if (isNaN(numericValue)) return;
-
-            const counterObj = { val: 0 };
-            gsap.to(counterObj, {
-                val: numericValue,
-                duration: 2.0,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: el,
-                    start: "top 90%",
-                    once: true
-                },
-                onUpdate: () => {
-                    const currentInt = Math.floor(counterObj.val);
-                    if (isFormatted && numericValue >= 1000) {
-                        el.textContent = currentInt.toLocaleString('id-ID');
-                    } else {
-                        el.textContent = currentInt.toString();
-                    }
-                },
-                onComplete: () => {
-                    el.textContent = rawTarget;
-                }
-            });
-        });
     }
 
     // 7. Pinned Scroll Showcase ("Empat Pilar Masaran")
+    // Keep cards 100% visible and sharp, only update step indicators on the left
     const dioramaContainer = document.querySelector('.diorama-scroll-wrapper');
     const dioramaCards = document.querySelectorAll('.diorama-card');
     const dioramaSteps = document.querySelectorAll('.diorama-step-item');
 
-    if (dioramaContainer && dioramaCards.length > 0) {
+    if (dioramaContainer && dioramaCards.length > 0 && typeof ScrollTrigger !== 'undefined') {
         dioramaCards.forEach((card, index) => {
-            // Card scroll reveal and stacking scale
-            if (index < dioramaCards.length - 1) {
-                gsap.to(card, {
-                    scale: 0.94,
-                    opacity: 0.45,
-                    filter: "blur(2px)",
-                    scrollTrigger: {
-                        trigger: dioramaCards[index + 1],
-                        start: "top 60%",
-                        end: "top 25%",
-                        scrub: true,
-                    }
-                });
-            }
-
-            // Update Left Sticky Step Indicators
             ScrollTrigger.create({
                 trigger: card,
-                start: "top 50%",
-                end: "bottom 50%",
+                start: "top 55%",
+                end: "bottom 55%",
                 onEnter: () => activateStep(index),
                 onEnterBack: () => activateStep(index),
             });
@@ -219,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
             dioramaSteps.forEach((step, sIdx) => {
                 if (sIdx === idx) {
                     step.classList.add('bg-brand-800', 'text-white', 'border-brand-800', 'shadow-md', 'scale-105');
-                    step.classList.remove('bg-neutral-100', 'text-neutral-600', 'border-neutral-200');
+                    step.classList.remove('bg-neutral-100', 'text-neutral-600', 'border-neutral-200', 'bg-neutral-200/80', 'text-neutral-700');
                     const bar = step.querySelector('.step-bar');
                     if (bar) bar.style.width = '100%';
                 } else if (sIdx < idx) {
@@ -237,26 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 8. Staggered Entrance for Grids (News, Agenda, Ranting, AUM)
-    document.querySelectorAll('.animate-stagger-grid').forEach(grid => {
-        const items = grid.children;
-        if (items.length > 0) {
-            gsap.from(items, {
-                y: 35,
-                opacity: 0,
-                duration: 0.75,
-                stagger: 0.1,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: grid,
-                    start: "top 85%",
-                    once: true
-                }
-            });
-        }
-    });
-
-    // 9. Interactive 3D Card Tilt on Hover (.card-tilt)
+    // 8. Interactive 3D Card Tilt on Hover (.card-tilt)
     document.querySelectorAll('.card-tilt').forEach(card => {
         let isHovered = false;
 
@@ -272,20 +218,20 @@ document.addEventListener('DOMContentLoaded', () => {
             const y = e.clientY - rect.top - (rect.height / 2);
             
             // Limit tilt angle to subtle 6 degrees
-            const rotateX = -(y / rect.height) * 8;
-            const rotateY = (x / rect.width) * 8;
+            const rotateX = -(y / rect.height) * 6;
+            const rotateY = (x / rect.width) * 6;
 
             card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-4px)`;
         });
 
         card.addEventListener('mouseleave', () => {
             isHovered = false;
-            card.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease-out';
+            card.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease-out';
             card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
         });
     });
 
-    // 10. Magnetic Micro-Interaction for Primary Buttons (.btn-magnetic)
+    // 9. Magnetic Micro-Interaction for Primary Buttons (.btn-magnetic)
     document.querySelectorAll('.btn-magnetic').forEach(btn => {
         btn.addEventListener('mousemove', (e) => {
             const rect = btn.getBoundingClientRect();
@@ -293,8 +239,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const relY = e.clientY - rect.top - (rect.height / 2);
 
             gsap.to(btn, {
-                x: relX * 0.28,
-                y: relY * 0.28,
+                x: relX * 0.25,
+                y: relY * 0.25,
                 duration: 0.3,
                 ease: "power2.out"
             });
@@ -304,18 +250,25 @@ document.addEventListener('DOMContentLoaded', () => {
             gsap.to(btn, {
                 x: 0,
                 y: 0,
-                duration: 0.6,
+                duration: 0.5,
                 ease: "elastic.out(1.1, 0.4)"
             });
         });
     });
 
-    // 11. Subtle Float Micro-Animation for Decorative Watermarks
+    // 10. Subtle Float Micro-Animation for Decorative Watermarks
     gsap.to('.ambient-float', {
-        y: -12,
+        y: -10,
         duration: 3.5,
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut"
+    });
+
+    // Refresh ScrollTrigger after DOM & assets are fully ready
+    window.addEventListener('load', () => {
+        if (typeof ScrollTrigger !== 'undefined') {
+            ScrollTrigger.refresh();
+        }
     });
 });
