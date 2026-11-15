@@ -7,12 +7,10 @@
     <title>{% block title %}{{ profil_organisasi.nama_singkat|default:"PCM Masaran" }} — Mencerahkan Semesta, Memajukan Masaran{% endblock %}</title>
     <meta name="description" content="Portal Resmi Pimpinan Cabang Muhammadiyah (PCM) Masaran, Kabupaten Sragen, Jawa Tengah. Informasi profil, pimpinan, ranting, amal usaha, berita, dan agenda kegiatan.">
     
-    <!-- Google Fonts: Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS CDN with Waabi-inspired design config -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -29,7 +27,7 @@
                             500: '#22c55e',
                             600: '#16a34a',
                             700: '#15803d',
-                            800: '#006633', // Muhammadiyah Signature Forest Green
+                            800: '#006633',
                             900: '#064e3b',
                             950: '#022c22',
                         },
@@ -42,7 +40,6 @@
     </script>
     <style>
         :root {
-            /* Apple Spring Physics via CSS linear() - Gold Standard */
             --spring-snappy: linear(
                 0, 0.009, 0.035 2.1%, 0.141 4.4%, 0.723 12.9%,
                 0.938 16.7%, 1.017 19.4%, 1.067 22.5%, 1.089 26.0%,
@@ -59,7 +56,6 @@
             --ease-snap: cubic-bezier(0.22, 1, 0.36, 1);
         }
 
-        /* Lenis Smooth Scroll CSS */
         html.lenis, html.lenis body {
             height: auto;
         }
@@ -88,12 +84,10 @@
             -webkit-backdrop-filter: blur(14px);
         }
         .hero-pattern {
-            background-image: radial-gradient(#006633 0.65px, transparent 0.65px);
+            background-image: radial-gradient(rgba(0, 102, 51, 0.06) 1px, transparent 1px);
             background-size: 24px 24px;
-            opacity: 0.04;
         }
 
-        /* Subtle Waabi Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -109,20 +103,17 @@
             background: #a1a1aa;
         }
 
-        /* Universal Physical Press Micro-Interaction */
         button:active, a.btn-press:active {
             transform: scale(0.97);
             transition: transform 140ms var(--ease-snap);
         }
 
-        /* Card 3D Perspective Container */
         .card-tilt {
             transform-style: preserve-3d;
             will-change: transform;
             backface-visibility: hidden;
         }
 
-        /* Reduced Motion Respect */
         @media (prefers-reduced-motion: reduce) {
             * {
                 animation-duration: 0.01ms !important;
@@ -136,10 +127,8 @@
 </head>
 <body class="min-h-screen flex flex-col bg-cream text-neutral-900 selection:bg-brand-800 selection:text-white">
 
-    <!-- FLOATING WAABI-STYLE HEADER -->
     <header class="sticky top-3 z-50 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
         <nav class="glass-nav border border-neutral-300/60 rounded-full px-5 py-3 shadow-sm flex items-center justify-between transition-all duration-300">
-            <!-- Brand Logo & Title -->
             <a href="{% url 'pcm:beranda' %}" class="flex items-center gap-3 group">
                 <div class="w-10 h-10 rounded-full bg-brand-800 flex items-center justify-center p-1.5 shadow-sm group-hover:scale-105 transition-transform duration-300">
                     <img src="{% static 'images/muhammadiyah.svg' %}" alt="Logo Muhammadiyah" class="w-full h-full object-contain filter invert brightness-0">
@@ -154,25 +143,99 @@
                 </div>
             </a>
 
-            <!-- Desktop Navigation Links -->
-            <div class="hidden lg:flex items-center gap-1 text-sm font-medium text-neutral-700">
-                <a href="{% url 'pcm:beranda' %}" class="px-3.5 py-1.5 rounded-full hover:bg-neutral-200/60 transition-colors {% if request.resolver_match.url_name == 'beranda' %}bg-neutral-900 text-white hover:bg-neutral-900{% endif %}">Beranda</a>
-                <a href="{% url 'pcm:profil' %}" class="px-3.5 py-1.5 rounded-full hover:bg-neutral-200/60 transition-colors {% if request.resolver_match.url_name == 'profil' %}bg-neutral-900 text-white hover:bg-neutral-900{% endif %}">Profil</a>
-                <a href="{% url 'pcm:pimpinan' %}" class="px-3.5 py-1.5 rounded-full hover:bg-neutral-200/60 transition-colors {% if request.resolver_match.url_name == 'pimpinan' %}bg-neutral-900 text-white hover:bg-neutral-900{% endif %}">Pimpinan</a>
-                <a href="{% url 'pcm:ranting' %}" class="px-3.5 py-1.5 rounded-full hover:bg-neutral-200/60 transition-colors {% if request.resolver_match.url_name == 'ranting' %}bg-neutral-900 text-white hover:bg-neutral-900{% endif %}">Ranting</a>
-                <a href="{% url 'pcm:amal_usaha' %}" class="px-3.5 py-1.5 rounded-full hover:bg-neutral-200/60 transition-colors {% if request.resolver_match.url_name == 'amal_usaha' %}bg-neutral-900 text-white hover:bg-neutral-900{% endif %}">Amal Usaha</a>
-                <a href="{% url 'pcm:berita_list' %}" class="px-3.5 py-1.5 rounded-full hover:bg-neutral-200/60 transition-colors {% if 'berita' in request.resolver_match.url_name %}bg-neutral-900 text-white hover:bg-neutral-900{% endif %}">Berita</a>
-                <a href="{% url 'pcm:agenda' %}" class="px-3.5 py-1.5 rounded-full hover:bg-neutral-200/60 transition-colors {% if request.resolver_match.url_name == 'agenda' %}bg-neutral-900 text-white hover:bg-neutral-900{% endif %}">Agenda</a>
-                <a href="{% url 'pcm:unduhan' %}" class="px-3.5 py-1.5 rounded-full hover:bg-neutral-200/60 transition-colors {% if request.resolver_match.url_name == 'unduhan' %}bg-neutral-900 text-white hover:bg-neutral-900{% endif %}">Unduhan</a>
+            <div class="hidden lg:flex items-center gap-1.5 text-sm font-medium text-neutral-700">
+                
+                <a href="{% url 'pcm:beranda' %}" class="px-4 py-2 rounded-full hover:bg-neutral-200/60 transition-colors {% if request.resolver_match.url_name == 'beranda' %}bg-neutral-900 text-white hover:bg-neutral-900{% endif %}">
+                    Beranda
+                </a>
+
+                <div class="relative group/menu py-1.5">
+                    <button type="button" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full hover:bg-neutral-200/60 transition-colors {% if request.resolver_match.url_name in 'profil,pimpinan,ranting' %}bg-neutral-900 text-white hover:bg-neutral-900{% endif %}">
+                        <span>Tentang Kami</span>
+                        <svg class="w-3.5 h-3.5 text-neutral-400 group-hover/menu:text-brand-800 group-hover/menu:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="absolute top-full left-0 pt-2 opacity-0 pointer-events-none translate-y-2 group-hover/menu:opacity-100 group-hover/menu:pointer-events-auto group-hover/menu:translate-y-0 transition-all duration-200 ease-out z-50">
+                        <div class="w-72 bg-white/95 backdrop-blur-xl border border-neutral-200/90 rounded-2xl shadow-xl p-2.5 space-y-1">
+                            <a href="{% url 'pcm:profil' %}" class="p-2.5 rounded-xl hover:bg-neutral-100/80 transition flex items-start gap-3 group/item">
+                                <div class="w-8 h-8 rounded-lg bg-brand-50 text-brand-800 flex items-center justify-center flex-shrink-0 group-hover/item:bg-brand-800 group-hover/item:text-white transition">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-neutral-900 group-hover/item:text-brand-800 transition">Profil & Sejarah</p>
+                                    <p class="text-[11px] text-neutral-500">Visi, misi, dan historis PCM Masaran</p>
+                                </div>
+                            </a>
+                            <a href="{% url 'pcm:pimpinan' %}" class="p-2.5 rounded-xl hover:bg-neutral-100/80 transition flex items-start gap-3 group/item">
+                                <div class="w-8 h-8 rounded-lg bg-brand-50 text-brand-800 flex items-center justify-center flex-shrink-0 group-hover/item:bg-brand-800 group-hover/item:text-white transition">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-neutral-900 group-hover/item:text-brand-800 transition">Susunan Pimpinan</p>
+                                    <p class="text-[11px] text-neutral-500">Pleno dan majelis periode 2022–2027</p>
+                                </div>
+                            </a>
+                            <a href="{% url 'pcm:ranting' %}" class="p-2.5 rounded-xl hover:bg-neutral-100/80 transition flex items-start gap-3 group/item">
+                                <div class="w-8 h-8 rounded-lg bg-brand-50 text-brand-800 flex items-center justify-center flex-shrink-0 group-hover/item:bg-brand-800 group-hover/item:text-white transition">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-neutral-900 group-hover/item:text-brand-800 transition">13 Pimpinan Ranting</p>
+                                    <p class="text-[11px] text-neutral-500">Jejaring dakwah desa se-Masaran</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="{% url 'pcm:amal_usaha' %}" class="px-4 py-2 rounded-full hover:bg-neutral-200/60 transition-colors {% if request.resolver_match.url_name == 'amal_usaha' %}bg-neutral-900 text-white hover:bg-neutral-900{% endif %}">
+                    Amal Usaha
+                </a>
+
+                <div class="relative group/menu py-1.5">
+                    <button type="button" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full hover:bg-neutral-200/60 transition-colors {% if request.resolver_match.url_name in 'berita_list,berita_detail,agenda,unduhan' %}bg-neutral-900 text-white hover:bg-neutral-900{% endif %}">
+                        <span>Warta & Layanan</span>
+                        <svg class="w-3.5 h-3.5 text-neutral-400 group-hover/menu:text-brand-800 group-hover/menu:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="absolute top-full right-0 pt-2 opacity-0 pointer-events-none translate-y-2 group-hover/menu:opacity-100 group-hover/menu:pointer-events-auto group-hover/menu:translate-y-0 transition-all duration-200 ease-out z-50">
+                        <div class="w-72 bg-white/95 backdrop-blur-xl border border-neutral-200/90 rounded-2xl shadow-xl p-2.5 space-y-1">
+                            <a href="{% url 'pcm:berita_list' %}" class="p-2.5 rounded-xl hover:bg-neutral-100/80 transition flex items-start gap-3 group/item">
+                                <div class="w-8 h-8 rounded-lg bg-brand-50 text-brand-800 flex items-center justify-center flex-shrink-0 group-hover/item:bg-brand-800 group-hover/item:text-white transition">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-neutral-900 group-hover/item:text-brand-800 transition">Warta & Berita</p>
+                                    <p class="text-[11px] text-neutral-500">Kabar kegiatan & siaran pers</p>
+                                </div>
+                            </a>
+                            <a href="{% url 'pcm:agenda' %}" class="p-2.5 rounded-xl hover:bg-neutral-100/80 transition flex items-start gap-3 group/item">
+                                <div class="w-8 h-8 rounded-lg bg-brand-50 text-brand-800 flex items-center justify-center flex-shrink-0 group-hover/item:bg-brand-800 group-hover/item:text-white transition">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-neutral-900 group-hover/item:text-brand-800 transition">Agenda & Pengajian</p>
+                                    <p class="text-[11px] text-neutral-500">Jadwal kajian Ahad & tabligh</p>
+                                </div>
+                            </a>
+                            <a href="{% url 'pcm:unduhan' %}" class="p-2.5 rounded-xl hover:bg-neutral-100/80 transition flex items-start gap-3 group/item">
+                                <div class="w-8 h-8 rounded-lg bg-brand-50 text-brand-800 flex items-center justify-center flex-shrink-0 group-hover/item:bg-brand-800 group-hover/item:text-white transition">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-neutral-900 group-hover/item:text-brand-800 transition">Dokumen & Berkas</p>
+                                    <p class="text-[11px] text-neutral-500">SK, surat edaran, & pedoman</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
-            <!-- Action CTA & Mobile Button -->
             <div class="flex items-center gap-2">
                 <a href="{% url 'pcm:kontak' %}" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider bg-brand-800 hover:bg-brand-900 text-white px-4 py-2.5 rounded-full shadow-sm hover:shadow transition-all duration-200">
                     <span>Hubungi Kami</span>
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                 </a>
-                <!-- Mobile Menu Button -->
                 <button id="mobile-menu-btn" type="button" aria-label="Toggle menu" class="lg:hidden p-2 rounded-full hover:bg-neutral-200/70 text-neutral-800 transition">
                     <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
                     <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
@@ -180,7 +243,6 @@
             </div>
         </nav>
 
-        <!-- Responsive Mobile Dropdown Menu -->
         <div id="mobile-menu" class="hidden lg:hidden mt-2 p-5 glass-nav border border-neutral-300/70 rounded-3xl shadow-lg transition-all duration-300 space-y-2 text-sm font-medium">
             <a href="{% url 'pcm:beranda' %}" class="block px-4 py-2.5 rounded-xl hover:bg-neutral-200/60 transition {% if request.resolver_match.url_name == 'beranda' %}bg-neutral-900 text-white hover:bg-neutral-900{% endif %}">Beranda</a>
             <a href="{% url 'pcm:profil' %}" class="block px-4 py-2.5 rounded-xl hover:bg-neutral-200/60 transition {% if request.resolver_match.url_name == 'profil' %}bg-neutral-900 text-white hover:bg-neutral-900{% endif %}">Profil Organisasi</a>
@@ -194,7 +256,6 @@
         </div>
     </header>
 
-    <!-- DJANGO MESSAGES NOTIFICATION CONTAINER -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mt-4">
         {% if messages %}
             {% for message in messages %}
@@ -209,17 +270,14 @@
         {% endif %}
     </div>
 
-    <!-- MAIN PAGE CONTENT -->
     <main class="flex-grow">
         {% block content %}{% endblock %}
     </main>
 
-    <!-- FOOTER WITH MANDATORY ACADEMIC DISCLAIMER & ATTRIBUTIONS -->
     <footer class="mt-24 border-t border-neutral-300/70 bg-neutral-950 text-neutral-300 pt-16 pb-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 pb-12 border-b border-neutral-800">
                 
-                <!-- Col 1: Identity & Socials -->
                 <div class="lg:col-span-5 space-y-5">
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 rounded-full bg-brand-800 flex items-center justify-center p-1.5 shadow-md">
@@ -244,7 +302,6 @@
                         </p>
                     </div>
 
-                    <!-- Social Media Links -->
                     <div class="pt-2">
                         <p class="text-xs font-semibold uppercase tracking-wider text-neutral-500 mb-3">Kanal Informasi Resmi</p>
                         <div class="flex flex-wrap gap-2">
@@ -258,7 +315,6 @@
                     </div>
                 </div>
 
-                <!-- Col 2: Navigation Links -->
                 <div class="lg:col-span-3 space-y-4">
                     <h4 class="text-xs font-bold uppercase tracking-wider text-neutral-400">Navigasi Halaman</h4>
                     <ul class="space-y-2 text-sm text-neutral-400">
@@ -272,7 +328,6 @@
                     </ul>
                 </div>
 
-                <!-- Col 3: Tautan Persyarikatan (MANDATORY FROM MODEL) -->
                 <div class="lg:col-span-4 space-y-4">
                     <h4 class="text-xs font-bold uppercase tracking-wider text-neutral-400">Tautan Persyarikatan</h4>
                     <p class="text-xs text-neutral-500">Akses langsung ke jaringan website resmi Persyarikatan Muhammadiyah:</p>
@@ -294,18 +349,15 @@
 
             </div>
 
-            <!-- MANDATORY LEGAL & ATTRIBUTION FOOTER NOTICE -->
             <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-neutral-500">
                 <div class="space-y-1 text-center md:text-left">
                     <p class="font-medium text-neutral-400">
                         &copy; 2026 Pimpinan Cabang Muhammadiyah (PCM) Masaran, Sragen.
                     </p>
-                    <!-- Strict academic disclaimer as required in rubric line 37 -->
                     <p class="text-neutral-500 italic">
-                        Website ini dibuat untuk tugas kuliah Pemrograman Web berbasis Framework, bukan website resmi PCM Masaran.
+                        Website ini dibuat untuk tugas kuliah Pemrograman Web berbasis Framework (TIF1336), bukan website resmi PCM Masaran.
                     </p>
                 </div>
-                <!-- Strict logo & photo attribution as required in rubric line 39 -->
                 <div class="text-center md:text-right text-[11px] text-neutral-500 max-w-md">
                     Logo Muhammadiyah: K. H. Siradj Dahlan, vektor oleh Hibensis, via Wikimedia Commons, lisensi CC BY-SA 4.0. Dokumentasi foto bersumber dari arsip resmi PCM Masaran & PDM Sragen.
                 </div>
@@ -313,7 +365,6 @@
         </div>
     </footer>
 
-    <!-- FLOATING SCROLL PROGRESS & BACK-TO-TOP (WAABI / APPLE STYLE) -->
     <button id="scroll-progress-widget" aria-label="Kembali ke atas" class="fixed bottom-6 right-6 z-40 p-2.5 rounded-full bg-neutral-900/90 hover:bg-neutral-900 text-white shadow-xl backdrop-blur-md border border-white/20 transition-all duration-300 transform opacity-0 pointer-events-none translate-y-4 hover:scale-110 active:scale-95 group">
         <svg class="w-10 h-10 -rotate-90 transform" viewBox="0 0 44 44">
             <circle cx="22" cy="22" r="18" stroke="currentColor" stroke-width="2.5" class="text-neutral-700/60" fill="none" />
@@ -324,13 +375,11 @@
         </span>
     </button>
 
-    <!-- MOTION & INTERACTION LIBS (LOCAL WITH CDNS FALLBACK) -->
     <script src="{% static 'js/lenis.min.js' %}"></script>
     <script src="{% static 'js/gsap.min.js' %}"></script>
     <script src="{% static 'js/ScrollTrigger.min.js' %}"></script>
     <script src="{% static 'js/main-motion.js' %}"></script>
 
-    <!-- Mobile Menu Script -->
     <script>
         const menuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');

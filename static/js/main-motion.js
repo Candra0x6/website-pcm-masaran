@@ -1,19 +1,10 @@
-/**
- * PCM Masaran — Awwwards-Tier Motion Design System
- * Inspired by Waabi Design Architecture & Apple Motion Guidelines
- * Robust, Safe, Zero-Flicker Progressive Enhancement
- */
-
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Accessibility: Check for reduced motion preference
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // 2. Register GSAP Plugins
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
         gsap.registerPlugin(ScrollTrigger);
     }
 
-    // 3. Initialize Lenis Smooth Scrolling (Only if reduced-motion is not requested)
     let lenis = null;
     if (!prefersReducedMotion && typeof Lenis !== 'undefined') {
         try {
@@ -28,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 infinite: false,
             });
 
-            // Synchronize Lenis with GSAP ScrollTrigger
             lenis.on('scroll', ScrollTrigger.update);
 
             gsap.ticker.add((time) => {
@@ -36,14 +26,12 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             gsap.ticker.lagSmoothing(0);
 
-            // Expose globally for smooth anchors
             window.lenis = lenis;
         } catch (e) {
             console.warn('Lenis smooth scroll could not be initialized:', e);
         }
     }
 
-    // 4. Back-To-Top and Circular Scroll Progress Tracker
     const progressContainer = document.getElementById('scroll-progress-widget');
     const progressCircle = document.getElementById('scroll-progress-circle');
 
@@ -78,7 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 5. Rolling Number Counter Function (Safe: Never hides default text)
     function initHeroCounters() {
         document.querySelectorAll('.counter-val').forEach(el => {
             const rawTarget = el.getAttribute('data-target') || el.textContent;
@@ -117,20 +104,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Call counters immediately (they already have default numbers visible)
     initHeroCounters();
 
-    // If reduced motion is requested or GSAP missing, skip motion effects
     if (prefersReducedMotion || typeof gsap === 'undefined') {
         return;
     }
 
-    // 6. Hero Subtle Entrance (Safe: Starts visible, clears inline props)
     const heroSection = document.querySelector('.hero-section');
     const heroBgImg = document.querySelector('.hero-bg-img');
 
     if (heroSection) {
-        // Fast entrance animation that clears all inline properties
         gsap.fromTo('.hero-headline', 
             { y: 25 }, 
             { y: 0, duration: 0.8, ease: "power3.out", clearProps: "all" }
@@ -148,7 +131,6 @@ document.addEventListener('DOMContentLoaded', () => {
             { y: 0, duration: 0.6, delay: 0.3, stagger: 0.1, ease: "power2.out", clearProps: "all" }
         );
 
-        // Hero Background Parallax on Scroll (Subtle & GPU accelerated)
         if (heroBgImg && typeof ScrollTrigger !== 'undefined') {
             gsap.to(heroBgImg, {
                 yPercent: 12,
@@ -163,8 +145,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 7. Pinned Scroll Showcase ("Empat Pilar Masaran")
-    // Keep cards 100% visible and sharp, only update step indicators on the left
     const dioramaContainer = document.querySelector('.diorama-scroll-wrapper');
     const dioramaCards = document.querySelectorAll('.diorama-card');
     const dioramaSteps = document.querySelectorAll('.diorama-step-item');
@@ -202,7 +182,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 8. Interactive 3D Card Tilt on Hover (.card-tilt)
     document.querySelectorAll('.card-tilt').forEach(card => {
         let isHovered = false;
 
@@ -217,7 +196,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const x = e.clientX - rect.left - (rect.width / 2);
             const y = e.clientY - rect.top - (rect.height / 2);
             
-            // Limit tilt angle to subtle 6 degrees
             const rotateX = -(y / rect.height) * 6;
             const rotateY = (x / rect.width) * 6;
 
@@ -231,7 +209,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 9. Magnetic Micro-Interaction for Primary Buttons (.btn-magnetic)
     document.querySelectorAll('.btn-magnetic').forEach(btn => {
         btn.addEventListener('mousemove', (e) => {
             const rect = btn.getBoundingClientRect();
@@ -256,7 +233,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 10. Subtle Float Micro-Animation for Decorative Watermarks
     gsap.to('.ambient-float', {
         y: -10,
         duration: 3.5,
@@ -265,7 +241,6 @@ document.addEventListener('DOMContentLoaded', () => {
         ease: "sine.inOut"
     });
 
-    // Refresh ScrollTrigger after DOM & assets are fully ready
     window.addEventListener('load', () => {
         if (typeof ScrollTrigger !== 'undefined') {
             ScrollTrigger.refresh();
