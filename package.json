@@ -1,0 +1,12 @@
+{
+  "name": "website-pcm-masaran",
+  "version": "1.0.0",
+  "description": "Website Resmi Pimpinan Cabang Muhammadiyah (PCM) Masaran, Kabupaten Sragen",
+  "scripts": {
+    "dev": "uv run python manage.py runserver 127.0.0.1:8000",
+    "start": "uv run python manage.py runserver 127.0.0.1:8000",
+    "test": "uv run python manage.py test",
+    "seed": "uv run python manage.py seed_pcm",
+    "collectstatic": "uv run python manage.py collectstatic --noinput"
+  }
+}
