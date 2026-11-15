@@ -331,7 +331,63 @@
     </div>
 </section>
 
-<!-- SECTION 5: CALL TO ACTION BANNER WITH AMBIENT WATERMARK -->
+<!-- SECTION 5: LOKASI & GOOGLE MAPS STREET -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-neutral-200/80">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
+        <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 border border-brand-200 text-brand-900 text-xs font-semibold uppercase tracking-wider mb-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
+                <span>Peta & Akses Jalan</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight">Lokasi Sekretariat PCM Masaran</h2>
+        </div>
+        <div class="flex items-center gap-3">
+            <a href="https://www.google.com/maps/search/?api=1&query=Gedung+Dakwah+Muhammadiyah+Masaran+Sragen" target="_blank" rel="noopener noreferrer" class="btn-magnetic inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider px-4 py-2.5 rounded-full bg-brand-800 hover:bg-brand-900 text-white transition shadow-sm">
+                <span>Buka Google Maps</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+            </a>
+            <a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=-7.4883,110.9587" target="_blank" rel="noopener noreferrer" class="btn-magnetic inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider px-4 py-2.5 rounded-full bg-neutral-900 hover:bg-neutral-800 text-white transition shadow-sm border border-neutral-700">
+                <span>Street View 360°</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+        <div class="lg:col-span-8 bg-neutral-100 rounded-3xl overflow-hidden border border-neutral-300/80 shadow-md min-h-[380px] relative">
+            <iframe 
+                title="Peta Lokasi PCM Masaran"
+                src="https://maps.google.com/maps?q=Masaran,+Sragen,+Gedung+Dakwah+Muhammadiyah&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                class="w-full h-full min-h-[380px] border-0"
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+        <div class="lg:col-span-4 bg-white rounded-3xl p-7 border border-neutral-200/80 shadow-sm flex flex-col justify-between space-y-5">
+            <div class="space-y-4">
+                <div class="w-10 h-10 rounded-2xl bg-brand-50 text-brand-800 flex items-center justify-center">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                </div>
+                <h3 class="font-bold text-xl text-neutral-950 tracking-tight">Gedung Dakwah Masaran</h3>
+                <p class="text-xs text-neutral-600 leading-relaxed">
+                    Jl. Raya Solo - Sragen KM 13, Masaran, Kabupaten Sragen, Jawa Tengah 57282.
+                </p>
+                <div class="text-xs space-y-1.5 pt-2 text-neutral-500 border-t border-neutral-100">
+                    <p><strong>Akses Utama:</strong> Jalur Arteri Solo – Sragen</p>
+                    <p><strong>Rute Terdekat:</strong> 500m dari Pasar Masaran</p>
+                    <p><strong>Kontak:</strong> (0271) 8821032</p>
+                </div>
+            </div>
+            <div>
+                <a href="{% url 'pcm:kontak' %}" class="btn-magnetic w-full py-3 px-4 rounded-full bg-brand-800 hover:bg-brand-900 text-white font-semibold text-xs uppercase tracking-wider text-center block transition shadow-sm">
+                    Kunjungi Halaman Kontak &rarr;
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 6: CALL TO ACTION BANNER WITH AMBIENT WATERMARK -->
 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <div class="card-tilt rounded-3xl bg-neutral-950 text-white p-8 sm:p-14 relative overflow-hidden shadow-2xl border border-neutral-800">
         <div class="relative z-10 max-w-2xl space-y-5">
