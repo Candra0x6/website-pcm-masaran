@@ -313,9 +313,15 @@ def agenda_view(request):
 
 
 def unduhan_view(request):
+    query = request.GET.get('q', '').strip()
     dokumen_list = Dokumen.objects.all().order_by('-tanggal_unggah')
+    if query:
+        dokumen_list = dokumen_list.filter(
+            Q(judul__icontains=query) | Q(keterangan__icontains=query)
+        )
     context = {
         'dokumen_list': dokumen_list,
+        'query': query,
     }
     return render(request, 'pcm/unduhan.html', context)
 
