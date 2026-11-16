@@ -344,3 +344,29 @@ class PCMWebsiteTests(TestCase):
 
     def test_agenda_sisa_hari(self):
         self.assertIsNotNone(self.agenda_mendatang.sisa_hari)
+
+    def test_kontak_form_sanitization(self):
+        from pcm.forms import KontakForm
+        data = {
+            'nama': '<b>Ahmad</b> Wahyudi',
+            'email': 'ahmad@example.com',
+            'subjek': '<i>Pertanyaan</i> Agenda',
+            'pesan': '<script>alert(1)</script>Isi pesan pertanyaan yang cukup panjang.',
+        }
+        form = KontakForm(data=data)
+        self.assertTrue(form.is_valid())
+        self.assertEqual(form.cleaned_data['nama'], 'Ahmad Wahyudi')
+        self.assertEqual(form.cleaned_data['subjek'], 'Pertanyaan Agenda')
+        self.assertNotIn('<script>', form.cleaned_data['pesan'])
+
+    def test_api_statistik_with_bidang_filter(self):
+        url = reverse('pcm:api_statistik') + '?bidang=pendidikan'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertEqual(data['filter_bidang'], 'pendidikan')
+        self.assertIn('pendidikan', data['amal_usaha_per_bidang'])
+
+    def test_ranting_custom_properties(self):
+        self.assertTrue(self.ranting.kontak_tersedia)
+        self.assertIn("Masaran", self.ranting.label_lengkap)
