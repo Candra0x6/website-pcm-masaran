@@ -8,9 +8,12 @@
                 <img src="{% static 'images/muhammadiyah.svg' %}" alt="Logo" class="w-16 h-16 opacity-30">
             </div>
         {% endif %}
-        <div class="absolute top-4 left-4">
+        <div class="absolute top-4 left-4 flex items-center gap-2">
             <span class="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold bg-white/90 backdrop-blur-md text-neutral-800 shadow-sm">
                 {{ item.tanggal_terbit|date:"d M Y" }}
+            </span>
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-brand-800/90 text-white backdrop-blur-md shadow-xs">
+                Warta
             </span>
         </div>
     </div>
