@@ -209,6 +209,13 @@ class Dokumen(models.Model):
     def __str__(self):
         return self.judul
 
+    def clean(self):
+        super().clean()
+        if self.berkas and hasattr(self.berkas, 'size'):
+            max_size = 25 * 1024 * 1024
+            if self.berkas.size > max_size:
+                raise ValidationError("Ukuran berkas melebihi batas maksimal 25 MB.")
+
 
 class PesanMasuk(models.Model):
     nama = models.CharField(max_length=150)
