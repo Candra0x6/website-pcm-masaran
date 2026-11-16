@@ -171,7 +171,7 @@ class PesanMasukAdmin(admin.ModelAdmin):
     search_fields = ('nama', 'email', 'subjek', 'pesan')
     readonly_fields = ('nama', 'email', 'subjek', 'pesan', 'waktu_kirim')
     ordering = ('-waktu_kirim',)
-    actions = ['tandai_sudah_dibaca', 'tandai_belum_dibaca']
+    actions = ['tandai_sudah_dibaca', 'tandai_belum_dibaca', 'ekspor_ke_csv']
 
     @admin.action(description="Tandai pesan terpilih sebagai SUDAH dibaca")
     def tandai_sudah_dibaca(self, request, queryset):
@@ -180,6 +180,25 @@ class PesanMasukAdmin(admin.ModelAdmin):
     @admin.action(description="Tandai pesan terpilih sebagai BELUM dibaca")
     def tandai_belum_dibaca(self, request, queryset):
         queryset.update(sudah_dibaca=False)
+
+    @admin.action(description="Ekspor pesan terpilih ke file CSV")
+    def ekspor_ke_csv(self, request, queryset):
+        import csv
+        from django.http import HttpResponse
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="pesan_masuk.csv"'
+        writer = csv.writer(response)
+        writer.writerow(['Waktu Kirim', 'Nama', 'Email', 'Subjek', 'Pesan', 'Sudah Dibaca'])
+        for item in queryset:
+            writer.writerow([
+                item.waktu_kirim.strftime('%Y-%m-%d %H:%M:%S'),
+                item.nama,
+                item.email,
+                item.subjek,
+                item.pesan,
+                'Ya' if item.sudah_dibaca else 'Tidak'
+            ])
+        return response
 
     def has_add_permission(self, request):
         return False
