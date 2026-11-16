@@ -16,6 +16,7 @@ urlpatterns = [
     path('unduhan/', views.unduhan_view, name='unduhan'),
     path('kontak/', views.kontak_view, name='kontak'),
     path('api/health/', views.api_health_check_view, name='api_health_check'),
+    path('api/statistik/', views.api_statistik_view, name='api_statistik'),
     path('sitemap.xml', views.sitemap_xml_view, name='sitemap_xml'),
     path('robots.txt', views.robots_txt_view, name='robots_txt'),
     path('rss/berita/', LatestBeritaFeed(), name='berita_rss_feed'),

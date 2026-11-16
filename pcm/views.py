@@ -410,3 +410,19 @@ def robots_txt_view(request):
         f"Sitemap: {sitemap_url}"
     ]
     return HttpResponse("\n".join(lines), content_type="text/plain")
+
+
+def api_statistik_view(request):
+    profil = ProfilOrganisasi.objects.first()
+    aum_counts = {}
+    for code, _ in AmalUsaha.BIDANG_CHOICES:
+        aum_counts[code] = AmalUsaha.objects.filter(bidang=code).count()
+    return JsonResponse({
+        "ranting_count": Ranting.objects.count(),
+        "amal_usaha_count": AmalUsaha.objects.count(),
+        "amal_usaha_per_bidang": aum_counts,
+        "berita_count": Berita.objects.published().count(),
+        "agenda_mendatang_count": Agenda.objects.filter(waktu_mulai__gte=timezone.now()).count(),
+        "dokumen_count": Dokumen.objects.count(),
+        "anggota_ktam": profil.jumlah_anggota_ktam if profil else 0,
+    })

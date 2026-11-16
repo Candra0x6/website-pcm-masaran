@@ -307,3 +307,14 @@ class PCMWebsiteTests(TestCase):
         self.assertIn('application/rss+xml', response['Content-Type'])
         self.assertContains(response, '<rss version="2.0"')
         self.assertContains(response, 'Warta &amp; Kabar PCM Masaran')
+
+    def test_api_statistik_endpoint(self):
+        url = reverse('pcm:api_statistik')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertIn('ranting_count', data)
+        self.assertIn('amal_usaha_count', data)
+        self.assertIn('amal_usaha_per_bidang', data)
+        self.assertIn('anggota_ktam', data)
+        self.assertGreaterEqual(data['ranting_count'], 1)
