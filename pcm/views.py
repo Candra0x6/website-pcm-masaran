@@ -426,3 +426,11 @@ def api_statistik_view(request):
         "dokumen_count": Dokumen.objects.count(),
         "anggota_ktam": profil.jumlah_anggota_ktam if profil else 0,
     })
+
+
+def custom_404_view(request, exception=None):
+    return render(request, '404.html', status=404)
+
+
+def custom_500_view(request):
+    return render(request, '500.html', status=500)

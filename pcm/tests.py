@@ -318,3 +318,14 @@ class PCMWebsiteTests(TestCase):
         self.assertIn('amal_usaha_per_bidang', data)
         self.assertIn('anggota_ktam', data)
         self.assertGreaterEqual(data['ranting_count'], 1)
+
+    def test_custom_404_page(self):
+        response = self.client.get('/halaman-acak-pasti-tidak-ada-404/')
+        self.assertEqual(response.status_code, 404)
+        self.assertContains(response, 'Halaman Tidak Ditemukan', status_code=404)
+
+    def test_custom_500_page(self):
+        from pcm.views import custom_500_view
+        response = custom_500_view(None)
+        self.assertEqual(response.status_code, 500)
+        self.assertIn(b'Kendala Pada Server', response.content)
