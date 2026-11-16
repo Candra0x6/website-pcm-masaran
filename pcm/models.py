@@ -85,6 +85,14 @@ class Ranting(models.Model):
     def __str__(self):
         return self.nama_ranting
 
+    @property
+    def kontak_tersedia(self):
+        return bool(self.telepon and self.telepon.strip())
+
+    @property
+    def label_lengkap(self):
+        return f"PRM {self.nama_ranting} - Ketua: {self.ketua}"
+
 
 class AmalUsaha(models.Model):
     BIDANG_CHOICES = [
