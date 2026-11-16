@@ -25,16 +25,16 @@
 
 | No | Nama Mahasiswa | NIM | Akun GitHub & Email | Peran Proyek | Total Commit | Rincian Pekerjaan & Fitur yang Dikerjakan |
 |:---:|---|---|---|---|:---:|---|
-| 1 | **Kurniawan Candra Mahardika** | **L200240210** | `@Candra0x6`<br>`kurniawancandram@gmail.com` | *Lead Fullstack, Core Backend & DevOps* | **27 commits** | Inisialisasi arsitektur uv & Django 6.x, database & core models (`ProfilOrganisasi`, `Pimpinan`, `Dokumen`, `TautanTerkait`), context processor navigasi global, singleton pattern organisasi, query optimizer (`select_related`/`prefetch_related`), security headers middleware, sitemap XML, robots.txt, health-check API, agregasi statistik, RSS 2.0 feed syndication, custom 404/500 handlers, WhiteNoise & Docker, management command `seed_pcm`, deployment serverless Vercel, dan GitHub Actions CI/CD pipeline. |
-| 2 | **afiiisky** | **L200240222** | `@afiiisky`<br>`l200240222@student.ums.ac.id` | *Frontend & UI Designer* | **20 commits** | Desain sistem antarmuka responsif mengadopsi estetika Waabi, template inheritance `base.html`, dropdown hover flyout navigasi 4 menu, halaman beranda, profil sejarah, pimpinan pleno, indikator status aktif menu mobile drawer, optimasi tipografi warta, breadcrumbs dinamis, styling tag warta, tombol scroll-to-top interaktif, dan penataan footer medsos resmi. |
-| 3 | **Latifah12-ui** | **L200240170** | `@Latifah12-ui`<br>`l200240170@student.ums.ac.id` | *Feature Developer (Warta & Agenda)* | **20 commits** | Model Berita & Agenda, custom queryset/manager `published()`, fitur slug otomatis unik, pagination (6 per halaman), pencarian berita, filter pencarian agenda & lokasi, estimasi waktu baca dinamis, artikel terkait relevan, ekspor kalender .ICS, Open Graph metadata sharing, penanda visual hitung mundur agenda, dan tombol share WhatsApp/Telegram/X. |
-| 4 | **nazh21** | **L200240221** | `@nazh21`<br>`l200240221@student.ums.ac.id` | *Backend Developer & QA* | **20 commits** | Model Ranting (13 PRM) & Amal Usaha (AUM), validasi batas ukuran berkas dokumen, validasi nomor telepon & format URL organisasi, kustomisasi fieldsets admin pimpinan & date hierarchy agenda, helper format kontak ranting, filter kategori endpoint API statistik, ekspor pesan masuk ke CSV, sanitasi input XSS form kontak, dan pengujian unit testing (`pcm/tests.py`). |
+| 1 | **Kurniawan Candra Mahardika** | **L200240210** | `@Candra0x6`<br>`kurniawancandram@gmail.com` | *Lead Fullstack, Core Backend & DevOps* | **28 commits** | Inisialisasi arsitektur uv & Django 6.x, database & core models (`ProfilOrganisasi`, `Pimpinan`, `Dokumen`, `TautanTerkait`), context processor navigasi global, singleton pattern organisasi, query optimizer (`select_related`/`prefetch_related`), security headers middleware, sitemap XML, robots.txt, health-check API, agregasi statistik, RSS 2.0 feed syndication, custom 404/500 handlers, WhiteNoise & Docker, management command `seed_pcm`, deployment serverless Vercel, dan GitHub Actions CI/CD pipeline. |
+| 2 | **Afifah Nur Hidayah** | **L200240222** | `@afiiisky`<br>`l200240222@student.ums.ac.id` | *Frontend & UI Designer* | **20 commits** | Desain sistem antarmuka responsif mengadopsi estetika Waabi, template inheritance `base.html`, dropdown hover flyout navigasi 4 menu, halaman beranda, profil sejarah, pimpinan pleno, indikator status aktif menu mobile drawer, optimasi tipografi warta, breadcrumbs dinamis, styling tag warta, tombol scroll-to-top interaktif, dan penataan footer medsos resmi. |
+| 3 | **Latifah Puji Lestari** | **L200240170** | `@Latifah12-ui`<br>`l200240170@student.ums.ac.id` | *Feature Developer (Warta & Agenda)* | **20 commits** | Model Berita & Agenda, custom queryset/manager `published()`, fitur slug otomatis unik, pagination (6 per halaman), pencarian berita, filter pencarian agenda & lokasi, estimasi waktu baca dinamis, artikel terkait relevan, ekspor kalender .ICS, Open Graph metadata sharing, penanda visual hitung mundur agenda, dan tombol share WhatsApp/Telegram/X. |
+| 4 | **Nabil Zhafif Al Rasyad** | **L200240221** | `@nazh21`<br>`l200240221@student.ums.ac.id` | *Backend Developer & QA* | **20 commits** | Model Ranting (13 PRM) & Amal Usaha (AUM), validasi batas ukuran berkas dokumen, validasi nomor telepon & format URL organisasi, kustomisasi fieldsets admin pimpinan & date hierarchy agenda, helper format kontak ranting, filter kategori endpoint API statistik, ekspor pesan masuk ke CSV, sanitasi input XSS form kontak, dan pengujian unit testing (`pcm/tests.py`). |
 
 ### 🔄 Alur Kerja & Workflow Kolaborasi Anggota
 
 Untuk menjamin kualitas kode berskala enterprise dan distribusi kontribusi yang terukur, alur kerja dibagi ke dalam 5 fase kolaborasi:
 
-#### 1. Workflow Anggota 1 (Lead Fullstack, Core Backend & DevOps):
+#### 1. Workflow Anggota 1 — Kurniawan Candra Mahardika (Lead Fullstack, Core Backend & DevOps):
 - **Arsitektur & Core Backend:**
   - Inisialisasi stack modern dengan `uv` (Fast Python Package Manager) dan Django 6.x.
   - Perancangan arsitektur database relasional untuk 9 model, termasuk model singleton `ProfilOrganisasi` (pola single-row constraint).
@@ -52,18 +52,18 @@ Untuk menjamin kualitas kode berskala enterprise dan distribusi kontribusi yang 
   - Orkestrasi `compose.yaml` untuk pengujian kontainer lokal.
   - Setup konfigurasi WhiteNoise serving static files dan pipeline GitHub Actions CI otomatis.
 
-#### 2. Workflow Anggota 2 — afiiisky (Frontend & UI Designer):
+#### 2. Workflow Anggota 2 — Afifah Nur Hidayah (Frontend & UI Designer):
 - Desain antarmuka publik berbasis Tailwind CSS mengadopsi estetika minimalis modern Waabi.
 - Implementasi template inheritance `base.html` lengkap dengan header dinamis, footer resmi dengan lisensi CC BY-SA 4.0, dan mobile navigation drawer.
 - Penyusunan halaman publik Beranda (`beranda.html`), Profil & Sejarah (`profil.html`), dan Pimpinan (`pimpinan.html`).
 
-#### 3. Workflow Anggota 3 — Latifah12-ui (Feature Developer - Warta & Agenda):
+#### 3. Workflow Anggota 3 — Latifah Puji Lestari (Feature Developer - Warta & Agenda):
 - Pembangunan model data `Berita` (dengan auto-slug unik) dan `Agenda` (dengan tanggal mulai/selesai).
 - Implementasi Custom Manager & QuerySet `BeritaManager.published()` dan `AgendaManager.mendatang()`.
 - Pembuatan view warta (`berita_list_view`, `berita_detail_view`) dengan pagination 6 artikel per halaman dan pencarian keyword.
 - Pembuatan view agenda (`agenda_list_view`) dengan segmentasi agenda mendatang vs riwayat agenda lampau.
 
-#### 4. Workflow Anggota 4 — nazh21 (Backend Developer & QA):
+#### 4. Workflow Anggota 4 — Nabil Zhafif Al Rasyad (Backend Developer & QA):
 - Pembangunan model data `Ranting` (13 PRM definitif) dan `AmalUsaha` (kategori pendidikan, kesehatan, sosial, ekonomi).
 - Implementasi validasi ukuran berkas unduhan dokumen (`Dokumen.clean`) dengan pembatasan ukuran maksimal 25 MB.
 - Kustomisasi panel Django Admin (`admin.py`): badge warna bidang amal usaha, paginasi & pencarian ranting, tampilan ukuran berkas dokumen, serta bulk actions status baca pesan masuk.
