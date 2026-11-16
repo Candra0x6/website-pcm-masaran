@@ -135,9 +135,23 @@ class AgendaAdmin(admin.ModelAdmin):
 
 @admin.register(Dokumen)
 class DokumenAdmin(admin.ModelAdmin):
-    list_display = ('judul', 'tanggal_unggah', 'berkas')
+    list_display = ('judul', 'ukuran_berkas', 'tanggal_unggah', 'berkas')
     search_fields = ('judul', 'keterangan')
     ordering = ('-tanggal_unggah',)
+
+    def ukuran_berkas(self, obj):
+        try:
+            if obj.berkas and hasattr(obj.berkas, 'size'):
+                size = obj.berkas.size
+                if size < 1024:
+                    return f"{size} B"
+                elif size < 1024 * 1024:
+                    return f"{size / 1024:.1f} KB"
+                return f"{size / (1024 * 1024):.1f} MB"
+        except (ValueError, FileNotFoundError, OSError):
+            return "-"
+        return "-"
+    ukuran_berkas.short_description = "Ukuran"
 
 
 @admin.register(PesanMasuk)
