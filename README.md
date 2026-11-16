@@ -18,7 +18,7 @@
 | 1 | **Kurniawan Candra Mahardika** | **L200240210** | *Lead Fullstack, Core Backend & DevOps* | Inisialisasi arsitektur uv & Django 6.x, arsitektur database & core models (`ProfilOrganisasi`, `Pimpinan`, `Dokumen`, `TautanTerkait`), context processor navigasi global, singleton pattern organisasi, query optimizer (`select_related`/`prefetch_related`), WhiteNoise & security headers, Dockerfile & Compose, management command `seed_pcm`, orkestrasi motion design Waabi (Lenis + GSAP), deployment setup, dan GitHub Actions CI. |
 | 2 | **afiiisky** | **L200240222** | *Frontend & UI Designer* | Desain sistem antarmuka responsif mengadopsi estetika Waabi, template inheritance `base.html`, dropdown hover flyout navigasi 4 menu, halaman beranda, profil, dan pimpinan. |
 | 3 | **Latifah12-ui** | **L200240170** | *Feature Developer (Warta & Agenda)* | Model Berita & Agenda, custom queryset/manager `published()`, fitur slug otomatis unik, pagination (6 per halaman), pencarian berita, filter agenda mendatang/lampau. |
-| 4 | *(Menyusul)* | *(Menyusul)* | *Backend Developer & QA* | Model Ranting & Amal Usaha, `ModelForm` formulir kontak publik & validasi, messages framework, panel admin custom, dan pengujian unit (`manage.py test`). |
+| 4 | **nazh21** | **L200240221** | *Backend Developer & QA* | Model Ranting & Amal Usaha, validasi ukuran berkas unduhan dokumen, custom actions & badge admin panel, opsi dry-run seeder, dan pengujian unit testing (`pcm/tests.py`). |
 
 ### 🔄 Alur Kerja & Workflow Kolaborasi Anggota
 
@@ -53,11 +53,12 @@ Untuk menjamin kualitas kode berskala enterprise dan distribusi kontribusi yang 
 - Pembuatan view warta (`berita_list_view`, `berita_detail_view`) dengan pagination 6 artikel per halaman dan pencarian keyword.
 - Pembuatan view agenda (`agenda_list_view`) dengan segmentasi agenda mendatang vs riwayat agenda lampau.
 
-#### 4. Workflow Anggota 4 (Backend Developer & QA — Menyusul):
+#### 4. Workflow Anggota 4 — nazh21 (Backend Developer & QA):
 - Pembangunan model data `Ranting` (13 PRM definitif) dan `AmalUsaha` (kategori pendidikan, kesehatan, sosial, ekonomi).
-- Implementasi `ModelForm` formulir kontak publik (`KontakForm`) dengan validasi input, sanitasi pesan, dan Django Messages framework.
-- Kustomisasi panel Django Admin (`admin.py`) dengan filter list, search fields, dan fieldsets yang terstruktur.
-- Penyusunan pengujian unit otomatis (`pcm/tests.py`) untuk memverifikasi 100% endpoint publik mengembalikan HTTP 200 dan form submission berjalan valid.
+- Implementasi validasi ukuran berkas unduhan dokumen (`Dokumen.clean`) dengan pembatasan ukuran maksimal 25 MB.
+- Kustomisasi panel Django Admin (`admin.py`): badge warna bidang amal usaha, paginasi & pencarian ranting, tampilan ukuran berkas dokumen, serta bulk actions status baca pesan masuk.
+- Penambahan opsi `--dry-run` pada Django management command `seed_pcm` untuk simulasi seeding aman.
+- Penyusunan rangkaian pengujian unit testing komprehensif (`pcm/tests.py`) mencakup representasi string, validasi form, pengurutan model, dan status dokumen.
 
 ---
 
