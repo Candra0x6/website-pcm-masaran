@@ -28,7 +28,7 @@
             {{ berita.judul }}
         </h1>
 
-        <p class="text-base sm:text-lg text-neutral-600 font-medium leading-relaxed italic border-l-4 border-brand-800 pl-4 py-1">
+        <p class="text-base sm:text-lg text-neutral-700 font-medium leading-relaxed italic border-l-4 border-brand-800 bg-brand-50/50 rounded-r-2xl pl-5 pr-4 py-3 shadow-xs">
             {{ berita.ringkasan }}
         </p>
     </div>
@@ -39,7 +39,7 @@
         </div>
     {% endif %}
 
-    <div class="prose prose-neutral max-w-none text-neutral-800 leading-relaxed text-base sm:text-lg space-y-6 pt-4 border-t border-neutral-100">
+    <div class="prose prose-lg prose-neutral max-w-none text-neutral-800 leading-relaxed font-normal space-y-6 pt-6 border-t border-neutral-200/80 [&>p]:leading-8 [&>p]:tracking-normal">
         {{ berita.isi|linebreaks }}
     </div>
 
