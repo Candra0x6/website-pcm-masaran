@@ -27,10 +27,13 @@
             <span class="truncate">{{ item.tempat }}</span>
         </div>
         {% if item.is_upcoming %}
-            <div class="pt-2 border-t border-neutral-100/60">
+            <div class="pt-2 border-t border-neutral-100/60 flex items-center justify-between">
                 <a href="{{ item.google_calendar_url }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-[11px] font-bold text-brand-800 hover:text-brand-900 transition">
                     <svg class="w-3.5 h-3.5 text-brand-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
-                    <span>Simpan ke Google Calendar</span>
+                    <span>Google Calendar</span>
+                </a>
+                <a href="{% url 'pcm:agenda_ics' item.pk %}" class="inline-flex items-center gap-1 text-[11px] font-semibold text-neutral-500 hover:text-neutral-800 transition">
+                    <span>Unduh .ICS</span>
                 </a>
             </div>
         {% endif %}

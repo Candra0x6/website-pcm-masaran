@@ -13,6 +13,7 @@ urlpatterns = [
     path('berita/', views.berita_list_view, name='berita_list'),
     path('berita/<slug:slug>/', views.berita_detail_view, name='berita_detail'),
     path('agenda/', views.agenda_view, name='agenda'),
+    path('agenda/<int:pk>/ics/', views.agenda_ics_view, name='agenda_ics'),
     path('unduhan/', views.unduhan_view, name='unduhan'),
     path('kontak/', views.kontak_view, name='kontak'),
     path('api/health/', views.api_health_check_view, name='api_health_check'),

@@ -342,6 +342,27 @@ def agenda_view(request):
     return render(request, 'pcm/agenda.html', context)
 
 
+def agenda_ics_view(request, pk):
+    agenda = get_object_or_404(Agenda, pk=pk)
+    dt_str = agenda.waktu_mulai.strftime('%Y%m%dT%H%M%SZ')
+    lines = [
+        "BEGIN:VCALENDAR",
+        "VERSION:2.0",
+        "PRODID:-//PCM Masaran//Agenda//ID",
+        "BEGIN:VEVENT",
+        f"SUMMARY:{agenda.nama_kegiatan}",
+        f"LOCATION:{agenda.tempat}",
+        f"DESCRIPTION:{agenda.keterangan}",
+        f"DTSTART:{dt_str}",
+        f"DTEND:{dt_str}",
+        "END:VEVENT",
+        "END:VCALENDAR",
+    ]
+    response = HttpResponse("\r\n".join(lines), content_type="text/calendar; charset=utf-8")
+    response['Content-Disposition'] = f'attachment; filename="agenda-{agenda.pk}.ics"'
+    return response
+
+
 def unduhan_view(request):
     query = request.GET.get('q', '').strip()
     dokumen_list = Dokumen.objects.all().order_by('-tanggal_unggah')
