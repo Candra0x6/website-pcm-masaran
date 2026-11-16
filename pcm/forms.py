@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.html import strip_tags
 from .models import PesanMasuk
 
 
@@ -31,19 +32,19 @@ class KontakForm(forms.ModelForm):
         }
 
     def clean_nama(self):
-        nama = self.cleaned_data.get('nama', '').strip()
+        nama = strip_tags(self.cleaned_data.get('nama', '')).strip()
         if len(nama) < 3:
             raise forms.ValidationError("Nama lengkap minimal 3 karakter.")
         return nama
 
     def clean_subjek(self):
-        subjek = self.cleaned_data.get('subjek', '').strip()
+        subjek = strip_tags(self.cleaned_data.get('subjek', '')).strip()
         if len(subjek) < 4:
             raise forms.ValidationError("Subjek pesan minimal 4 karakter.")
         return subjek
 
     def clean_pesan(self):
-        pesan = self.cleaned_data.get('pesan', '').strip()
+        pesan = strip_tags(self.cleaned_data.get('pesan', '')).strip()
         if len(pesan) < 10:
             raise forms.ValidationError("Pesan terlalu pendek. Mohon berikan minimal 10 karakter.")
         return pesan
