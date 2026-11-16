@@ -261,3 +261,9 @@ class PCMWebsiteTests(TestCase):
         pesan.sudah_dibaca = True
         pesan.save()
         self.assertTrue(PesanMasuk.objects.get(pk=pesan.pk).sudah_dibaca)
+
+    def test_media_and_static_assets_status_200(self):
+        resp_static = self.client.get('/static/images/muhammadiyah.svg')
+        self.assertEqual(resp_static.status_code, 200)
+        resp_hero = self.client.get('/media/profil/hero_masaran.jpg')
+        self.assertEqual(resp_hero.status_code, 200)
