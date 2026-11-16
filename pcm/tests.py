@@ -329,3 +329,18 @@ class PCMWebsiteTests(TestCase):
         response = custom_500_view(None)
         self.assertEqual(response.status_code, 500)
         self.assertIn(b'Kendala Pada Server', response.content)
+
+    def test_estimasi_waktu_baca_dan_jumlah_kata(self):
+        self.assertGreater(self.berita_terbit.jumlah_kata, 0)
+        self.assertIn("menit baca", self.berita_terbit.estimasi_waktu_baca)
+
+    def test_agenda_ics_endpoint(self):
+        url = reverse('pcm:agenda_ics', kwargs={'pk': self.agenda_mendatang.pk})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('text/calendar', response['Content-Type'])
+        self.assertContains(response, 'BEGIN:VCALENDAR')
+        self.assertContains(response, 'END:VCALENDAR')
+
+    def test_agenda_sisa_hari(self):
+        self.assertIsNotNone(self.agenda_mendatang.sisa_hari)
