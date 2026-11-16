@@ -297,7 +297,21 @@ def berita_list_view(request):
 
 def berita_detail_view(request, slug):
     berita = get_object_or_404(Berita.objects.published(), slug=slug)
-    berita_terkait = Berita.objects.published().exclude(pk=berita.pk).order_by('-tanggal_terbit')[:3]
+    words = [w for w in berita.judul.split() if len(w) > 3][:3]
+    related_qs = Berita.objects.published().exclude(pk=berita.pk)
+    if words:
+        title_q = Q()
+        for w in words:
+            title_q |= Q(judul__icontains=w) | Q(ringkasan__icontains=w)
+        matched = list(related_qs.filter(title_q).order_by('-tanggal_terbit')[:3])
+        if len(matched) < 3:
+            existing_ids = [m.pk for m in matched] + [berita.pk]
+            fallback = list(Berita.objects.published().exclude(pk__in=existing_ids).order_by('-tanggal_terbit')[:(3 - len(matched))])
+            berita_terkait = matched + fallback
+        else:
+            berita_terkait = matched
+    else:
+        berita_terkait = list(related_qs.order_by('-tanggal_terbit')[:3])
 
     context = {
         'berita': berita,
