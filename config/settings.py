@@ -14,7 +14,7 @@ SECRET_KEY = os.environ.get(
 
 DEBUG = os.environ.get('DEBUG', 'True').lower() in ('true', '1', 't')
 
-allowed_hosts_env = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1,testserver,.trycloudflare.com,.onrender.com')
+allowed_hosts_env = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1,testserver,.trycloudflare.com,.onrender.com,.railway.app,.up.railway.app')
 ALLOWED_HOSTS = [host.strip() for host in allowed_hosts_env.split(',') if host.strip()]
 if 'testserver' not in ALLOWED_HOSTS:
     ALLOWED_HOSTS.append('testserver')
@@ -22,6 +22,10 @@ if '.trycloudflare.com' not in ALLOWED_HOSTS:
     ALLOWED_HOSTS.append('.trycloudflare.com')
 if '.onrender.com' not in ALLOWED_HOSTS:
     ALLOWED_HOSTS.append('.onrender.com')
+if '.railway.app' not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append('.railway.app')
+if '.up.railway.app' not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append('.up.railway.app')
 if not ALLOWED_HOSTS:
     ALLOWED_HOSTS = ['*']
 
@@ -29,7 +33,7 @@ csrf_origins_env = os.environ.get('CSRF_TRUSTED_ORIGINS', '')
 if csrf_origins_env:
     CSRF_TRUSTED_ORIGINS = [origin.strip() for origin in csrf_origins_env.split(',') if origin.strip()]
 else:
-    CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'http://127.0.0.1:8000', 'https://*.trycloudflare.com', 'https://*.onrender.com']
+    CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'http://127.0.0.1:8000', 'https://*.trycloudflare.com', 'https://*.onrender.com', 'https://*.railway.app', 'https://*.up.railway.app']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
