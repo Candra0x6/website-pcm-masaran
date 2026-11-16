@@ -4,7 +4,7 @@ from django.utils import timezone
 from django.contrib import messages
 from django.db.models import Q
 from django.db import connection
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from .models import (
     ProfilOrganisasi,
     Pimpinan,
@@ -369,3 +369,31 @@ def api_health_check_view(request):
         "service": "website-pcm-masaran",
         "version": "1.0.0"
     })
+
+
+def sitemap_xml_view(request):
+    base_url = request.build_absolute_uri('/')[:-1]
+    static_routes = [
+        '',
+        '/profil/',
+        '/pimpinan/',
+        '/ranting/',
+        '/amal-usaha/',
+        '/berita/',
+        '/agenda/',
+        '/unduhan/',
+        '/kontak/',
+    ]
+    xml_items = []
+    for route in static_routes:
+        xml_items.append(
+            f"<url><loc>{base_url}{route}</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>"
+        )
+    for b in Berita.objects.published():
+        url = request.build_absolute_uri(b.get_absolute_url())
+        lastmod = b.tanggal_terbit.strftime('%Y-%m-%d')
+        xml_items.append(
+            f"<url><loc>{url}</loc><lastmod>{lastmod}</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>"
+        )
+    content = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "\n".join(xml_items) + "\n</urlset>"
+    return HttpResponse(content, content_type='application/xml')

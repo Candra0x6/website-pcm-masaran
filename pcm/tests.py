@@ -282,3 +282,11 @@ class PCMWebsiteTests(TestCase):
         self.assertEqual(data['status'], 'healthy')
         self.assertEqual(data['database'], 'ok')
         self.assertEqual(data['service'], 'website-pcm-masaran')
+
+    def test_sitemap_xml_endpoint(self):
+        url = reverse('pcm:sitemap_xml')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['Content-Type'], 'application/xml')
+        self.assertContains(response, '<urlset')
+        self.assertContains(response, '/profil/')
