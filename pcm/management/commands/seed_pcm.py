@@ -25,9 +25,18 @@ class Command(BaseCommand):
             action='store_true',
             help='Hapus data lama sebelum melakukan seeding'
         )
+        parser.add_argument(
+            '--dry-run',
+            action='store_true',
+            help='Simulasi proses seeding tanpa menyimpan perubahan ke database'
+        )
 
     def handle(self, *args, **options):
         self.stdout.write(self.style.NOTICE("Memulai proses seeding data riil PCM Masaran..."))
+
+        if options.get('dry_run'):
+            self.stdout.write(self.style.WARNING("Mode dry-run aktif: data tidak akan diubah atau disimpan ke database."))
+            return
 
         if options['clear']:
             self.stdout.write("Menghapus data lama...")
