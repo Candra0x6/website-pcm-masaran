@@ -178,3 +178,19 @@ class PCMWebsiteTests(TestCase):
         self.assertIn(self.berita_terbit, published_qs)
         self.assertNotIn(self.berita_draf, published_qs)
         self.assertNotIn(self.berita_future, published_qs)
+
+    def test_unduhan_search_filter(self):
+        Dokumen.objects.create(
+            judul="Surat Keputusan PWM Jateng No 066",
+            keterangan="Piagam Pendirian Resmi PCM Masaran",
+            berkas="dokumen/test_doc.pdf"
+        )
+        url = reverse('pcm:unduhan') + "?q=066"
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Surat Keputusan PWM Jateng No 066")
+
+        url_empty = reverse('pcm:unduhan') + "?q=dokumen_tidak_ada_xyz"
+        response_empty = self.client.get(url_empty)
+        self.assertEqual(response_empty.status_code, 200)
+        self.assertNotContains(response_empty, "Surat Keputusan PWM Jateng No 066")
