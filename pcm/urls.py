@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .feeds import LatestBeritaFeed
 
 app_name = 'pcm'
 
@@ -17,4 +18,5 @@ urlpatterns = [
     path('api/health/', views.api_health_check_view, name='api_health_check'),
     path('sitemap.xml', views.sitemap_xml_view, name='sitemap_xml'),
     path('robots.txt', views.robots_txt_view, name='robots_txt'),
+    path('rss/berita/', LatestBeritaFeed(), name='berita_rss_feed'),
 ]

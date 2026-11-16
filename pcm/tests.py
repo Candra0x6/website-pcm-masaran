@@ -299,3 +299,11 @@ class PCMWebsiteTests(TestCase):
         self.assertContains(response, 'User-agent: *')
         self.assertContains(response, 'Disallow: /admin/')
         self.assertContains(response, 'Sitemap:')
+
+    def test_rss_feed_endpoint(self):
+        url = reverse('pcm:berita_rss_feed')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('application/rss+xml', response['Content-Type'])
+        self.assertContains(response, '<rss version="2.0"')
+        self.assertContains(response, 'Warta &amp; Kabar PCM Masaran')
