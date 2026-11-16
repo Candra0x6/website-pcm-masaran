@@ -14,4 +14,5 @@ urlpatterns = [
     path('agenda/', views.agenda_view, name='agenda'),
     path('unduhan/', views.unduhan_view, name='unduhan'),
     path('kontak/', views.kontak_view, name='kontak'),
+    path('api/health/', views.api_health_check_view, name='api_health_check'),
 ]

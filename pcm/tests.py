@@ -273,3 +273,12 @@ class PCMWebsiteTests(TestCase):
         self.assertEqual(response['X-Content-Type-Options'], 'nosniff')
         self.assertEqual(response['Referrer-Policy'], 'strict-origin-when-cross-origin')
         self.assertEqual(response['Permissions-Policy'], 'camera=(), microphone=(), geolocation=()')
+
+    def test_api_health_check_endpoint(self):
+        url = reverse('pcm:api_health_check')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertEqual(data['status'], 'healthy')
+        self.assertEqual(data['database'], 'ok')
+        self.assertEqual(data['service'], 'website-pcm-masaran')

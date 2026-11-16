@@ -3,6 +3,8 @@ from django.core.paginator import Paginator
 from django.utils import timezone
 from django.contrib import messages
 from django.db.models import Q
+from django.db import connection
+from django.http import JsonResponse
 from .models import (
     ProfilOrganisasi,
     Pimpinan,
@@ -351,3 +353,19 @@ def kontak_view(request):
         'form': form,
     }
     return render(request, 'pcm/kontak.html', context)
+
+
+def api_health_check_view(request):
+    db_status = "ok"
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT 1")
+    except Exception as e:
+        db_status = str(e)
+    return JsonResponse({
+        "status": "healthy" if db_status == "ok" else "unhealthy",
+        "database": db_status,
+        "timestamp": timezone.now().isoformat(),
+        "service": "website-pcm-masaran",
+        "version": "1.0.0"
+    })
