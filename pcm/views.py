@@ -459,17 +459,20 @@ def robots_txt_view(request):
 
 def api_statistik_view(request):
     profil = ProfilOrganisasi.objects.first()
+    bidang_filter = request.GET.get('bidang', '').strip().lower()
     aum_counts = {}
     for code, _ in AmalUsaha.BIDANG_CHOICES:
-        aum_counts[code] = AmalUsaha.objects.filter(bidang=code).count()
+        if not bidang_filter or bidang_filter == code:
+            aum_counts[code] = AmalUsaha.objects.filter(bidang=code).count()
     return JsonResponse({
         "ranting_count": Ranting.objects.count(),
-        "amal_usaha_count": AmalUsaha.objects.count(),
+        "amal_usaha_count": sum(aum_counts.values()) if bidang_filter else AmalUsaha.objects.count(),
         "amal_usaha_per_bidang": aum_counts,
         "berita_count": Berita.objects.published().count(),
         "agenda_mendatang_count": Agenda.objects.filter(waktu_mulai__gte=timezone.now()).count(),
         "dokumen_count": Dokumen.objects.count(),
         "anggota_ktam": profil.jumlah_anggota_ktam if profil else 0,
+        "filter_bidang": bidang_filter or None,
     })
 
 
