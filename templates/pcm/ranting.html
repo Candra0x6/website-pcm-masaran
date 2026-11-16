@@ -61,11 +61,11 @@
                 </thead>
                 <tbody class="divide-y divide-neutral-100 font-normal">
                     {% for r in ranting_list %}
-                        <tr class="hover:bg-neutral-50 transition-colors">
+                        <tr class="hover:bg-brand-50/40 transition-colors group/row">
                             <td class="px-6 py-4 text-center font-semibold text-neutral-400 text-xs">
                                 {{ forloop.counter }}
                             </td>
-                            <td class="px-6 py-4 font-bold text-neutral-950 whitespace-nowrap">
+                            <td class="px-6 py-4 font-bold text-neutral-950 whitespace-nowrap group-hover/row:text-brand-800 transition-colors">
                                 <span class="inline-flex items-center gap-2">
                                     <span class="w-2 h-2 rounded-full bg-brand-600"></span>
                                     <span>PRM {{ r.nama_ranting }}</span>
