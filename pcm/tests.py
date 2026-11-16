@@ -194,3 +194,11 @@ class PCMWebsiteTests(TestCase):
         response_empty = self.client.get(url_empty)
         self.assertEqual(response_empty.status_code, 200)
         self.assertNotContains(response_empty, "Surat Keputusan PWM Jateng No 066")
+
+    def test_agenda_upcoming_vs_past(self):
+        url = reverse('pcm:agenda')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('agenda_akan_datang', response.context)
+        self.assertIn('agenda_terlaksana', response.context)
+        self.assertIn(self.agenda_mendatang, response.context['agenda_akan_datang'])
