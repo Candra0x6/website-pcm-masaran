@@ -4,6 +4,16 @@
 > Program Studi Informatika, Fakultas Komunikasi dan Informatika  
 > Universitas Muhammadiyah Surakarta (UMS) — 2026
 
+[![Production Deploy](https://img.shields.io/badge/Production-website--pcm--masaran.vercel.app-006633?style=for-the-badge&logo=vercel&logoColor=white)](https://website-pcm-masaran.vercel.app)
+[![CI/CD Status](https://img.shields.io/badge/CI%2FCD-Passing-brightgreen?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/Candra0x6/website-pcm-masaran/actions)
+[![Python](https://img.shields.io/badge/Python-3.12%20%7C%203.13-blue?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Django](https://img.shields.io/badge/Django-6.0-092E20?style=for-the-badge&logo=django&logoColor=white)](https://www.djangoproject.com/)
+
+### 🌐 Live Deployment URLs
+- **Production URL:** [https://website-pcm-masaran.vercel.app](https://website-pcm-masaran.vercel.app)
+- **Backup Public Tunnel:** [https://circus-wines-endorsed-kick.trycloudflare.com](https://circus-wines-endorsed-kick.trycloudflare.com)
+- **GitHub Repository:** [https://github.com/Candra0x6/website-pcm-masaran](https://github.com/Candra0x6/website-pcm-masaran)
+
 ---
 
 ## 👥 Identitas Kelompok & Kontribusi Anggota
@@ -163,6 +173,25 @@ Setelah container berjalan:
 - **🌐 Production Cloud Server (Vercel):** [https://website-pcm-masaran.vercel.app](https://website-pcm-masaran.vercel.app)
 - **⚡ Backup Public Tunnel (Cloudflare):** [https://circus-wines-endorsed-kick.trycloudflare.com](https://circus-wines-endorsed-kick.trycloudflare.com)
 - **📦 GitHub Repository:** [https://github.com/Candra0x6/website-pcm-masaran](https://github.com/Candra0x6/website-pcm-masaran)
+
+### Tabel Rute & Endpoint Live Publik
+
+| Halaman / Fitur | Rute URL Publik | Status | Deskripsi |
+|---|---|:---:|---|
+| **Beranda** | [website-pcm-masaran.vercel.app](https://website-pcm-masaran.vercel.app/) | `200 OK` | Showcase 4 pilar, hero editorial, peta interaktif |
+| **Profil & Sejarah** | [website-pcm-masaran.vercel.app/profil/](https://website-pcm-masaran.vercel.app/profil/) | `200 OK` | Piagam SK 1935, visi misi, sejarah cabang |
+| **Pimpinan Cabang** | [website-pcm-masaran.vercel.app/pimpinan/](https://website-pcm-masaran.vercel.app/pimpinan/) | `200 OK` | Struktur pleno 13 formatur & 18 majelis/lembaga |
+| **Ranting (PRM)** | [website-pcm-masaran.vercel.app/ranting/](https://website-pcm-masaran.vercel.app/ranting/) | `200 OK` | Direktori 13 Pimpinan Ranting Muhammadiyah se-Masaran |
+| **Amal Usaha (AUM)** | [website-pcm-masaran.vercel.app/amal-usaha/](https://website-pcm-masaran.vercel.app/amal-usaha/) | `200 OK` | AUM Pendidikan, Kesehatan, Sosial, & Ekonomi |
+| **Warta Berita** | [website-pcm-masaran.vercel.app/berita/](https://website-pcm-masaran.vercel.app/berita/) | `200 OK` | Artikel kegiatan, paginasi, & pencarian keyword |
+| **Agenda Kegiatan** | [website-pcm-masaran.vercel.app/agenda/](https://website-pcm-masaran.vercel.app/agenda/) | `200 OK` | Jadwal kajian & agenda mendatang/lampau |
+| **Kontak & Pesan** | [website-pcm-masaran.vercel.app/kontak/](https://website-pcm-masaran.vercel.app/kontak/) | `200 OK` | Formulir pesan publik terintegrasi Django messages |
+| **Health API** | [website-pcm-masaran.vercel.app/api/health/](https://website-pcm-masaran.vercel.app/api/health/) | `200 OK` | JSON monitoring status ketersediaan server |
+| **Statistik API** | [website-pcm-masaran.vercel.app/api/statistik/](https://website-pcm-masaran.vercel.app/api/statistik/) | `200 OK` | JSON agregasi ringkasan data PRM & AUM |
+| **Sitemap XML** | [website-pcm-masaran.vercel.app/sitemap.xml](https://website-pcm-masaran.vercel.app/sitemap.xml) | `200 OK` | Sitemap dinamis untuk indexing search engine |
+| **Robots TXT** | [website-pcm-masaran.vercel.app/robots.txt](https://website-pcm-masaran.vercel.app/robots.txt) | `200 OK` | File aturan crawling bot terintegrasi sitemap URL |
+| **RSS Feed** | [website-pcm-masaran.vercel.app/rss/berita/](https://website-pcm-masaran.vercel.app/rss/berita/) | `200 OK` | RSS 2.0 feed syndication artikel warta |
+
 - **Platform Web:** [Vercel](https://vercel.com) / [Render](https://render.com) / [Railway](https://railway.app) (Serverless & Docker Gunicorn + WhiteNoise)
 - **Database Produksi:** PostgreSQL di [Supabase](https://supabase.com) / [Neon](https://neon.tech)
 - **Alasan Pemilihan Platform & Database:**
