@@ -172,9 +172,10 @@ Setelah container berjalan:
 
 ## 🌐 Deployment Produksi & Tautan Live
 
-- **🌐 Live Production URL (Cloudflare Quick Tunnel):** [https://circus-wines-endorsed-kick.trycloudflare.com](https://circus-wines-endorsed-kick.trycloudflare.com)
+- **🌐 Production Cloud Server (Vercel):** [https://website-pcm-masaran.vercel.app](https://website-pcm-masaran.vercel.app)
+- **⚡ Backup Public Tunnel (Cloudflare):** [https://circus-wines-endorsed-kick.trycloudflare.com](https://circus-wines-endorsed-kick.trycloudflare.com)
 - **📦 GitHub Repository:** [https://github.com/Candra0x6/website-pcm-masaran](https://github.com/Candra0x6/website-pcm-masaran)
-- **Platform Web:** [Railway](https://railway.app) / [Render](https://render.com) (Docker + Gunicorn + WhiteNoise)
+- **Platform Web:** [Vercel](https://vercel.com) / [Render](https://render.com) / [Railway](https://railway.app) (Serverless & Docker Gunicorn + WhiteNoise)
 - **Database Produksi:** PostgreSQL di [Supabase](https://supabase.com) / [Neon](https://neon.tech)
 - **Alasan Pemilihan Platform & Database:**
   - **Railway / Render:** Mendukung deployment langsung dari `Dockerfile` berbasis `uv` dengan Gunicorn dan WhiteNoise tanpa kompromi serverless timeout.
