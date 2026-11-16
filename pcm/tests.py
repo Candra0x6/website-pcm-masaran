@@ -218,3 +218,14 @@ class PCMWebsiteTests(TestCase):
         self.assertEqual(str(r2), "Pilang")
         rantings = list(Ranting.objects.values_list('nama_ranting', flat=True))
         self.assertEqual(rantings, sorted(rantings))
+
+    def test_amal_usaha_str_and_bidang_choices(self):
+        au = AmalUsaha.objects.create(
+            nama="Klinik PKU Muhammadiyah Masaran",
+            bidang="kesehatan",
+            deskripsi="Pelayanan kesehatan masyarakat",
+            alamat="Masaran"
+        )
+        self.assertEqual(str(au), "Klinik PKU Muhammadiyah Masaran (Kesehatan)")
+        valid_keys = [k for k, _ in AmalUsaha.BIDANG_CHOICES]
+        self.assertIn(au.bidang, valid_keys)
