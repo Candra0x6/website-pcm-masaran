@@ -308,12 +308,22 @@ def berita_detail_view(request, slug):
 
 def agenda_view(request):
     now = timezone.now()
+    query = request.GET.get('q', '').strip()
     agenda_akan_datang = Agenda.objects.filter(waktu_mulai__gte=now).order_by('waktu_mulai')
     agenda_terlaksana = Agenda.objects.filter(waktu_mulai__lt=now).order_by('-waktu_mulai')
+
+    if query:
+        agenda_akan_datang = agenda_akan_datang.filter(
+            Q(nama_kegiatan__icontains=query) | Q(tempat__icontains=query) | Q(keterangan__icontains=query)
+        )
+        agenda_terlaksana = agenda_terlaksana.filter(
+            Q(nama_kegiatan__icontains=query) | Q(tempat__icontains=query) | Q(keterangan__icontains=query)
+        )
 
     context = {
         'agenda_akan_datang': agenda_akan_datang,
         'agenda_terlaksana': agenda_terlaksana,
+        'query': query,
     }
     return render(request, 'pcm/agenda.html', context)
 
