@@ -164,9 +164,13 @@ class Berita(models.Model):
         return reverse('pcm:berita_detail', kwargs={'slug': self.slug})
 
     @property
+    def jumlah_kata(self):
+        return len(self.isi.split()) if self.isi else 0
+
+    @property
     def estimasi_waktu_baca(self):
-        kata = len(self.isi.split())
-        menit = max(1, round(kata / 180))
+        kata = self.jumlah_kata
+        menit = max(1, round(kata / 180)) if kata > 0 else 1
         return f"{menit} menit baca"
 
 
