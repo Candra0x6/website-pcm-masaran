@@ -61,14 +61,20 @@
             <span class="text-xs font-bold uppercase tracking-wider text-neutral-500">Bagikan Warta</span>
             <p class="text-sm font-semibold text-neutral-900">Sebarkan informasi dakwah ini kepada jamaah</p>
         </div>
-        <div class="flex items-center gap-2">
+        <div class="flex flex-wrap items-center gap-2">
             <a href="https://api.whatsapp.com/send?text={{ berita.judul|urlencode }}%20{{ request.build_absolute_uri|urlencode }}" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition inline-flex items-center gap-1.5 shadow-sm">
                 <span>WhatsApp</span>
+            </a>
+            <a href="https://t.me/share/url?url={{ request.build_absolute_uri|urlencode }}&text={{ berita.judul|urlencode }}" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-full bg-sky-500 hover:bg-sky-600 text-white text-xs font-bold transition inline-flex items-center gap-1.5 shadow-sm">
+                <span>Telegram</span>
+            </a>
+            <a href="https://twitter.com/intent/tweet?text={{ berita.judul|urlencode }}&url={{ request.build_absolute_uri|urlencode }}" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-full bg-neutral-900 hover:bg-neutral-800 text-white text-xs font-bold transition inline-flex items-center gap-1.5 shadow-sm">
+                <span>X</span>
             </a>
             <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri|urlencode }}" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition inline-flex items-center gap-1.5 shadow-sm">
                 <span>Facebook</span>
             </a>
-            <button type="button" onclick="navigator.clipboard.writeText(window.location.href); alert('Tautan berita berhasil disalin ke clipboard!');" class="px-4 py-2 rounded-full bg-neutral-900 hover:bg-neutral-800 text-white text-xs font-bold transition inline-flex items-center gap-1.5 shadow-sm">
+            <button type="button" onclick="navigator.clipboard.writeText(window.location.href); alert('Tautan berita berhasil disalin ke clipboard!');" class="px-4 py-2 rounded-full bg-neutral-800 hover:bg-neutral-700 text-white text-xs font-bold transition inline-flex items-center gap-1.5 shadow-sm">
                 <span>Salin Link</span>
             </button>
         </div>
