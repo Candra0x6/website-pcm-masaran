@@ -58,6 +58,14 @@ class PimpinanAdmin(admin.ModelAdmin):
     search_fields = ('nama', 'jabatan')
     list_filter = ('periode',)
     ordering = ('urutan', 'id')
+    fieldsets = (
+        ("Informasi Personel", {
+            'fields': ('nama', 'jabatan', 'periode', 'urutan')
+        }),
+        ("Media & Foto", {
+            'fields': ('foto',)
+        }),
+    )
 
     def preview_foto(self, obj):
         if obj.foto:
