@@ -193,6 +193,17 @@ class Agenda(models.Model):
         return self.waktu_mulai >= timezone.now()
 
     @property
+    def sisa_hari(self):
+        delta = self.waktu_mulai.date() - timezone.now().date()
+        if delta.days == 0:
+            return "Hari ini"
+        elif delta.days == 1:
+            return "Besok"
+        elif delta.days > 1:
+            return f"{delta.days} hari lagi"
+        return "Telah lewat"
+
+    @property
     def google_calendar_url(self):
         from urllib.parse import quote
         waktu_str = self.waktu_mulai.strftime('%Y%m%dT%H%M%SZ')

@@ -1,9 +1,16 @@
 <div class="card-tilt group bg-white rounded-3xl p-6 border border-neutral-200/80 shadow-sm hover:shadow-xl hover:border-neutral-300 transition-all duration-300 flex flex-col justify-between transform-gpu">
     <div class="space-y-4">
         <div class="flex items-center justify-between">
-            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold {% if item.is_upcoming %}bg-brand-50 text-brand-800 border border-brand-200{% else %}bg-neutral-100 text-neutral-600 border border-neutral-200{% endif %}">
-                {% if item.is_upcoming %}Akan Datang{% else %}Selesai{% endif %}
-            </span>
+            <div class="flex items-center gap-2">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold {% if item.is_upcoming %}bg-brand-50 text-brand-800 border border-brand-200{% else %}bg-neutral-100 text-neutral-600 border border-neutral-200{% endif %}">
+                    {% if item.is_upcoming %}Akan Datang{% else %}Selesai{% endif %}
+                </span>
+                {% if item.is_upcoming %}
+                    <span class="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                        {{ item.sisa_hari }}
+                    </span>
+                {% endif %}
+            </div>
             <span class="text-xs text-neutral-500 font-medium">
                 {{ item.waktu_mulai|date:"H:i" }} WIB
             </span>
