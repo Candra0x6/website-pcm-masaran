@@ -188,7 +188,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         card.addEventListener('mouseenter', () => {
             isHovered = true;
-            card.style.transition = 'transform 0.15s ease-out, box-shadow 0.25s ease-out';
+            card.style.willChange = 'transform';
+            card.style.transition = 'transform 0.12s ease-out, box-shadow 0.25s ease-out';
         });
 
         card.addEventListener('mousemove', (e) => {
@@ -197,15 +198,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const x = e.clientX - rect.left - (rect.width / 2);
             const y = e.clientY - rect.top - (rect.height / 2);
             
-            const rotateX = -(y / rect.height) * 6;
-            const rotateY = (x / rect.width) * 6;
+            const rotateX = -(y / rect.height) * 7.5;
+            const rotateY = (x / rect.width) * 7.5;
 
-            card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-4px)`;
+            card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-5px)`;
         });
 
         card.addEventListener('mouseleave', () => {
             isHovered = false;
-            card.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease-out';
+            card.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease-out';
             card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
         });
     });
