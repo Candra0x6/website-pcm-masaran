@@ -39,6 +39,8 @@ class ProfilOrganisasi(models.Model):
         super().clean()
         if not self.pk and ProfilOrganisasi.objects.exists():
             raise ValidationError("Hanya boleh ada satu baris profil organisasi di sistem.")
+        if self.telepon and len(self.telepon.strip()) < 5:
+            raise ValidationError({'telepon': "Nomor telepon organisasi tidak valid."})
 
     def get_misi_list(self):
         if not self.misi:
@@ -264,3 +266,8 @@ class TautanTerkait(models.Model):
 
     def __str__(self):
         return self.nama
+
+    def clean(self):
+        super().clean()
+        if self.url and not (self.url.startswith('http://') or self.url.startswith('https://')):
+            raise ValidationError({'url': "Format URL harus diawali dengan http:// atau https://"})
