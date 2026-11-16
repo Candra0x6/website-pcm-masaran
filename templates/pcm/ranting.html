@@ -6,6 +6,12 @@
 {% block content %}
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
     
+    <nav class="flex items-center gap-2 text-xs text-neutral-500 font-medium">
+        <a href="{% url 'pcm:beranda' %}" class="hover:text-neutral-900 transition">Beranda</a>
+        <span>/</span>
+        <span class="text-neutral-900 font-semibold">Daftar Ranting (PRM)</span>
+    </nav>
+
     <div class="max-w-3xl space-y-4">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 border border-brand-200 text-brand-900 text-xs font-semibold uppercase tracking-wider">
             Basis Jamaah & Wilayah
