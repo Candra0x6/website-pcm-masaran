@@ -278,6 +278,8 @@ def berita_list_view(request):
             Q(isi__icontains=query)
         )
 
+    query_count = berita_qs.count() if query else None
+
     paginator = Paginator(berita_qs, 6)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -285,6 +287,7 @@ def berita_list_view(request):
     context = {
         'page_obj': page_obj,
         'query': query,
+        'query_count': query_count,
     }
     return render(request, 'pcm/berita_list.html', context)
 

@@ -39,7 +39,7 @@
 
     {% if query %}
         <div class="p-4 rounded-2xl bg-neutral-100 border border-neutral-200 text-sm text-neutral-700 flex items-center justify-between">
-            <p>Menampilkan hasil pencarian untuk kata kunci: <strong class="text-neutral-950">"{{ query }}"</strong></p>
+            <p>Ditemukan <strong class="text-neutral-950">{{ query_count }}</strong> warta untuk kata kunci: <strong class="text-neutral-950">"{{ query }}"</strong></p>
             <a href="{% url 'pcm:berita_list' %}" class="text-brand-800 hover:underline font-semibold text-xs">Reset Pencarian</a>
         </div>
     {% endif %}
