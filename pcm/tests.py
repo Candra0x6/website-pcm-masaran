@@ -229,3 +229,15 @@ class PCMWebsiteTests(TestCase):
         self.assertEqual(str(au), "Klinik PKU Muhammadiyah Masaran (Kesehatan)")
         valid_keys = [k for k, _ in AmalUsaha.BIDANG_CHOICES]
         self.assertIn(au.bidang, valid_keys)
+
+    def test_kontak_form_invalid_email_and_empty_fields(self):
+        url_kontak = reverse('pcm:kontak')
+        data_invalid = {
+            'nama': 'Pengirim Test',
+            'email': 'bukan-email-valid',
+            'subjek': 'Judul',
+            'pesan': 'Isi pesan test',
+        }
+        response = self.client.post(url_kontak, data=data_invalid)
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(PesanMasuk.objects.filter(nama='Pengirim Test').exists())
