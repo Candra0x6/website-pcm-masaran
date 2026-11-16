@@ -202,3 +202,19 @@ class PCMWebsiteTests(TestCase):
         self.assertIn('agenda_akan_datang', response.context)
         self.assertIn('agenda_terlaksana', response.context)
         self.assertIn(self.agenda_mendatang, response.context['agenda_akan_datang'])
+
+    def test_ranting_str_representation_and_ordering(self):
+        r1 = Ranting.objects.create(
+            nama_ranting="Dawungan",
+            ketua="Ketua Dawungan",
+            alamat="Desa Dawungan"
+        )
+        r2 = Ranting.objects.create(
+            nama_ranting="Pilang",
+            ketua="Ketua Pilang",
+            alamat="Desa Pilang"
+        )
+        self.assertEqual(str(r1), "Dawungan")
+        self.assertEqual(str(r2), "Pilang")
+        rantings = list(Ranting.objects.values_list('nama_ranting', flat=True))
+        self.assertEqual(rantings, sorted(rantings))
