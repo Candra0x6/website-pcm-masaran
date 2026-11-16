@@ -13,12 +13,12 @@
 
 ### Tabel Kontribusi Anggota
 
-| No | Nama Mahasiswa | NIM | Peran Utama | Rincian Pekerjaan & Fitur yang Dikerjakan |
-|---|---|---|---|---|
-| 1 | **Kurniawan Candra Mahardika** | **L200240210** | *Lead Fullstack, Core Backend & DevOps* | Inisialisasi arsitektur uv & Django 6.x, arsitektur database & core models (`ProfilOrganisasi`, `Pimpinan`, `Dokumen`, `TautanTerkait`), context processor navigasi global, singleton pattern organisasi, query optimizer (`select_related`/`prefetch_related`), WhiteNoise & security headers, Dockerfile & Compose, management command `seed_pcm`, orkestrasi motion design Waabi (Lenis + GSAP), deployment setup, dan GitHub Actions CI. |
-| 2 | **afiiisky** | **L200240222** | *Frontend & UI Designer* | Desain sistem antarmuka responsif mengadopsi estetika Waabi, template inheritance `base.html`, dropdown hover flyout navigasi 4 menu, halaman beranda, profil, dan pimpinan. |
-| 3 | **Latifah12-ui** | **L200240170** | *Feature Developer (Warta & Agenda)* | Model Berita & Agenda, custom queryset/manager `published()`, fitur slug otomatis unik, pagination (6 per halaman), pencarian berita, filter agenda mendatang/lampau. |
-| 4 | **nazh21** | **L200240221** | *Backend Developer & QA* | Model Ranting & Amal Usaha, validasi ukuran berkas unduhan dokumen, custom actions & badge admin panel, opsi dry-run seeder, dan pengujian unit testing (`pcm/tests.py`). |
+| No | Nama Mahasiswa | NIM | Akun GitHub & Email | Peran Proyek | Total Commit | Rincian Pekerjaan & Fitur yang Dikerjakan |
+|:---:|---|---|---|---|:---:|---|
+| 1 | **Kurniawan Candra Mahardika** | **L200240210** | `@Candra0x6`<br>`kurniawancandram@gmail.com` | *Lead Fullstack, Core Backend & DevOps* | **17 commits** | Inisialisasi arsitektur uv & Django 6.x, database & core models (`ProfilOrganisasi`, `Pimpinan`, `Dokumen`, `TautanTerkait`), context processor navigasi global, singleton pattern organisasi, query optimizer (`select_related`/`prefetch_related`), WhiteNoise & security headers, Dockerfile & Compose, management command `seed_pcm`, orkestrasi motion design Waabi (Lenis + GSAP), deployment serverless Vercel, dan GitHub Actions CI. |
+| 2 | **afiiisky** | **L200240222** | `@afiiisky`<br>`l200240222@student.ums.ac.id` | *Frontend & UI Designer* | **11 commits** | Desain sistem antarmuka responsif mengadopsi estetika Waabi, template inheritance `base.html`, dropdown hover flyout navigasi 4 menu, halaman beranda, profil sejarah, dan pimpinan pleno. |
+| 3 | **Latifah12-ui** | **L200240170** | `@Latifah12-ui`<br>`l200240170@student.ums.ac.id` | *Feature Developer (Warta & Agenda)* | **11 commits** | Model Berita & Agenda, custom queryset/manager `published()`, fitur slug otomatis unik, pagination (6 per halaman), pencarian berita, filter agenda mendatang/lampau. |
+| 4 | **nazh21** | **L200240221** | `@nazh21`<br>`l200240221@student.ums.ac.id` | *Backend Developer & QA* | **11 commits** | Model Ranting (13 PRM) & Amal Usaha (AUM), validasi batas ukuran berkas unduhan dokumen, custom actions & badge admin panel, opsi dry-run seeder, dan pengujian unit testing (`pcm/tests.py`). |
 
 ### 🔄 Alur Kerja & Workflow Kolaborasi Anggota
 
@@ -103,7 +103,7 @@ Website ini dibangun menggunakan **100% data riil** dari Pimpinan Cabang Muhamma
 6. **Auto Unique Slug:** Slug artikel dibuat otomatis dari judul dan tetap unik jika terjadi kesamaan judul artikel.
 7. **WhiteNoise & Multi-Database Ready:** Mendukung SQLite untuk pengembangan lokal serta PostgreSQL (Supabase / Neon) untuk produksi via `DATABASE_URL`.
 8. **Management Command `seed_pcm`:** Satu perintah untuk mengisi seluruh data profil, pimpinan, ranting, amal usaha, berita, agenda, dokumen unduhan, dan menyalin aset gambar asli ke direktori `media/`.
-9. **Unit Testing Otomatis:** Minimal 6 test case lulus 100% dan terintegrasi dengan GitHub Actions CI.
+9. **Unit Testing Otomatis:** 13 test cases lulus 100% (`uv run python manage.py test`) mencakup verifikasi seluruh rute publik HTTP 200, validasi slug berita, pengujian singleton profil organisasi, form pesan masuk, validasi ukuran berkas, status agenda, dan serving aset media/static.
 
 ---
 
@@ -115,27 +115,14 @@ Website ini dibangun menggunakan **100% data riil** dari Pimpinan Cabang Muhamma
 
 ### 2. Langkah Instalasi & Menjalankan
 
+> Catatan: Database SQLite pre-seeded (`db.sqlite3`) dan seluruh aset gambar (`media/`) telah dibundle di dalam repositori, sehingga proyek langsung siap dijalankan out-of-the-box.
+
 ```bash
-# 1. Clone repository
-git clone <url-repo-anda>
+git clone https://github.com/Candra0x6/website-pcm-masaran.git
 cd website-pcm-masaran
-
-# 2. Siapkan environment file
 cp .env.example .env
-
-# 3. Install seluruh dependensi menggunakan uv
 uv sync
-
-# 4. Jalankan migrasi database SQLite
-uv run python manage.py migrate
-
-# 5. Isi database dengan data riil PCM Masaran & gambar otomatis
-uv run python manage.py seed_pcm --clear
-
-# 6. Jalankan automated test
 uv run python manage.py test
-
-# 7. Jalankan development server
 uv run python manage.py runserver
 ```
 
