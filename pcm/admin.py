@@ -76,10 +76,16 @@ class PimpinanAdmin(admin.ModelAdmin):
 
 @admin.register(Ranting)
 class RantingAdmin(admin.ModelAdmin):
-    list_display = ('nama_ranting', 'ketua', 'telepon', 'alamat')
+    list_display = ('nama_ranting', 'ketua', 'telepon', 'kontak_status')
     search_fields = ('nama_ranting', 'ketua', 'alamat', 'telepon')
     ordering = ('nama_ranting',)
     list_per_page = 20
+
+    def kontak_status(self, obj):
+        if obj.kontak_tersedia:
+            return format_html('<span style="color: #059669; font-weight: 600;">Tersedia</span>')
+        return format_html('<span style="color: #9ca3af;">Belum Ada</span>')
+    kontak_status.short_description = "Status Kontak"
 
 
 @admin.register(AmalUsaha)
