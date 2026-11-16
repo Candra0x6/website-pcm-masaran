@@ -124,6 +124,8 @@ class AgendaAdmin(admin.ModelAdmin):
     list_display = ('nama_kegiatan', 'waktu_mulai', 'tempat', 'status_agenda')
     list_filter = ('waktu_mulai',)
     search_fields = ('nama_kegiatan', 'tempat', 'keterangan')
+    date_hierarchy = 'waktu_mulai'
+    list_per_page = 20
     ordering = ('-waktu_mulai',)
 
     def status_agenda(self, obj):
