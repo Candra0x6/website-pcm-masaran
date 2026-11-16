@@ -415,6 +415,13 @@
             iconOpen.classList.toggle('hidden');
             iconClose.classList.toggle('hidden');
         });
+
+        const scrollBtn = document.getElementById('scroll-progress-widget');
+        if (scrollBtn) {
+            scrollBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
     </script>
 </body>
 </html>
