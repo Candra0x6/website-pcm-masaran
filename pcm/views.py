@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.db.models import Q
 from django.db import connection
 from django.http import JsonResponse, HttpResponse
+from django.urls import reverse
 from .models import (
     ProfilOrganisasi,
     Pimpinan,
@@ -397,3 +398,15 @@ def sitemap_xml_view(request):
         )
     content = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "\n".join(xml_items) + "\n</urlset>"
     return HttpResponse(content, content_type='application/xml')
+
+
+def robots_txt_view(request):
+    sitemap_url = request.build_absolute_uri(reverse('pcm:sitemap_xml'))
+    lines = [
+        "User-agent: *",
+        "Allow: /",
+        "Disallow: /admin/",
+        "",
+        f"Sitemap: {sitemap_url}"
+    ]
+    return HttpResponse("\n".join(lines), content_type="text/plain")

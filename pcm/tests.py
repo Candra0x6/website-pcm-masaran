@@ -290,3 +290,12 @@ class PCMWebsiteTests(TestCase):
         self.assertEqual(response['Content-Type'], 'application/xml')
         self.assertContains(response, '<urlset')
         self.assertContains(response, '/profil/')
+
+    def test_robots_txt_endpoint(self):
+        url = reverse('pcm:robots_txt')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['Content-Type'], 'text/plain')
+        self.assertContains(response, 'User-agent: *')
+        self.assertContains(response, 'Disallow: /admin/')
+        self.assertContains(response, 'Sitemap:')
