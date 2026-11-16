@@ -80,8 +80,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const counterObj = { val: 0 };
                 gsap.to(counterObj, {
                     val: numericValue,
-                    duration: 1.8,
-                    ease: "power2.out",
+                    duration: 2.0,
+                    ease: "circ.out",
                     scrollTrigger: {
                         trigger: el,
                         start: "top 95%",
