@@ -188,6 +188,12 @@ class Agenda(models.Model):
     def is_upcoming(self):
         return self.waktu_mulai >= timezone.now()
 
+    @property
+    def google_calendar_url(self):
+        from urllib.parse import quote
+        waktu_str = self.waktu_mulai.strftime('%Y%m%dT%H%M%SZ')
+        return f"https://calendar.google.com/calendar/render?action=TEMPLATE&text={quote(self.nama_kegiatan)}&location={quote(self.tempat)}&details={quote(self.keterangan or '')}&dates={waktu_str}/{waktu_str}"
+
 
 class Dokumen(models.Model):
     judul = models.CharField(max_length=250)

@@ -26,5 +26,13 @@
             <svg class="w-4 h-4 text-brand-700 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
             <span class="truncate">{{ item.tempat }}</span>
         </div>
+        {% if item.is_upcoming %}
+            <div class="pt-2 border-t border-neutral-100/60">
+                <a href="{{ item.google_calendar_url }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-[11px] font-bold text-brand-800 hover:text-brand-900 transition">
+                    <svg class="w-3.5 h-3.5 text-brand-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+                    <span>Simpan ke Google Calendar</span>
+                </a>
+            </div>
+        {% endif %}
     </div>
 </div>
