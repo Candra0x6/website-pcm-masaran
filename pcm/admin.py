@@ -75,10 +75,25 @@ class RantingAdmin(admin.ModelAdmin):
 
 @admin.register(AmalUsaha)
 class AmalUsahaAdmin(admin.ModelAdmin):
-    list_display = ('nama', 'bidang', 'alamat', 'preview_gambar')
+    list_display = ('nama', 'badge_bidang', 'alamat', 'preview_gambar')
     list_filter = ('bidang',)
     search_fields = ('nama', 'deskripsi', 'alamat')
     ordering = ('bidang', 'nama')
+
+    def badge_bidang(self, obj):
+        colors = {
+            'pendidikan': '#2563eb',
+            'kesehatan': '#059669',
+            'sosial': '#d97706',
+            'ekonomi': '#7c3aed',
+        }
+        color = colors.get(obj.bidang, '#4b5563')
+        return format_html(
+            '<span style="background-color: {}; color: white; padding: 3px 10px; border-radius: 9999px; font-size: 11px; font-weight: bold; text-transform: uppercase;">{}</span>',
+            color,
+            obj.get_bidang_display()
+        )
+    badge_bidang.short_description = "Bidang"
 
     def preview_gambar(self, obj):
         if obj.gambar:
