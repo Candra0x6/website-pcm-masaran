@@ -161,6 +161,15 @@ class PesanMasukAdmin(admin.ModelAdmin):
     search_fields = ('nama', 'email', 'subjek', 'pesan')
     readonly_fields = ('nama', 'email', 'subjek', 'pesan', 'waktu_kirim')
     ordering = ('-waktu_kirim',)
+    actions = ['tandai_sudah_dibaca', 'tandai_belum_dibaca']
+
+    @admin.action(description="Tandai pesan terpilih sebagai SUDAH dibaca")
+    def tandai_sudah_dibaca(self, request, queryset):
+        queryset.update(sudah_dibaca=True)
+
+    @admin.action(description="Tandai pesan terpilih sebagai BELUM dibaca")
+    def tandai_belum_dibaca(self, request, queryset):
+        queryset.update(sudah_dibaca=False)
 
     def has_add_permission(self, request):
         return False
