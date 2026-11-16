@@ -241,3 +241,23 @@ class PCMWebsiteTests(TestCase):
         response = self.client.post(url_kontak, data=data_invalid)
         self.assertEqual(response.status_code, 200)
         self.assertFalse(PesanMasuk.objects.filter(nama='Pengirim Test').exists())
+
+    def test_dokumen_clean_and_pesan_masuk_defaults(self):
+        doc = Dokumen(
+            judul="Dokumen Uji Coba Ukuran Normal",
+            keterangan="Keterangan uji coba",
+            berkas="dokumen/sample.pdf"
+        )
+        doc.clean()
+        self.assertEqual(doc.judul, "Dokumen Uji Coba Ukuran Normal")
+
+        pesan = PesanMasuk.objects.create(
+            nama="Uji Coba Default",
+            email="uji@example.com",
+            subjek="Subjek Uji",
+            pesan="Isi pesan uji"
+        )
+        self.assertFalse(pesan.sudah_dibaca)
+        pesan.sudah_dibaca = True
+        pesan.save()
+        self.assertTrue(PesanMasuk.objects.get(pk=pesan.pk).sudah_dibaca)
