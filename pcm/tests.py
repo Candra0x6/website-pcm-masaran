@@ -267,3 +267,9 @@ class PCMWebsiteTests(TestCase):
         self.assertEqual(resp_static.status_code, 200)
         resp_hero = self.client.get('/media/profil/hero_masaran.jpg')
         self.assertEqual(resp_hero.status_code, 200)
+
+    def test_security_headers_middleware(self):
+        response = self.client.get(reverse('pcm:beranda'))
+        self.assertEqual(response['X-Content-Type-Options'], 'nosniff')
+        self.assertEqual(response['Referrer-Policy'], 'strict-origin-when-cross-origin')
+        self.assertEqual(response['Permissions-Policy'], 'camera=(), microphone=(), geolocation=()')
