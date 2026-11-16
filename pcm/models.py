@@ -163,6 +163,12 @@ class Berita(models.Model):
     def get_absolute_url(self):
         return reverse('pcm:berita_detail', kwargs={'slug': self.slug})
 
+    @property
+    def estimasi_waktu_baca(self):
+        kata = len(self.isi.split())
+        menit = max(1, round(kata / 180))
+        return f"{menit} menit baca"
+
 
 class Agenda(models.Model):
     nama_kegiatan = models.CharField(max_length=250)
