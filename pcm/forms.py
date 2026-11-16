@@ -30,6 +30,18 @@ class KontakForm(forms.ModelForm):
             }),
         }
 
+    def clean_nama(self):
+        nama = self.cleaned_data.get('nama', '').strip()
+        if len(nama) < 3:
+            raise forms.ValidationError("Nama lengkap minimal 3 karakter.")
+        return nama
+
+    def clean_subjek(self):
+        subjek = self.cleaned_data.get('subjek', '').strip()
+        if len(subjek) < 4:
+            raise forms.ValidationError("Subjek pesan minimal 4 karakter.")
+        return subjek
+
     def clean_pesan(self):
         pesan = self.cleaned_data.get('pesan', '').strip()
         if len(pesan) < 10:
