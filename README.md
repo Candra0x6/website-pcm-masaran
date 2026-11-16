@@ -16,6 +16,27 @@
 
 ---
 
+## 📸 Tangkapan Layar Antarmuka Website (Preview Visual)
+
+Berikut adalah dokumentasi tampilan antarmuka resmi Website PCM Masaran yang mengadopsi estetika editorial modern minimalis ala Waabi:
+
+| Beranda & Hero Section | Profil & Sejarah 1935 |
+|:---:|:---:|
+| ![Beranda](docs/screenshots/beranda.webp) | ![Profil](docs/screenshots/profil.webp) |
+| *Hero editorial, showcase 4 pilar dakwah, dan statistik* | *Piagam pendirian 17 Nov 1935, visi misi, & sejarah* |
+
+| Susunan Pimpinan & Majelis | Direktori 13 Ranting (PRM) |
+|:---:|:---:|
+| ![Pimpinan](docs/screenshots/pimpinan.webp) | ![Ranting](docs/screenshots/ranting.webp) |
+| *13 Pimpinan Pleno Musycab 48 & 18 Majelis/Lembaga* | *Peta & tabel direktori 13 PRM se-Kecamatan Masaran* |
+
+| Amal Usaha Muhammadiyah (AUM) | Warta & Berita Kegiatan |
+|:---:|:---:|
+| ![Amal Usaha](docs/screenshots/amal_usaha.webp) | ![Warta Berita](docs/screenshots/berita.webp) |
+| *AUM Pendidikan, Kesehatan PKU, Sosial, & Ekonomi* | *Portal berita, paginasi 6 artikel, & live search* |
+
+---
+
 ## 👥 Identitas Kelompok & Kontribusi Anggota
 
 **Nama Kelompok:** Tim Pengembang PCM Masaran  
@@ -25,7 +46,7 @@
 
 | No | Nama Mahasiswa | NIM | Akun GitHub & Email | Peran Proyek | Total Commit | Rincian Pekerjaan & Fitur yang Dikerjakan |
 |:---:|---|---|---|---|:---:|---|
-| 1 | **Kurniawan Candra Mahardika** | **L200240210** | `@Candra0x6`<br>`kurniawancandram@gmail.com` | *Lead Fullstack, Core Backend & DevOps* | **28 commits** | Inisialisasi arsitektur uv & Django 6.x, database & core models (`ProfilOrganisasi`, `Pimpinan`, `Dokumen`, `TautanTerkait`), context processor navigasi global, singleton pattern organisasi, query optimizer (`select_related`/`prefetch_related`), security headers middleware, sitemap XML, robots.txt, health-check API, agregasi statistik, RSS 2.0 feed syndication, custom 404/500 handlers, WhiteNoise & Docker, management command `seed_pcm`, deployment serverless Vercel, dan GitHub Actions CI/CD pipeline. |
+| 1 | **Kurniawan Candra Mahardika** | **L200240210** | `@Candra0x6`<br>`kurniawancandram@gmail.com` | *Lead Fullstack Engineer*<br>**(Backend 60% · Frontend 30% · DevOps 10%)** | **37 commits** | **Backend (60%):** Arsitektur uv & Django 6.x, 9 model relasional (`ProfilOrganisasi` singleton, `Pimpinan`, `Dokumen`, `TautanTerkait`), context processor navigasi global, query optimizer (`select_related`/`prefetch_related`), security headers middleware, sitemap XML dinamis, robots.txt, health-check API, agregasi statistik, RSS 2.0 syndication, custom 404/500 handlers, dan seeder `seed_pcm`.<br>**Frontend (30%):** Floating blur glassmorphism navigation, Lenis momentum smooth scrolling, pinned diorama 4 pilar dakwah, 3D tilt interactive card effect, Google Maps Street View 360°, dynamic numeric counters, dan penyelarasan palet warna editorial Waabi.<br>**DevOps (10%):** Containerization Docker & Compose, deployment Vercel serverless, WhiteNoise static serving, dan GitHub Actions CI/CD matrix. |
 | 2 | **Afifah Nur Hidayah** | **L200240222** | `@afiiisky`<br>`l200240222@student.ums.ac.id` | *Frontend & UI Designer* | **20 commits** | Desain sistem antarmuka responsif mengadopsi estetika Waabi, template inheritance `base.html`, dropdown hover flyout navigasi 4 menu, halaman beranda, profil sejarah, pimpinan pleno, indikator status aktif menu mobile drawer, optimasi tipografi warta, breadcrumbs dinamis, styling tag warta, tombol scroll-to-top interaktif, dan penataan footer medsos resmi. |
 | 3 | **Latifah Puji Lestari** | **L200240170** | `@Latifah12-ui`<br>`l200240170@student.ums.ac.id` | *Feature Developer (Warta & Agenda)* | **20 commits** | Model Berita & Agenda, custom queryset/manager `published()`, fitur slug otomatis unik, pagination (6 per halaman), pencarian berita, filter pencarian agenda & lokasi, estimasi waktu baca dinamis, artikel terkait relevan, ekspor kalender .ICS, Open Graph metadata sharing, penanda visual hitung mundur agenda, dan tombol share WhatsApp/Telegram/X. |
 | 4 | **Nabil Zhafif Al Rasyad** | **L200240221** | `@nazh21`<br>`l200240221@student.ums.ac.id` | *Backend Developer & QA* | **20 commits** | Model Ranting (13 PRM) & Amal Usaha (AUM), validasi batas ukuran berkas dokumen, validasi nomor telepon & format URL organisasi, kustomisasi fieldsets admin pimpinan & date hierarchy agenda, helper format kontak ranting, filter kategori endpoint API statistik, ekspor pesan masuk ke CSV, sanitasi input XSS form kontak, dan pengujian unit testing (`pcm/tests.py`). |
@@ -34,23 +55,27 @@
 
 Untuk menjamin kualitas kode berskala enterprise dan distribusi kontribusi yang terukur, alur kerja dibagi ke dalam 5 fase kolaborasi:
 
-#### 1. Workflow Anggota 1 — Kurniawan Candra Mahardika (Lead Fullstack, Core Backend & DevOps):
-- **Arsitektur & Core Backend:**
+#### 1. Workflow Anggota 1 — Kurniawan Candra Mahardika (Lead Fullstack: Backend 60%, Frontend 30%, DevOps 10%):
+- **Core Backend & Architecture (60%):**
   - Inisialisasi stack modern dengan `uv` (Fast Python Package Manager) dan Django 6.x.
   - Perancangan arsitektur database relasional untuk 9 model, termasuk model singleton `ProfilOrganisasi` (pola single-row constraint).
   - Implementasi model inti backend: `ProfilOrganisasi`, `Pimpinan`, `Dokumen`, dan `TautanTerkait`.
   - Pembangunan Global Context Processor (`pcm.context_processors.pcm_globals`) agar data organisasi, nomor kontak, serta tautan eksternal terdistribusi ke seluruh template tanpa duplicate database queries.
   - Optimasi query backend (`select_related` & `prefetch_related`) untuk mencegah masalah N+1 queries pada view Beranda dan Amal Usaha.
-- **Pipeline Data & Seeder:**
-  - Pembuatan custom Django management command `seed_pcm` (`manage.py seed_pcm --download-images`).
-  - Mekanisme pipeline unduh aset foto riil (Gedung Dakwah Masaran, struktur majelis, logo resmi) ke direktori `media/` dengan penanganan graceful fallback saat offline.
-- **Motion & Visual Engineering:**
-  - Orkestrasi sistem interaksi interaktif bergaya Waabi: Lenis Momentum Scroll, GSAP ScrollTrigger, Pinned Diorama Showcase 4 Pilar, serta dropdown navigasi 4 menu beranimasi smooth.
-  - Integrasi Street View 360° & Google Maps Street interaktif dengan geolokasi presisi Gedung Dakwah PCM Masaran.
-- **Containerization & CI/CD DevOps:**
+  - Pembuatan custom Django management command `seed_pcm` (`manage.py seed_pcm --download-images`) untuk populasi data riil dan unduh aset gambar asli.
+  - Implementasi Security Headers Middleware, dynamic XML Sitemap, dynamic Robots.txt, JSON Health-Check API, RSS 2.0 syndication warta, serta custom UX-oriented 404/500 handlers.
+- **Frontend UI/UX & Motion Engineering (30%):**
+  - Pembangunan antarmuka responsif mengadopsi estetika editorial Waabi dengan palet *warm cream* (`#FAF9F5`) dan aksen hijau emerald (`#006633`).
+  - Orkestrasi sistem interaksi interaktif: Lenis Momentum Smooth Scroll, GSAP ScrollTrigger, Pinned Diorama Showcase 4 Pilar, serta dropdown navigasi 4 menu beranimasi smooth.
+  - Implementasi interaktif 3D card tilt effect pada kartu profil dan fitur.
+  - Integrasi Street View 360° & Google Maps interaktif dengan geolokasi presisi Gedung Dakwah PCM Masaran.
+  - Implementasi animasi dinamis numeric counters statistik anggota dan ranting.
+  - Penambahan komponen breadcrumbs navigasi dinamis pada seluruh halaman publik.
+- **Containerization & CI/CD DevOps (10%):**
   - Penyusunan `Dockerfile` multi-stage berbasis `python:3.12-slim` dengan keamanan user non-root.
-  - Orkestrasi `compose.yaml` untuk pengujian kontainer lokal.
+  - Orkestrasi `compose.yaml` untuk pengujian kontainer lokal dengan PostgreSQL 17.
   - Setup konfigurasi WhiteNoise serving static files dan pipeline GitHub Actions CI otomatis.
+  - Konfigurasi serverless deployment Vercel dan backup tunnel Cloudflare.
 
 #### 2. Workflow Anggota 2 — Afifah Nur Hidayah (Frontend & UI Designer):
 - Desain antarmuka publik berbasis Tailwind CSS mengadopsi estetika minimalis modern Waabi.
