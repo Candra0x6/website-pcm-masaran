@@ -69,8 +69,9 @@ class PimpinanAdmin(admin.ModelAdmin):
 @admin.register(Ranting)
 class RantingAdmin(admin.ModelAdmin):
     list_display = ('nama_ranting', 'ketua', 'telepon', 'alamat')
-    search_fields = ('nama_ranting', 'ketua', 'alamat')
+    search_fields = ('nama_ranting', 'ketua', 'alamat', 'telepon')
     ordering = ('nama_ranting',)
+    list_per_page = 20
 
 
 @admin.register(AmalUsaha)
