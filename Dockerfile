@@ -13,9 +13,7 @@ WORKDIR /app
 RUN useradd -u 1000 -m -s /bin/bash appuser
 
 COPY pyproject.toml uv.lock ./
-COPY --chown=appuser:appuser .venv /app/.venv
-
-RUN uv sync --frozen --no-dev --offline || true
+RUN uv sync --frozen --no-dev
 
 COPY . .
 
