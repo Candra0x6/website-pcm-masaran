@@ -37,10 +37,20 @@ class ProfilOrganisasiAdmin(admin.ModelAdmin):
     )
 
     def preview_hero(self, obj):
-        if obj.gambar_utama:
-            return format_html('<img src="{}" style="height: 40px; border-radius: 6px; object-fit: cover;" />', obj.gambar_utama.url)
+        try:
+            if obj.gambar_utama:
+                return format_html('<img src="{}" style="height: 40px; border-radius: 6px; object-fit: cover;" />', obj.gambar_utama.url)
+        except Exception:
+            return "-"
         return "-"
     preview_hero.short_description = "Hero"
+
+    def save_model(self, request, obj, form, change):
+        try:
+            super().save_model(request, obj, form, change)
+        except Exception as e:
+            from django.contrib import messages
+            messages.warning(request, f"Pemberitahuan media: {e}")
 
     def has_add_permission(self, request):
         if ProfilOrganisasi.objects.exists():
@@ -69,10 +79,20 @@ class PimpinanAdmin(admin.ModelAdmin):
     )
 
     def preview_foto(self, obj):
-        if obj.foto:
-            return format_html('<img src="{}" style="height: 40px; width: 40px; border-radius: 50%; object-fit: cover;" />', obj.foto.url)
+        try:
+            if obj.foto:
+                return format_html('<img src="{}" style="height: 40px; width: 40px; border-radius: 50%; object-fit: cover;" />', obj.foto.url)
+        except Exception:
+            return "-"
         return "-"
     preview_foto.short_description = "Foto"
+
+    def save_model(self, request, obj, form, change):
+        try:
+            super().save_model(request, obj, form, change)
+        except Exception as e:
+            from django.contrib import messages
+            messages.warning(request, f"Pemberitahuan foto: {e}")
 
 
 @admin.register(Ranting)
@@ -112,10 +132,20 @@ class AmalUsahaAdmin(admin.ModelAdmin):
     badge_bidang.short_description = "Bidang"
 
     def preview_gambar(self, obj):
-        if obj.gambar:
-            return format_html('<img src="{}" style="height: 40px; width: 60px; border-radius: 6px; object-fit: cover;" />', obj.gambar.url)
+        try:
+            if obj.gambar:
+                return format_html('<img src="{}" style="height: 40px; width: 60px; border-radius: 6px; object-fit: cover;" />', obj.gambar.url)
+        except Exception:
+            return "-"
         return "-"
     preview_gambar.short_description = "Gambar"
+
+    def save_model(self, request, obj, form, change):
+        try:
+            super().save_model(request, obj, form, change)
+        except Exception as e:
+            from django.contrib import messages
+            messages.warning(request, f"Pemberitahuan gambar amal usaha: {e}")
 
 
 @admin.register(Berita)
@@ -128,10 +158,20 @@ class BeritaAdmin(admin.ModelAdmin):
     ordering = ('-tanggal_terbit',)
 
     def preview_sampul(self, obj):
-        if obj.gambar_sampul:
-            return format_html('<img src="{}" style="height: 40px; width: 60px; border-radius: 6px; object-fit: cover;" />', obj.gambar_sampul.url)
+        try:
+            if obj.gambar_sampul:
+                return format_html('<img src="{}" style="height: 40px; width: 60px; border-radius: 6px; object-fit: cover;" />', obj.gambar_sampul.url)
+        except Exception:
+            return "-"
         return "-"
     preview_sampul.short_description = "Sampul"
+
+    def save_model(self, request, obj, form, change):
+        try:
+            super().save_model(request, obj, form, change)
+        except Exception as e:
+            from django.contrib import messages
+            messages.warning(request, f"Pemberitahuan sampul berita: {e}")
 
 
 @admin.register(Agenda)
@@ -166,10 +206,17 @@ class DokumenAdmin(admin.ModelAdmin):
                 elif size < 1024 * 1024:
                     return f"{size / 1024:.1f} KB"
                 return f"{size / (1024 * 1024):.1f} MB"
-        except (ValueError, FileNotFoundError, OSError):
+        except (ValueError, FileNotFoundError, OSError, Exception):
             return "-"
         return "-"
     ukuran_berkas.short_description = "Ukuran"
+
+    def save_model(self, request, obj, form, change):
+        try:
+            super().save_model(request, obj, form, change)
+        except Exception as e:
+            from django.contrib import messages
+            messages.warning(request, f"Pemberitahuan berkas dokumen: {e}")
 
 
 @admin.register(PesanMasuk)

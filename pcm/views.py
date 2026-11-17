@@ -216,6 +216,120 @@ def beranda_view(request):
     return render(request, 'pcm/beranda.html', context)
 
 
+TUJUAN_BERDIRI_MUHAMMADIYAH = {
+    'nama_pendiri': 'K.H. Ahmad Dahlan (Muhammad Darwis)',
+    'masa_hidup': '1868 – 1923 M',
+    'tanggal_hijriyah': '8 Dzulhijjah 1330 H',
+    'tanggal_masehi': '18 November 1912 M',
+    'tempat_berdiri': 'Kampung Kauman, Yogyakarta',
+    'ayat_al_quran': 'وَلْتَكُن مِّنكُمْ أُمَّةٌۭ يَدْعُونَ إِلَى ٱلْخَيْرِ وَيَأْمُرُونَ بِٱلْمَعْرُوفِ وَيَنْهَوْنَ عَنِ ٱلْمُنكَرِ ۚ وَأُو۟لَـٰٓئِكَ هُمُ ٱلْمُفْلِحُونَ',
+    'surat': 'Surat Ali \'Imran Ayat 104',
+    'arti_ayat': 'Dan hendaklah ada di antara kamu segolongan umat yang menyeru kepada kebajikan, menyuruh kepada yang ma\'ruf dan mencegah dari yang munkar; merekalah orang-orang yang beruntung.',
+    'maksud_dan_tujuan': 'Menegakkan dan menjunjung tinggi Agama Islam sehingga terwujud masyarakat Islam yang sebenar-benarnya.',
+    'dasar_hukum_ad': 'Anggaran Dasar Muhammadiyah Bab III Pasal 4 Ayat 1',
+    'latar_belakang': 'K.H. Ahmad Dahlan mendirikan persyarikatan Muhammadiyah dilandasi oleh kegelisahan mendalam atas keterbelakangan pendidikan umat Islam, maraknya amalan takhayul, bid\'ah, dan khurafat (TBC) yang mencemari kemurnian akidah, serta keprihatinan atas nasib kaum miskin dan anak-anak yatim yang terabaikan. Beliau menerjemahkan pemahaman teologis Surat Al-Ma\'un ke dalam praksis gerakan sosial modern melalui pendirian sekolah, rumah sakit (PKO), dan rumah yatim.',
+    'foto_pendiri': 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80',
+    'tiga_pilar_gerakan': [
+        {
+            'judul': 'Gerakan Islam',
+            'penjelasan': 'Gerakan yang beraqidah Islam, bersumber pada Al-Qur\'an dan As-Sunnah ash-Shahihah sebagai pedoman mutlak dalam seluruh aspek kehidupan.',
+        },
+        {
+            'judul': 'Gerakan Dakwah Amar Ma\'ruf Nahi Munkar',
+            'penjelasan': 'Mengajak kepada kebaikan dan mencegah kemungkaran yang ditujukan kepada perorangan maupun masyarakat luas secara persuasif dan bijaksana.',
+        },
+        {
+            'judul': 'Gerakan Tajdid (Pembaruan)',
+            'penjelasan': 'Melakukan purifikasi pemurnian akidah-ibadah dari syirik dan khurafat, serta dinamisasi pembaruan dalam muamalah dan ilmu pengetahuan.',
+        },
+    ],
+}
+
+PHIWM_DATA = {
+    'judul': 'Pedoman Hidup Islami Warga Muhammadiyah (PHIWM)',
+    'keputusan': 'Keputusan Muktamar Muhammadiyah ke-44 Tahun 2000 di Jakarta',
+    'pengertian': 'PHIWM adalah pedoman nilai, norma, dan etika Islami yang menjadi rujukan moral bagi seluruh pimpinan, anggota, dan simpatisan Muhammadiyah dalam mengamalkan ajaran Islam secara kaffah guna mewujudkan keteladanan mulia (uswah hasanah).',
+    'foto_buku': 'https://images.unsplash.com/photo-1532012164546-f432f2e3777a?auto=format&fit=crop&w=800&q=80',
+    'dimensi_kehidupan': [
+        {
+            'nomor': '01',
+            'kategori': 'Kehidupan Pribadi',
+            'poin': 'Akidah, Ibadah, Akhlaq, & Mu\'amalah',
+            'deskripsi': 'Warga Muhammadiyah wajib memurnikan tauhid dari syirik, beribadah tekun sesuai tuntunan Rasulullah SAW, memiliki kejujuran (shiddiq), amanah, dan mencari rezeki secara halal serta menjauhi riba.',
+        },
+        {
+            'nomor': '02',
+            'kategori': 'Kehidupan dalam Keluarga',
+            'poin': 'Keluarga Sakinah Mawaddah Warahmah',
+            'deskripsi': 'Mewujudkan rumah tangga Islami yang tentram, membina anak-anak dengan pendidikan tauhid dan akhlak sejak dini, membagi peran suami-istri secara adil dan penuh kasih sayang.',
+        },
+        {
+            'nomor': '03',
+            'kategori': 'Kehidupan Bermasyarakat',
+            'poin': 'Kesantunan Sosial & Kerukunan',
+            'deskripsi': 'Menjadi pelopor kedamaian antar-tetangga, mengedepankan tepa selira dan empati sosial, gemar menolong yang lemah (spirit Al-Ma\'un), serta menjaga kebersihan dan kelestarian lingkungan.',
+        },
+        {
+            'nomor': '04',
+            'kategori': 'Kehidupan Berorganisasi',
+            'poin': 'Amanah, Keikhlasan, & Musyawarah',
+            'deskripsi': 'Menjalankan amanah persyarikatan dengan ikhlas lillahi ta\'ala, mengutamakan musyawarah mufakat, loyal terhadap keputusan organisasi, dan tidak mencari keuntungan materi pribadi di persyarikatan.',
+        },
+        {
+            'nomor': '05',
+            'kategori': 'Kehidupan Mengelola Amal Usaha (AUM)',
+            'poin': 'Profesionalisme & Misi Dakwah',
+            'deskripsi': 'Menjadikan AUM sebagai media dakwah nyata dan wahana kaderisasi, menerapkan tata kelola yang transparan, akuntabel, serta memberikan pelayanan terbaik kepada masyarakat luas.',
+        },
+        {
+            'nomor': '06',
+            'kategori': 'Kehidupan Berbangsa & Bernegara',
+            'poin': 'Darul \'Ahdi Wasy-Syahadah',
+            'deskripsi': 'Memandang NKRI sebagai konsensus nasional (Darul \'Ahdi) dan gelanggang pembuktian pengabdian (Darul Syahadah). Menolak korupsi, taat hukum yang adil, dan berkontribusi nyata bagi kemajuan bangsa.',
+        },
+    ],
+}
+
+DOKUMEN_DASAR_MUHAMMADIYAH = [
+    {
+        'singkatan': 'MADM',
+        'nama': 'Muqaddimah Anggaran Dasar Muhammadiyah',
+        'tahun': '1945 – 1950 M',
+        'tokoh': 'Ki Bagus Hadikusumo bersama tokoh pimpinan lainnya',
+        'inti_pokok': 'Memuat 7 pokok pikiran fundamental yang menjadi landasan filosofis persyarikatan, menegaskan tauhid sebagai asas hidup manusia, urgensi hidup bermasyarakat, syariat Islam sebagai satu-satunya hukum kebenaran, perlunya organisasi sebagai wasilah dakwah, dan cita-cita mewujudkan masyarakat Islam yang sebenar-benarnya.',
+        'tag': 'Ruh Ideologi & Asas Persyarikatan',
+        'warna': 'brand',
+    },
+    {
+        'singkatan': 'Kepribadian',
+        'nama': 'Kepribadian Muhammadiyah',
+        'tahun': 'Muktamar ke-35 Jakarta (1962 M)',
+        'tokoh': 'K.H. Faqih Usman dkk.',
+        'inti_pokok': 'Merumuskan jati diri hakiki persyarikatan dan pedoman sikap gerak warga. Menegaskan 10 sifat utama Muhammadiyah: beramal dan berjuang untuk perdamaian dan kesejahteraan, memperbanyak kawan, lapang dada, mengindahkan hukum negara, amar ma\'ruf nahi munkar, serta aktif bekerjasama dengan golongan Islam manapun.',
+        'tag': 'Jati Diri & Kharakter Gerak',
+        'warna': 'emerald',
+    },
+    {
+        'singkatan': 'MKCHM',
+        'nama': 'Matan Keyakinan dan Cita-cita Hidup Muhammadiyah',
+        'tahun': 'Tanwir Ponorogo (1969 M)',
+        'tokoh': 'Pimpinan Pusat Muhammadiyah',
+        'inti_pokok': 'Sistematisasi ideologi persyarikatan yang memuat konsepsi aqidah murni, pandangan komprehensif tentang ajaran Islam (aqidah, ibadah, akhlak, dan muamalat dunyawiyah), fungsi Muhammadiyah di Indonesia, serta cita-cita masyarakat adil makmur yang diridhai Allah SWT berlandaskan nilai-nilai profetik.',
+        'tag': 'Pedoman Sistemik Ideologi',
+        'warna': 'purple',
+    },
+    {
+        'singkatan': 'Khittah',
+        'nama': 'Khittah Perjuangan Muhammadiyah',
+        'tahun': 'Khittah Denpasar (2002 M), Surabaya (1978 M)',
+        'tokoh': 'Muktamar & Sidang Tanwir',
+        'inti_pokok': 'Pedoman garis kebijakan dakwah dan panduan posisi strategis Muhammadiyah dalam merespons dinamika kehidupan sosial-politik. Menegaskan bahwa Muhammadiyah tidak berafiliasi dan tidak terikat dengan partai politik manapun, serta menjalankan politik keadaban (high politics) berbasis moralitas kebangsaan.',
+        'tag': 'Garis Kebijakan Dakwah & Politik',
+        'warna': 'blue',
+    },
+]
+
+
 def profil_view(request):
     profil = ProfilOrganisasi.objects.first()
     misi_list = profil.get_misi_list() if profil else []
@@ -223,6 +337,9 @@ def profil_view(request):
     context = {
         'profil': profil,
         'misi_list': misi_list,
+        'tujuan_muhammadiyah': TUJUAN_BERDIRI_MUHAMMADIYAH,
+        'phiwm': PHIWM_DATA,
+        'dokumen_dasar_list': DOKUMEN_DASAR_MUHAMMADIYAH,
     }
     return render(request, 'pcm/profil.html', context)
 

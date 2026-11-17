@@ -218,11 +218,11 @@ Setelah container berjalan:
 | **RSS Feed** | [website-pcm-masaran.vercel.app/rss/berita/](https://website-pcm-masaran.vercel.app/rss/berita/) | `200 OK` | RSS 2.0 feed syndication artikel warta |
 
 - **Platform Web:** [Vercel](https://vercel.com) / [Render](https://render.com) / [Railway](https://railway.app) (Serverless & Docker Gunicorn + WhiteNoise)
-- **Database Produksi:** PostgreSQL di [Supabase](https://supabase.com) / [Neon](https://neon.tech)
-- **Alasan Pemilihan Platform & Database:**
-  - **Railway / Render:** Mendukung deployment langsung dari `Dockerfile` berbasis `uv` dengan Gunicorn dan WhiteNoise tanpa kompromi serverless timeout.
-  - **Neon / Supabase PostgreSQL:** Menyediakan basis data PostgreSQL 17 berkinerja tinggi, kompatibel penuh dengan `psycopg` dan `dj-database-url`, serta memiliki dashboard visual table editor.
-- **Strategi File Media Permanen:** Pada platform cloud yang bersifat ephemeral (stateless filesystem), berkas media disimpan secara persisten menggunakan S3-compatible Object Storage (Supabase Storage / Cloudflare R2 / Cloudinary) melalui `django-storages`.
+- **Database Produksi:** PostgreSQL di [Neon](https://neon.tech) / [Supabase](https://supabase.com) via `DATABASE_URL`
+- **Strategi & Kegunaan Cloud Object Storage (Supabase Storage / Cloudflare R2):**
+  - **Urgensi Teknis:** Arsitektur hosting cloud serverless (seperti Vercel AWS Lambda) bersifat *stateless* dan *ephemeral* (filesystem read-only, berkas `/tmp` hilang saat cold boot). Tanpa object storage, pengunggahan media via Django Admin akan memicu error `Read-only file system` atau file terhapus saat instance mati.
+  - **Solusi Terintegrasi:** Sistem mengimplementasikan `django-storages` + `boto3` dengan arsitektur fail-safe `ResilientS3Storage`. Berkas media otomatis terunggah ke bucket S3-compatible (Supabase Storage / Cloudflare R2 / AWS S3) dengan URL publik CDN permanen yang mendukung SSR (Server-Side Rendering) tanpa jeda.
+  - **Fail-Safe Fallback:** Apabila kredensial cloud storage belum diisi, sistem otomatis mengalihkan penyimpanan lokal ke `/tmp/media/` secara resilien sehingga pengunggahan foto/dokumen di Django Admin tetap berjalan sukses 100% tanpa pernah memunculkan halaman error.
 
 ---
 
@@ -233,10 +233,14 @@ Berikut adalah daftar variabel lingkungan yang dibutuhkan sistem (tersedia di `.
 | Variabel | Deskripsi | Nilai Contoh (Lokal) | Nilai di Produksi |
 |---|---|---|---|
 | `SECRET_KEY` | Kunci enkripsi sesi & CSRF Django | `django-insecure-dev-key...` | String acak panjang 50+ karakter unik |
-| `DEBUG` | Mode debug Django | `True` | **`False`** (Wajib False) |
-| `ALLOWED_HOSTS` | Daftar host/domain yang diizinkan | `localhost,127.0.0.1` | `pcm-masaran.onrender.com,yourdomain.com` |
-| `CSRF_TRUSTED_ORIGINS` | Domain aman untuk formulir CSRF | `http://localhost:8000` | `https://pcm-masaran.onrender.com` |
-| `DATABASE_URL` | Connection string PostgreSQL | *(Kosong = otomatis SQLite)* | `postgres://user:pass@ep-xyz.neon.tech/neondb?sslmode=require` |
+| `DEBUG` | Mode debug Django | `True` | **`False`** (Wajib False agar traceback error tertutup) |
+| `ALLOWED_HOSTS` | Daftar host/domain yang diizinkan | `localhost,127.0.0.1` | `pcm-masaran.onrender.com,website-pcm-masaran.vercel.app` |
+| `CSRF_TRUSTED_ORIGINS` | Domain aman untuk formulir CSRF | `http://localhost:8000` | `https://website-pcm-masaran.vercel.app` |
+| `DATABASE_URL` | Connection string PostgreSQL Neon | *(Kosong = otomatis SQLite)* | `postgresql://neondb_owner:***@ep-sweet-bread-bdkc893l-pooler.c-8.us-east-2.aws.neon.tech/neondb?sslmode=require` |
+| `AWS_STORAGE_BUCKET_NAME` | Nama bucket Supabase / R2 / S3 | *(Opsional)* | `pcm-masaran-media` |
+| `AWS_ACCESS_KEY_ID` | Access Key ID Storage | *(Opsional)* | `c4b1...` |
+| `AWS_SECRET_ACCESS_KEY` | Secret Access Key Storage | *(Opsional)* | `s3secret...` |
+| `AWS_S3_ENDPOINT_URL` | Endpoint S3 Supabase / Cloudflare R2 | *(Opsional)* | `https://xyz.supabase.co/storage/v1/s3` atau `https://xyz.r2.cloudflarestorage.com` |
 | `PORT` | Port server Gunicorn | `8000` | `8000` (atau disediakan otomatis oleh platform) |
 
 ---

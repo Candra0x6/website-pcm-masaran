@@ -13,7 +13,7 @@ SECRET_KEY = os.environ.get(
     'django-insecure-pcm-masaran-sragen-default-dev-key-change-in-production'
 )
 
-DEBUG = os.environ.get('DEBUG', 'True').lower() in ('true', '1', 't')
+DEBUG = os.environ.get('DEBUG', 'False').lower() in ('true', '1', 't')
 
 allowed_hosts_env = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1,testserver,.trycloudflare.com,.onrender.com,.railway.app,.up.railway.app,.vercel.app')
 ALLOWED_HOSTS = [host.strip() for host in allowed_hosts_env.split(',') if host.strip()]
@@ -143,35 +143,65 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-STORAGES = {
-    "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
-    },
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
-    },
-}
+if os.environ.get('VERCEL'):
+    MEDIA_ROOT = Path('/tmp/media')
+else:
+    MEDIA_ROOT = BASE_DIR / 'media'
+os.makedirs(MEDIA_ROOT, exist_ok=True)
 
-if os.environ.get('AWS_STORAGE_BUCKET_NAME'):
-    STORAGES["default"] = {
-        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+MEDIA_URL = '/media/'
+
+bucket_name = (
+    os.environ.get('AWS_STORAGE_BUCKET_NAME')
+    or os.environ.get('SUPABASE_STORAGE_BUCKET')
+    or os.environ.get('R2_BUCKET_NAME')
+)
+
+if bucket_name:
+    STORAGES = {
+        "default": {
+            "BACKEND": "pcm.storage.ResilientS3Storage",
+        },
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+        },
     }
-    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-    AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+    AWS_ACCESS_KEY_ID = (
+        os.environ.get('AWS_ACCESS_KEY_ID')
+        or os.environ.get('SUPABASE_ACCESS_KEY_ID')
+        or os.environ.get('R2_ACCESS_KEY_ID')
+    )
+    AWS_SECRET_ACCESS_KEY = (
+        os.environ.get('AWS_SECRET_ACCESS_KEY')
+        or os.environ.get('SUPABASE_SECRET_ACCESS_KEY')
+        or os.environ.get('R2_SECRET_ACCESS_KEY')
+    )
+    AWS_STORAGE_BUCKET_NAME = bucket_name
     AWS_S3_REGION_NAME = os.environ.get('AWS_S3_REGION_NAME', 'us-east-1')
-    AWS_S3_ENDPOINT_URL = os.environ.get('AWS_S3_ENDPOINT_URL')
+    AWS_S3_ENDPOINT_URL = (
+        os.environ.get('AWS_S3_ENDPOINT_URL')
+        or os.environ.get('SUPABASE_S3_ENDPOINT')
+        or os.environ.get('R2_ENDPOINT_URL')
+    )
     AWS_S3_CUSTOM_DOMAIN = os.environ.get('AWS_S3_CUSTOM_DOMAIN')
-    AWS_DEFAULT_ACL = os.environ.get('AWS_DEFAULT_ACL', None)
+    AWS_DEFAULT_ACL = None
     AWS_S3_FILE_OVERWRITE = False
     AWS_QUERYSTRING_AUTH = False
     if AWS_S3_CUSTOM_DOMAIN:
         MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/"
-    elif AWS_STORAGE_BUCKET_NAME and not AWS_S3_ENDPOINT_URL:
-        MEDIA_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/"
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+    elif AWS_S3_ENDPOINT_URL:
+        MEDIA_URL = f"{AWS_S3_ENDPOINT_URL.rstrip('/')}/{bucket_name}/"
+    else:
+        MEDIA_URL = f"https://{bucket_name}.s3.amazonaws.com/"
+else:
+    STORAGES = {
+        "default": {
+            "BACKEND": "pcm.storage.ResilientStorage",
+        },
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+        },
+    }
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
