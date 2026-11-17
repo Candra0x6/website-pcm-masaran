@@ -94,10 +94,18 @@ if database_url:
         DATABASES['default']['DISABLE_SERVER_SIDE_CURSORS'] = True
         DATABASES['default']['CONN_MAX_AGE'] = 0
 else:
+    db_path = BASE_DIR / 'db.sqlite3'
+    if os.environ.get('VERCEL'):
+        import shutil
+        tmp_db = Path('/tmp/db.sqlite3')
+        if db_path.exists() and (not tmp_db.exists() or db_path.stat().st_mtime > tmp_db.stat().st_mtime):
+            shutil.copy2(db_path, tmp_db)
+        if tmp_db.exists():
+            db_path = tmp_db
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
+            'NAME': db_path,
         }
     }
 
