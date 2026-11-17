@@ -124,6 +124,9 @@ Website ini dibangun menggunakan **100% data riil** dari Pimpinan Cabang Muhamma
 | **Data Amal Usaha (AUM Pendidikan, Kesehatan, Sosial, Ekonomi)** | Majelis Dikdasmen PCM Masaran & Direktori AUM Sragen | 15 November 2026 | SMK 10, SMA 3, SMP 2, MTs 3, SD Terpadu, 3 MIM, 11 TK ABA 'Aisyiyah, SPPGM Tangen, PKU, Lazismu, BMT |
 | **Warta Berita & Agenda Kajian** | Kanal YouTube resmi `@muhammadiyahmasaran` & Liputan PDM Sragen | 15 November 2026 | Rekaman video kajian Ahad pagi, Rakercab, dan Milad ke-113 |
 | **Dokumen SK & Pedoman Ranting** | Arsip publik Lembaga Pengembangan Cabang dan Ranting (LPCR) | 15 November 2026 | Berkas PDF resmi persyarikatan |
+| **Pedoman Hidup Islami Warga Muhammadiyah (PHIWM)** | Keputusan Muktamar Muhammadiyah ke-44 di Jakarta (Tahun 2000) | 17 November 2026 | Pedoman nilai, norma, dan etika Islami 6 dimensi kehidupan warga persyarikatan |
+| **Dokumen Dasar Ideologi (MADM, Kepribadian, MKCHM, Khittah)** | Pimpinan Pusat Muhammadiyah & Majelis Tarjih dan Tajdid | 17 November 2026 | Empat dokumen pilar asas tauhid, kepribadian gerak, cita-cita ideologi, dan khittah perjuangan |
+| **Maksud & Tujuan Pendirian 1912** | Anggaran Dasar Muhammadiyah (Pasal 4 Ayat 1) & QS. Ali 'Imran: 104 | 17 November 2026 | Landasan teologis dan historis berdirinya persyarikatan oleh K.H. Ahmad Dahlan |
 | **Logo Resmi Muhammadiyah** | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Muhammadiyah.svg) | 15 November 2026 | Karya K. H. Siradj Dahlan, vektor oleh Hibensis, lisensi CC BY-SA 4.0 |
 
 ---
@@ -136,9 +139,12 @@ Website ini dibangun menggunakan **100% data riil** dari Pimpinan Cabang Muhamma
 4. **Paginator & Fitur Pencarian:** Halaman berita membatasi 6 berita per halaman dan dilengkapi form pencarian kata kunci (`?q=...`).
 5. **ModelForm & Messages Framework:** Formulir kontak publik tervalidasi dengan notifikasi flash pesan sukses.
 6. **Auto Unique Slug:** Slug artikel dibuat otomatis dari judul dan tetap unik jika terjadi kesamaan judul artikel.
-7. **WhiteNoise & Multi-Database Ready:** Mendukung SQLite untuk pengembangan lokal serta PostgreSQL (Supabase / Neon) untuk produksi via `DATABASE_URL`.
+7. **WhiteNoise & Multi-Database Ready:** Mendukung SQLite untuk pengembangan lokal serta PostgreSQL (Neon / Supabase) untuk produksi via `DATABASE_URL`.
 8. **Management Command `seed_pcm`:** Satu perintah untuk mengisi seluruh data profil, pimpinan, ranting, amal usaha, berita, agenda, dokumen unduhan, dan menyalin aset gambar asli ke direktori `media/`.
-9. **Unit Testing Otomatis:** 27 test cases lulus 100% (`uv run python manage.py test`) mencakup verifikasi seluruh rute publik HTTP 200, validasi slug berita, pengujian singleton profil organisasi, form pesan masuk, validasi ukuran berkas, status agenda, security headers, health-check endpoint, sitemap XML, robots.txt, RSS feed, agregasi statistik & filter bidang, error handlers 404/500, ekspor kalender .ICS, sanitasi XSS form, serta serving aset media/static.
+9. **Unit Testing Otomatis:** 32 test cases lulus 100% (`uv run python manage.py test`) mencakup verifikasi seluruh rute publik HTTP 200, validasi slug berita, pengujian singleton profil organisasi, form pesan masuk, validasi ukuran berkas, status agenda, security headers, health-check endpoint, sitemap XML, robots.txt, RSS feed, agregasi statistik & filter bidang, error handlers 404/500, ekspor kalender .ICS, sanitasi XSS form, serta serving aset media/static.
+10. **Ideologi & Dokumen Dasar Lengkap:** Menghadirkan Maksud & Tujuan Pendirian 1912 (QS Ali 'Imran: 104), Pedoman Hidup Islami Warga Muhammadiyah (PHIWM) 6 dimensi, serta 4 Dokumen Dasar Ideologi (MADM, Kepribadian Muhammadiyah, MKCHM, Khittah Perjuangan).
+11. **Direktori 13 Ranting & Jaringan Masjid Desa:** Direktori visual interaktif 13 PRM dengan profil desa, nama masjid induk binaan, program unggulan, filter kategori cepat, live search, serta tombol toggle tampilan kartu visual vs tabel rekapitulasi.
+12. **Resilient Cloud Storage & SSR Penuh:** Konfigurasi `django-storages` + `boto3` untuk cloud storage (Supabase / Cloudflare R2 / AWS S3) dengan mekanisme fail-safe anti-error dan dukungan Server-Side Rendering (SSR) murni pada seluruh tag media.
 
 ---
 
