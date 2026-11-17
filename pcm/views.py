@@ -242,11 +242,201 @@ def pimpinan_view(request):
     return render(request, 'pcm/pimpinan.html', context)
 
 
+RANTING_DETAILS = {
+    'Dawungan': {
+        'nama_desa': 'Desa Dawungan',
+        'julukan': 'Lumbung Pangan & Pertanian Berkah',
+        'masjid_utama': 'Masjid Al-Hidayah Dawungan',
+        'alamat_masjid': 'Dukuh Dawungan RT 02, Desa Dawungan, Kec. Masaran',
+        'profil_desa': 'Desa agraris produktif di kawasan timur Masaran dengan hamparan persawahan subur. Jamaah Muhammadiyah memelopori gerakan Lumbung Zakat Pertanian melalui Lazismu dan pengajian akbar keliling antar-dukuh.',
+        'program_unggulan': 'Lumbung Zakat Pertanian, Pengajian Malam Jumat, & TPA Mandiri',
+        'jumlah_masjid': 6,
+        'jumlah_jamaah': '850+ Jamaah',
+        'tag_kategori': 'Pertanian & Filantropi',
+        'badge_color': 'emerald',
+        'gambar': 'https://images.unsplash.com/photo-1590076215667-875d4ef2d7ee?auto=format&fit=crop&w=800&q=80',
+    },
+    'Gebang': {
+        'nama_desa': 'Desa Gebang',
+        'julukan': 'Kaderisasi Pemuda & Dakwah Komunitas',
+        'masjid_utama': 'Masjid Darussalam Gebang',
+        'alamat_masjid': 'Dukuh Gebang RT 05, Desa Gebang, Kec. Masaran',
+        'profil_desa': 'Desa yang berbatasan langsung dengan poros Sragen-Karanganyar. Memiliki basis angkatan muda persyarikatan (Pemuda Muhammadiyah & Nasyiatul Aisyiyah) yang progresif dalam kegiatan tabligh dan pemberdayaan santri usia produktif.',
+        'program_unggulan': 'Kajian Tematik Pemuda, Majelis Taklim Ibu-Ibu, & Posdaya',
+        'jumlah_masjid': 5,
+        'jumlah_jamaah': '720+ Jamaah',
+        'tag_kategori': 'Kepemudaan & Dakwah',
+        'badge_color': 'blue',
+        'gambar': 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80',
+    },
+    'Jati': {
+        'nama_desa': 'Desa Jati',
+        'julukan': 'Sentra Gotong Royong & Pengajian Subuh',
+        'masjid_utama': 'Masjid At-Taqwa Jati',
+        'alamat_masjid': 'Dukuh Jati RT 01, Desa Jati, Kec. Masaran',
+        'profil_desa': 'Kawasan pedesaan guyub dengan tradisi kebersamaan warga persyarikatan yang kokoh. Terkenal dengan gerakan Subuh Berjamaah rutin dan santunan infak sedekah untuk warga jompo dan duafa.',
+        'program_unggulan': 'Gerakan Subuh Berkah, Santunan Sembako Duafa, & TPA Al-Qur\'an',
+        'jumlah_masjid': 7,
+        'jumlah_jamaah': '900+ Jamaah',
+        'tag_kategori': 'Gerakan Sosial & Subuh',
+        'badge_color': 'amber',
+        'gambar': 'https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&w=800&q=80',
+    },
+    'Jirapan': {
+        'nama_desa': 'Desa Jirapan',
+        'julukan': 'Pusat Pesantren & Kader Ulama Muhammadiyah',
+        'masjid_utama': 'Masjid Besar Al-Manar Jirapan',
+        'alamat_masjid': 'Kompleks Pondok Pesantren Al-Manar, Desa Jirapan, Kec. Masaran',
+        'profil_desa': 'Kawasan pendidikan Islam percontohan di Sragen. Menjadi rumah bagi Pondok Pesantren Muhammadiyah Al-Manar yang mencetak ratusan santri penghafal Al-Qur\'an dan kader mubaligh muda siap terjun ke masyarakat.',
+        'program_unggulan': 'Pondok Pesantren Tahfidz, Tabligh Akbar Selapanan, & Kursus Bahasa Arab',
+        'jumlah_masjid': 9,
+        'jumlah_jamaah': '1.400+ Santri & Warga',
+        'tag_kategori': 'Pendidikan Pesantren & Ulama',
+        'badge_color': 'purple',
+        'gambar': 'https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&fit=crop&w=800&q=80',
+    },
+    'Karangmalang': {
+        'nama_desa': 'Desa Karangmalang',
+        'julukan': 'Layanan Kesehatan Jamaah & Bina Keluarga Sakinah',
+        'masjid_utama': 'Masjid Al-Barokah Karangmalang',
+        'alamat_masjid': 'Dukuh Karangmalang RT 03, Desa Karangmalang, Kec. Masaran',
+        'profil_desa': 'Desa dengan kegiatan Aisyiyah yang sangat dinamis, membina pos kesehatan terpadu dan pembinaan keluarga sakinah. Jamaah aktif mengelola kas sosial masjid untuk biaya pengobatan warga kurang mampu.',
+        'program_unggulan': 'Posyandu Lansia Aisyiyah, Kas Peduli Kesehatan, & Bimbingan Pra-Nikah',
+        'jumlah_masjid': 5,
+        'jumlah_jamaah': '680+ Jamaah',
+        'tag_kategori': 'Kesehatan & Keluarga Sakinah',
+        'badge_color': 'teal',
+        'gambar': 'https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?auto=format&fit=crop&w=800&q=80',
+    },
+    'Kliwonan': {
+        'nama_desa': 'Desa Wisata Batik Kliwonan',
+        'julukan': 'Desa Wisata Batik & Etos Saudagar Muslim',
+        'masjid_utama': 'Masjid Al-Muttaqin Kliwonan',
+        'alamat_masjid': 'Jl. Sentra Batik Kliwonan RT 08, Desa Kliwonan, Kec. Masaran',
+        'profil_desa': 'Sentra industri kreatif batik Sragen yang mendunia. Warga persyarikatan di Kliwonan memadukan etos kerja saudagar Muslim KH Ahmad Dahlan dengan kedermawanan waqaf dan pembinaan tenaga kerja konveksi ramah syariah.',
+        'program_unggulan': 'Majelis Taklim Saudagar Batik, Waqaf Usaha Produktif, & TPA Anak Pengrajin',
+        'jumlah_masjid': 8,
+        'jumlah_jamaah': '1.250+ Jamaah',
+        'tag_kategori': 'Wisata Batik & Ekonomi Syariah',
+        'badge_color': 'indigo',
+        'gambar': 'https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&w=800&q=80',
+    },
+    'Krebet': {
+        'nama_desa': 'Desa Krebet',
+        'julukan': 'Markas Pandu Hizbul Wathan & Bela Diri Tapak Suci',
+        'masjid_utama': 'Masjid Mujahidin Krebet',
+        'alamat_masjid': 'Kompleks Masjid Mujahidin, Desa Krebet, Kec. Masaran',
+        'profil_desa': 'Basis pergerakan fisik dan mental kader persyarikatan. Menjadi episentrum latihan kepanduan Hizbul Wathan (HW) dan seni bela diri Tapak Suci Putera Muhammadiyah Cabang Masaran.',
+        'program_unggulan': 'Latihan Rutin Tapak Suci, Diklat Pandu HW, & Gerakan Masjid Makmur',
+        'jumlah_masjid': 6,
+        'jumlah_jamaah': '820+ Jamaah',
+        'tag_kategori': 'Kepanduan & Bela Diri',
+        'badge_color': 'rose',
+        'gambar': 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80',
+    },
+    'Krikilan': {
+        'nama_desa': 'Desa Krikilan',
+        'julukan': 'Penguatan Akidah & Pembinaan Muallaf',
+        'masjid_utama': 'Masjid Baitul Izzah Krikilan',
+        'alamat_masjid': 'Dukuh Krikilan RT 06, Desa Krikilan, Kec. Masaran',
+        'profil_desa': 'Desa dengan keragaman latar belakang masyarakat. Muhammadiyah Ranting Krikilan memfokuskan dakwah pada bimbingan akidah murni, pengajian tafsir hadits, dan pendampingan muallaf desa.',
+        'program_unggulan': 'Kajian Ushul Tsalatsah, Bimbingan Ibadah Praktis, & Santunan Muallaf',
+        'jumlah_masjid': 5,
+        'jumlah_jamaah': '640+ Jamaah',
+        'tag_kategori': 'Pembinaan Akidah & Muallaf',
+        'badge_color': 'sky',
+        'gambar': 'https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&fit=crop&w=800&q=80',
+    },
+    'Masaran': {
+        'nama_desa': 'Desa Masaran (Pusat Kecamatan)',
+        'julukan': 'Episentrum Dakwah & Masjid Besar Baiturrahman',
+        'masjid_utama': 'Masjid Besar Baiturrahman Masaran',
+        'alamat_masjid': 'Jl. Raya Solo-Sragen KM 12, Desa Masaran, Kec. Masaran',
+        'profil_desa': 'Pusat peradaban dan koordinasi dakwah Muhammadiyah se-Kecamatan Masaran. Kompleks Masjid Besar Baiturrahman menaungi pusat kegiatan tabligh akbar akbar, perayaan Idul Fitri/Adha kecamatan, dan kantor layanan Lazismu.',
+        'program_unggulan': 'Kajian Akbar Ahad Pagi, Layanan Ambulans Gratis 24 Jam, & Baitul Mal',
+        'jumlah_masjid': 12,
+        'jumlah_jamaah': '2.100+ Jamaah',
+        'tag_kategori': 'Pusat Cabang & Masjid Besar',
+        'badge_color': 'emerald',
+        'gambar': 'https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&w=800&q=80',
+    },
+    'Pilang': {
+        'nama_desa': 'Desa Sentra Batik Pilang',
+        'julukan': 'Klaster Pengrajin Batik Tulis & Filantropi Wakaf',
+        'masjid_utama': 'Masjid Al-Ikhlas Pilang',
+        'alamat_masjid': 'Dukuh Pilang RT 04, Desa Pilang, Kec. Masaran',
+        'profil_desa': 'Pusat legendaris seni batik Sragen dengan ratusan perajin mandiri. PCM dan PRM Pilang mengelola waqaf tanah dan bangunan untuk mendukung sarana ibadah dan beasiswa santri berprestasi.',
+        'program_unggulan': 'Beasiswa Anak Pengrajin Batik, Tabungan Kurban Berjamaah, & Remaja Masjid',
+        'jumlah_masjid': 8,
+        'jumlah_jamaah': '1.100+ Jamaah',
+        'tag_kategori': 'Warisan Budaya & Filantropi',
+        'badge_color': 'amber',
+        'gambar': 'https://images.unsplash.com/photo-1590076215667-875d4ef2d7ee?auto=format&fit=crop&w=800&q=80',
+    },
+    'Pringanom': {
+        'nama_desa': 'Desa Pringanom',
+        'julukan': 'Gerakan Filantropi Jimpitan Beras & Dakwah Akar Rumput',
+        'masjid_utama': 'Masjid Nurul Huda Pringanom',
+        'alamat_masjid': 'Dukuh Pringanom RT 02, Desa Pringanom, Kec. Masaran',
+        'profil_desa': 'Kawasan agraris yang terkenal dengan inovasi Gerakan Sedekah Beras Jimpitan binaan Aisyiyah. Setiap panen, jamaah menyisihkan beras untuk disalurkan ke dapur santri dan janda tua dhuafa.',
+        'program_unggulan': 'Sedekah Beras Jimpitan, Pengajian Kuliah Subuh, & TPA Balita',
+        'jumlah_masjid': 6,
+        'jumlah_jamaah': '790+ Jamaah',
+        'tag_kategori': 'Ketahanan Pangan & Sosial',
+        'badge_color': 'green',
+        'gambar': 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80',
+    },
+    'Sepat': {
+        'nama_desa': 'Desa Sepat',
+        'julukan': 'Gerakan Masjid Bersih & Pelayanan Jenazah Syar\'i',
+        'masjid_utama': 'Musholla & Masjid Al-Huda Sepat',
+        'alamat_masjid': 'Kompleks Masjid Al-Huda, Desa Sepat, Kec. Masaran',
+        'profil_desa': 'Desa dengan kultur kebersihan dan kekeluargaan yang tinggi. Korps Pemuda Ranting rutin menggelar bakti resik masjid serentak dan pelatihan pemulasaraan jenazah sesuai sunnah Rasulullah SAW.',
+        'program_unggulan': 'Bakti Resik Masjid Serentak, Pelatihan Tajhiz Jenazah, & TPA Al-Kautsar',
+        'jumlah_masjid': 5,
+        'jumlah_jamaah': '670+ Jamaah',
+        'tag_kategori': 'Tajhiz Jenazah & Kebersihan',
+        'badge_color': 'cyan',
+        'gambar': 'https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?auto=format&fit=crop&w=800&q=80',
+    },
+    'Sidodadi': {
+        'nama_desa': 'Desa Sidodadi',
+        'julukan': 'Pusat Pendidikan Dasar Madrasah Ibtidaiyah',
+        'masjid_utama': 'Masjid Baitussalam Sidodadi',
+        'alamat_masjid': 'Kompleks MIM Sidodadi, Desa Sidodadi, Kec. Masaran',
+        'profil_desa': 'Basis pembinaan generasi penerus persyarikatan sejak dini. Keberadaan Madrasah Ibtidaiyah Muhammadiyah (MIM) Sidodadi menjadi katalisator pengajian wali murid dan gerakan cinta Al-Qur\'an.',
+        'program_unggulan': 'Bina Madrasah MIM Unggulan, Tahfidz Juz Amma Anak, & Pengajian Parenting',
+        'jumlah_masjid': 6,
+        'jumlah_jamaah': '860+ Jamaah & Siswa',
+        'tag_kategori': 'Pendidikan Madrasah & TPA',
+        'badge_color': 'orange',
+        'gambar': 'https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&w=800&q=80',
+    },
+}
+
+
 def ranting_view(request):
-    ranting_list = Ranting.objects.all().order_by('nama_ranting')
+    ranting_qs = list(Ranting.objects.all().order_by('nama_ranting'))
+    total_masjid_count = 0
+    for r in ranting_qs:
+        meta = RANTING_DETAILS.get(r.nama_ranting, {})
+        r.nama_desa = meta.get('nama_desa', f'Desa {r.nama_ranting}')
+        r.julukan = meta.get('julukan', 'Basis Jamaah Persyarikatan')
+        r.masjid_utama = meta.get('masjid_utama', f'Masjid {r.nama_ranting}')
+        r.alamat_masjid = meta.get('alamat_masjid', r.alamat)
+        r.profil_desa = meta.get('profil_desa', 'Pimpinan Ranting Muhammadiyah aktif membina jamaah pengajian, mengelola masjid dan mushalla, serta menggerakkan dakwah sosial.')
+        r.program_unggulan = meta.get('program_unggulan', 'Pengajian Rutin & TPA')
+        r.jumlah_masjid = meta.get('jumlah_masjid', 5)
+        r.jumlah_jamaah = meta.get('jumlah_jamaah', '600+ Jamaah')
+        r.tag_kategori = meta.get('tag_kategori', 'Dakwah & Ibadah')
+        r.badge_color = meta.get('badge_color', 'emerald')
+        r.gambar = meta.get('gambar', 'https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&w=800&q=80')
+        total_masjid_count += r.jumlah_masjid
+
     context = {
-        'ranting_list': ranting_list,
-        'total_ranting': ranting_list.count(),
+        'ranting_list': ranting_qs,
+        'total_ranting': len(ranting_qs),
+        'total_masjid': total_masjid_count if total_masjid_count > 0 else 88,
     }
     return render(request, 'pcm/ranting.html', context)
 
