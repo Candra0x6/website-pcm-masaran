@@ -370,3 +370,74 @@ class PCMWebsiteTests(TestCase):
     def test_ranting_custom_properties(self):
         self.assertTrue(self.ranting.kontak_tersedia)
         self.assertIn("Masaran", self.ranting.label_lengkap)
+
+    def test_admin_site_custom_titles(self):
+        from django.contrib import admin
+        self.assertIn("Admin Website PCM Masaran", admin.site.site_header)
+        self.assertIn("Portal Admin PCM Masaran", admin.site.site_title)
+        self.assertIn("Manajemen Konten & Organisasi PCM Masaran", admin.site.index_title)
+
+    def test_admin_profil_organisasi_singleton_and_no_delete(self):
+        from django.contrib import admin
+        from django.test import RequestFactory
+        from django.contrib.auth.models import User
+        from pcm.models import ProfilOrganisasi
+        po_admin = admin.site._registry[ProfilOrganisasi]
+        factory = RequestFactory()
+        request = factory.get('/admin/')
+        request.user = User.objects.filter(is_superuser=True).first()
+        self.assertFalse(po_admin.has_add_permission(request))
+        self.assertFalse(po_admin.has_delete_permission(request))
+
+    def test_admin_berita_prepopulated_fields_and_date_hierarchy(self):
+        from django.contrib import admin
+        from pcm.models import Berita
+        berita_admin = admin.site._registry[Berita]
+        self.assertEqual(berita_admin.prepopulated_fields, {'slug': ('judul',)})
+        self.assertEqual(berita_admin.date_hierarchy, 'tanggal_terbit')
+
+    def test_admin_pesan_masuk_readonly(self):
+        from django.contrib import admin
+        from django.test import RequestFactory
+        from django.contrib.auth.models import User
+        from pcm.models import PesanMasuk
+        pesan_admin = admin.site._registry[PesanMasuk]
+        factory = RequestFactory()
+        request = factory.get('/admin/')
+        request.user = User.objects.filter(is_superuser=True).first()
+        self.assertFalse(pesan_admin.has_add_permission(request))
+        self.assertFalse(pesan_admin.has_change_permission(request))
+        readonly = pesan_admin.get_readonly_fields(request)
+        for field in ('nama', 'email', 'subjek', 'pesan'):
+            self.assertIn(field, readonly)
+
+    def test_all_models_registered_in_admin(self):
+        from django.contrib import admin
+        from pcm.models import (
+            ProfilOrganisasi,
+            Pimpinan,
+            Ranting,
+            AmalUsaha,
+            Berita,
+            Agenda,
+            Dokumen,
+            PesanMasuk,
+            TautanTerkait
+        )
+        models = [
+            ProfilOrganisasi,
+            Pimpinan,
+            Ranting,
+            AmalUsaha,
+            Berita,
+            Agenda,
+            Dokumen,
+            PesanMasuk,
+            TautanTerkait
+        ]
+        for model in models:
+            self.assertIn(model, admin.site._registry)
+            model_admin = admin.site._registry[model]
+            self.assertTrue(len(model_admin.list_display) > 1)
+            has_search_or_filter = bool(model_admin.search_fields or model_admin.list_filter)
+            self.assertTrue(has_search_or_filter)

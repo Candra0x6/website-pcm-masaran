@@ -20,6 +20,7 @@ admin.site.index_title = "Manajemen Konten & Organisasi PCM Masaran"
 @admin.register(ProfilOrganisasi)
 class ProfilOrganisasiAdmin(admin.ModelAdmin):
     list_display = ('nama_singkat', 'telepon', 'email', 'jumlah_anggota_ktam', 'preview_hero')
+    search_fields = ('nama', 'nama_singkat', 'tagline')
     fieldsets = (
         ("Identitas Utama", {
             'fields': ('nama', 'nama_singkat', 'tagline', 'gambar_utama')
@@ -152,6 +153,7 @@ class AgendaAdmin(admin.ModelAdmin):
 @admin.register(Dokumen)
 class DokumenAdmin(admin.ModelAdmin):
     list_display = ('judul', 'ukuran_berkas', 'tanggal_unggah', 'berkas')
+    list_filter = ('tanggal_unggah',)
     search_fields = ('judul', 'keterangan')
     ordering = ('-tanggal_unggah',)
 
@@ -175,7 +177,7 @@ class PesanMasukAdmin(admin.ModelAdmin):
     list_display = ('waktu_kirim', 'nama', 'email', 'subjek', 'sudah_dibaca')
     list_filter = ('sudah_dibaca', 'waktu_kirim')
     search_fields = ('nama', 'email', 'subjek', 'pesan')
-    readonly_fields = ('nama', 'email', 'subjek', 'pesan', 'waktu_kirim')
+    readonly_fields = ('nama', 'email', 'subjek', 'pesan', 'waktu_kirim', 'sudah_dibaca')
     ordering = ('-waktu_kirim',)
     actions = ['tandai_sudah_dibaca', 'tandai_belum_dibaca', 'ekspor_ke_csv']
 
@@ -210,11 +212,9 @@ class PesanMasukAdmin(admin.ModelAdmin):
         return False
 
     def has_change_permission(self, request, obj=None):
-        return True
+        return False
 
     def get_readonly_fields(self, request, obj=None):
-        if obj:
-            return ('nama', 'email', 'subjek', 'pesan', 'waktu_kirim')
         return self.readonly_fields
 
 
