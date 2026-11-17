@@ -1,4 +1,13 @@
-from .models import ProfilOrganisasi, TautanTerkait
+from .models import (
+    ProfilOrganisasi,
+    TautanTerkait,
+    Berita,
+    Agenda,
+    Dokumen,
+    PesanMasuk,
+    Ranting,
+    AmalUsaha
+)
 
 
 def pcm_global_context(request):
@@ -15,8 +24,19 @@ def pcm_global_context(request):
         'email': 'pcm.masaran@gmail.com',
     }
 
+    admin_stats = {
+        'total_berita': Berita.objects.count(),
+        'total_agenda': Agenda.objects.count(),
+        'total_dokumen': Dokumen.objects.count(),
+        'total_pesan': PesanMasuk.objects.count(),
+        'pesan_belum_dibaca': PesanMasuk.objects.filter(sudah_dibaca=False).count(),
+        'total_ranting': Ranting.objects.count(),
+        'total_amal_usaha': AmalUsaha.objects.count(),
+    }
+
     return {
         'profil_organisasi': profil,
         'tautan_terkait': tautan,
         'medsos_links': medsos,
+        'admin_stats': admin_stats,
     }

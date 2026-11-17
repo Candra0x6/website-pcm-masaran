@@ -1,0 +1,90 @@
+{% extends "admin/index.html" %}
+{% load i18n static %}
+
+{% block content %}
+<div style="margin-bottom: 25px;">
+    <div style="background: linear-gradient(135deg, #064e3b 0%, #065f46 50%, #047857 100%); border-radius: 14px; padding: 24px; color: white; box-shadow: 0 10px 25px -5px rgba(5, 150, 105, 0.3); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px;">
+        <div>
+            <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.15); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">
+                <span>✨</span> Dasbor Manajemen Terpadu
+            </div>
+            <h1 style="margin: 0; font-size: 1.6rem; font-weight: 800; letter-spacing: -0.02em; color: #ffffff;">Pimpinan Cabang Muhammadiyah Masaran</h1>
+            <p style="margin: 6px 0 0 0; font-size: 0.9rem; opacity: 0.85; max-width: 650px;">Portal administrasi resmi PCM Masaran. Kelola warta dakwah, agenda syiar, data ranting, amal usaha, dan pesan masyarakat secara terpusat.</p>
+        </div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="{% url 'admin:pcm_berita_add' %}" style="background: #ffffff; color: #065f46; padding: 10px 18px; border-radius: 10px; font-weight: 700; font-size: 0.85rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+                <span>✍️</span> Tulis Berita
+            </a>
+            <a href="{% url 'admin:pcm_agenda_add' %}" style="background: rgba(255,255,255,0.18); color: #ffffff; border: 1px solid rgba(255,255,255,0.3); padding: 10px 18px; border-radius: 10px; font-weight: 600; font-size: 0.85rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+                <span>📅</span> Tambah Agenda
+            </a>
+            <a href="{% url 'admin:pcm_pesanmasuk_changelist' %}" style="background: rgba(255,255,255,0.18); color: #ffffff; border: 1px solid rgba(255,255,255,0.3); padding: 10px 18px; border-radius: 10px; font-weight: 600; font-size: 0.85rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+                <span>📩</span> Kotak Pesan {% if admin_stats.pesan_belum_dibaca > 0 %}<span style="background: #ef4444; color: white; padding: 1px 7px; border-radius: 10px; font-size: 0.7rem; font-weight: 800;">{{ admin_stats.pesan_belum_dibaca }}</span>{% endif %}
+            </a>
+        </div>
+    </div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 25px;">
+    <div style="background: var(--body-bg, #ffffff); border: 1px solid var(--hairline-color, #e5e7eb); border-radius: 12px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); display: flex; flex-direction: column; justify-content: space-between;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-size: 0.8rem; font-weight: 600; color: #6b7280; text-transform: uppercase;">Warta Berita</span>
+            <span style="font-size: 1.2rem;">📰</span>
+        </div>
+        <div style="font-size: 1.8rem; font-weight: 800; color: #059669;">{{ admin_stats.total_berita }}</div>
+        <a href="{% url 'admin:pcm_berita_changelist' %}" style="font-size: 0.75rem; color: #059669; font-weight: 600; text-decoration: none; margin-top: 6px; display: inline-block;">Kelola Publikasi →</a>
+    </div>
+
+    <div style="background: var(--body-bg, #ffffff); border: 1px solid var(--hairline-color, #e5e7eb); border-radius: 12px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); display: flex; flex-direction: column; justify-content: space-between;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-size: 0.8rem; font-weight: 600; color: #6b7280; text-transform: uppercase;">Agenda Syiar</span>
+            <span style="font-size: 1.2rem;">📅</span>
+        </div>
+        <div style="font-size: 1.8rem; font-weight: 800; color: #2563eb;">{{ admin_stats.total_agenda }}</div>
+        <a href="{% url 'admin:pcm_agenda_changelist' %}" style="font-size: 0.75rem; color: #2563eb; font-weight: 600; text-decoration: none; margin-top: 6px; display: inline-block;">Kelola Jadwal →</a>
+    </div>
+
+    <div style="background: var(--body-bg, #ffffff); border: 1px solid var(--hairline-color, #e5e7eb); border-radius: 12px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); display: flex; flex-direction: column; justify-content: space-between;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-size: 0.8rem; font-weight: 600; color: #6b7280; text-transform: uppercase;">Pesan Masuk</span>
+            <span style="font-size: 1.2rem;">📩</span>
+        </div>
+        <div style="display: flex; align-items: baseline; gap: 8px;">
+            <div style="font-size: 1.8rem; font-weight: 800; color: #d97706;">{{ admin_stats.total_pesan }}</div>
+            {% if admin_stats.pesan_belum_dibaca > 0 %}
+            <span style="background: #fee2e2; color: #dc2626; font-size: 0.7rem; font-weight: 700; padding: 2px 6px; border-radius: 8px;">{{ admin_stats.pesan_belum_dibaca }} baru</span>
+            {% endif %}
+        </div>
+        <a href="{% url 'admin:pcm_pesanmasuk_changelist' %}" style="font-size: 0.75rem; color: #d97706; font-weight: 600; text-decoration: none; margin-top: 6px; display: inline-block;">Lihat Aspirasi →</a>
+    </div>
+
+    <div style="background: var(--body-bg, #ffffff); border: 1px solid var(--hairline-color, #e5e7eb); border-radius: 12px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); display: flex; flex-direction: column; justify-content: space-between;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-size: 0.8rem; font-weight: 600; color: #6b7280; text-transform: uppercase;">Ranting (PRM)</span>
+            <span style="font-size: 1.2rem;">📍</span>
+        </div>
+        <div style="font-size: 1.8rem; font-weight: 800; color: #7c3aed;">{{ admin_stats.total_ranting }}</div>
+        <a href="{% url 'admin:pcm_ranting_changelist' %}" style="font-size: 0.75rem; color: #7c3aed; font-weight: 600; text-decoration: none; margin-top: 6px; display: inline-block;">Data Ranting →</a>
+    </div>
+
+    <div style="background: var(--body-bg, #ffffff); border: 1px solid var(--hairline-color, #e5e7eb); border-radius: 12px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); display: flex; flex-direction: column; justify-content: space-between;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-size: 0.8rem; font-weight: 600; color: #6b7280; text-transform: uppercase;">Amal Usaha (AUM)</span>
+            <span style="font-size: 1.2rem;">🏢</span>
+        </div>
+        <div style="font-size: 1.8rem; font-weight: 800; color: #0891b2;">{{ admin_stats.total_amal_usaha }}</div>
+        <a href="{% url 'admin:pcm_amalusaha_changelist' %}" style="font-size: 0.75rem; color: #0891b2; font-weight: 600; text-decoration: none; margin-top: 6px; display: inline-block;">Data AUM →</a>
+    </div>
+
+    <div style="background: var(--body-bg, #ffffff); border: 1px solid var(--hairline-color, #e5e7eb); border-radius: 12px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); display: flex; flex-direction: column; justify-content: space-between;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-size: 0.8rem; font-weight: 600; color: #6b7280; text-transform: uppercase;">Dokumen Publik</span>
+            <span style="font-size: 1.2rem;">📂</span>
+        </div>
+        <div style="font-size: 1.8rem; font-weight: 800; color: #4b5563;">{{ admin_stats.total_dokumen }}</div>
+        <a href="{% url 'admin:pcm_dokumen_changelist' %}" style="font-size: 0.75rem; color: #4b5563; font-weight: 600; text-decoration: none; margin-top: 6px; display: inline-block;">Arsip Berkas →</a>
+    </div>
+</div>
+
+{{ block.super }}
+{% endblock %}
