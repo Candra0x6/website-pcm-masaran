@@ -84,8 +84,8 @@ class RantingAdmin(admin.ModelAdmin):
 
     def kontak_status(self, obj):
         if obj.kontak_tersedia:
-            return format_html('<span style="color: #059669; font-weight: 600;">Tersedia</span>')
-        return format_html('<span style="color: #9ca3af;">Belum Ada</span>')
+            return format_html('<span style="color: {}; font-weight: 600;">{}</span>', '#059669', 'Tersedia')
+        return format_html('<span style="color: {};">{}</span>', '#9ca3af', 'Belum Ada')
     kontak_status.short_description = "Status Kontak"
 
 
@@ -145,8 +145,8 @@ class AgendaAdmin(admin.ModelAdmin):
 
     def status_agenda(self, obj):
         if obj.is_upcoming:
-            return format_html('<span style="color: #059669; font-weight: bold;">Akan Datang</span>')
-        return format_html('<span style="color: #6b7280;">Selesai</span>')
+            return format_html('<span style="color: {}; font-weight: bold;">{}</span>', '#059669', 'Akan Datang')
+        return format_html('<span style="color: {};">{}</span>', '#6b7280', 'Selesai')
     status_agenda.short_description = "Status"
 
 
